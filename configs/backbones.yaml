@@ -1,0 +1,18 @@
+# Checkpoints are local/external assets. Do not commit weights to this repository.
+indic_wav2vec:
+  checkpoint_path: models/indicwav2vec_large.pt
+  backbone_id: indicwav2vec-large
+  checkpoint_version: null
+  device: cpu
+  output_layer: null
+
+wavlm:
+  model_name_or_path: microsoft/wavlm-base-plus
+  backbone_id: wavlm-base-plus
+  checkpoint_version: null
+  device: cpu
+
+routing:
+  # Initial policy: trust language metadata from the audio/data path when present.
+  indic_languages: [as, bn, gu, hi, kn, ml, mr, ne, or, pa, sa, si, ta, te, ur]
+  unknown_language_route: global_fallback
