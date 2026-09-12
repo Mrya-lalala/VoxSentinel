@@ -2,8 +2,11 @@
 indic_wav2vec:
   checkpoint_path: models/indicwav2vec_large.pt
   backbone_id: indicwav2vec-large
-  checkpoint_version: null
+  checkpoint_version: indicw2v_large_pretrained
+  checkpoint_sha256: 26bb5ada18952fd7355f691d25927b34a0e46d6afda7658bf5c254621831ab59
+  expected_embedding_dim: 1024
   device: cpu
+  # None = final encoder output; integer 0..23 = zero-based transformer block.
   output_layer: null
 
 wavlm:
