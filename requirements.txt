@@ -1,0 +1,34 @@
+# Frozen IndicWav2Vec runtime verified on Python 3.10.18 / macOS arm64.
+# Run scripts/setup_encoder_env.sh: bootstrap first, then --no-build-isolation.
+# No fallback encoder or model weights are installed here.
+antlr4-python3-runtime==4.8
+bitarray==3.11.0
+cffi==2.1.1
+colorama==0.4.6
+Cython==0.29.37
+filelock==3.32.6
+fsspec==2026.7.0
+hydra-core==1.0.7
+Jinja2==3.1.6
+lxml==6.1.3
+MarkupSafe==3.0.3
+mpmath==1.3.0
+networkx==3.4.2
+numpy==1.23.5
+omegaconf==2.0.6
+pip==24.0
+portalocker==4.3.0
+pycparser==3.0
+PyYAML==6.0.3
+regex==2026.9.10
+sacrebleu==2.6.0
+setuptools==69.5.1
+soundfile==0.12.1
+sympy==1.14.0
+tabulate==0.10.0
+torch==2.2.2
+torchaudio==2.2.2
+tqdm==4.70.1
+typing_extensions==4.16.0
+wheel==0.43.0
+fairseq @ git+https://github.com/AI4Bharat/fairseq-indicwav2vec-v1.git@d11b8fb30a6f0156c2c1152644221ac4031cadcc

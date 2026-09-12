@@ -1,0 +1,2 @@
+# Optional: only to unpack the small speech-verification parquet archive.
+pyarrow==17.0.0
