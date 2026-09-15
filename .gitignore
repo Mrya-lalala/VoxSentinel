@@ -1,10 +1,19 @@
-.venv/
+# Python caches and build metadata
 __pycache__/
 *.py[cod]
 .pytest_cache/
-.DS_Store
-models/
-artifacts/
+*.egg-info/
+
+# Virtual environments
+.venv/
+venv/
+
+# Local model artifacts and environment files
+/models/
+/artifacts/
 .env
 .env.*
 !.env.example
+
+# OS files
+.DS_Store
