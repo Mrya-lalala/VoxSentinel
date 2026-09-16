@@ -1,0 +1,25 @@
+model:
+  name: gru
+  # Custom GRU detector over B1 embedding sequences [batch, time, dim].
+  # input_dim defaults to the current IndicWav2Vec embedding size; hidden_size
+  # is the GRU / classifier width from the initial GRU architecture.
+  parameters:
+    input_dim: 1024
+    hidden_size: 256
+    num_layers: 1
+    dropout: 0.0
+    num_classes: 2
+optimizer:
+  name: adamw
+  learning_rate: 0.001
+  weight_decay: 0.0
+training:
+  batch_size: 8
+  epochs: 10
+  loss: cross_entropy
+evaluation:
+  threshold: 0.5
+checkpoint:
+  directory: artifacts/gru
+  best_metric: eer
+  best_mode: min

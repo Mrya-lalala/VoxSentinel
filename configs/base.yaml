@@ -1,0 +1,20 @@
+optimizer:
+  name: adamw
+  learning_rate: 0.001
+  weight_decay: 0.0
+training:
+  batch_size: 8
+  epochs: 1
+  device: cpu
+  use_amp: false
+  shuffle: true
+  seed: 0
+  loss: cross_entropy
+evaluation:
+  threshold: 0.5
+checkpoint:
+  format_version: 1
+  strict_load: true
+  directory: artifacts/gru
+  best_metric: eer
+  best_mode: min
