@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from voxsentinel.config import load_config
+from src.config import load_config
 
 
 def test_config_overlay_loads_gru():
@@ -24,4 +24,18 @@ def test_config_requires_model_name(tmp_path):
     path = tmp_path / "invalid.yaml"
     path.write_text("training:\n  epochs: 2\n", encoding="utf-8")
     with pytest.raises(ValueError, match="model.name"):
+        load_config(path)
+
+
+def test_config_rejects_invalid_training_values(tmp_path):
+    path = tmp_path / "invalid.yaml"
+    path.write_text("model:\n  name: gru\ntraining:\n  batch_size: 0\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="batch_size"):
+        load_config(path)
+
+    path.write_text(
+        "model:\n  name: gru\ncheckpoint:\n  best_mode: sideways\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(ValueError, match="best_mode"):
         load_config(path)
