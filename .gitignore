@@ -11,6 +11,7 @@ venv/
 # Local model artifacts and environment files
 /models/
 /artifacts/
+/data/
 .env
 .env.*
 !.env.example
