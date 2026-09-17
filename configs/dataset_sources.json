@@ -1,0 +1,11 @@
+{
+  "_comment": "Fill each 'url' with the verified accessible subset URL from 02-DATASET-TRAINING. 'sha256' is optional but recommended. 'archive' is inferred from the URL suffix (tar/zip) when omitted; set it explicitly to 'tar', 'zip' or 'none' otherwise. Regenerate with: python src/data/dataset_setup.py sources-template",
+  "sources": [
+    {"dataset": "indicsynth", "language": "hindi", "url": "", "version": "indicsynth-v1.0-pilot", "sha256": null, "notes": "IndicSynth hindi pilot subset (label 1 = spoof)"},
+    {"dataset": "indicsynth", "language": "bengali", "url": "", "version": "indicsynth-v1.0-pilot", "sha256": null, "notes": "IndicSynth bengali pilot subset (label 1 = spoof)"},
+    {"dataset": "indicsynth", "language": "marathi", "url": "", "version": "indicsynth-v1.0-pilot", "sha256": null, "notes": "IndicSynth marathi pilot subset (label 1 = spoof)"},
+    {"dataset": "kathbath", "language": "hindi", "url": "", "version": "kathbath-v1.0-pilot", "sha256": null, "notes": "Kathbath hindi pilot subset (label 0 = genuine)"},
+    {"dataset": "kathbath", "language": "bengali", "url": "", "version": "kathbath-v1.0-pilot", "sha256": null, "notes": "Kathbath bengali pilot subset (label 0 = genuine)"},
+    {"dataset": "kathbath", "language": "marathi", "url": "", "version": "kathbath-v1.0-pilot", "sha256": null, "notes": "Kathbath marathi pilot subset (label 0 = genuine)"}
+  ]
+}

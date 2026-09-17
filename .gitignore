@@ -13,7 +13,6 @@ venv/
 /artifacts/
 /data/
 .env
-.env.*
 !.env.example
 
 # OS files
