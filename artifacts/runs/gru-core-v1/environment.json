@@ -1,0 +1,13 @@
+{
+  "python": "3.10.18",
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "machine": "arm64",
+  "torch": "2.2.2",
+  "torch_cuda_available": false,
+  "torch_num_threads": 8,
+  "torchaudio": "2.2.2",
+  "numpy": "1.23.5",
+  "fairseq": "0.12.1",
+  "device": "cpu",
+  "dtype": "float32"
+}

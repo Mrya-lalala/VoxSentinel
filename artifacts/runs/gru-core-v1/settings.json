@@ -1,0 +1,83 @@
+{
+  "config_paths": [
+    "configs/base.yaml",
+    "configs/gru.yaml"
+  ],
+  "raw_merged_config": {
+    "optimizer": {
+      "name": "adamw",
+      "learning_rate": 0.001,
+      "weight_decay": 0.0
+    },
+    "training": {
+      "batch_size": 8,
+      "epochs": 10,
+      "loss": "cross_entropy"
+    },
+    "evaluation": {
+      "threshold": 0.5
+    },
+    "checkpoint": {
+      "directory": "artifacts/gru",
+      "best_metric": "eer",
+      "best_mode": "min"
+    },
+    "model": {
+      "name": "gru",
+      "parameters": {
+        "input_dim": 1024,
+        "hidden_size": 256,
+        "num_layers": 1,
+        "dropout": 0.0,
+        "num_classes": 2
+      }
+    }
+  },
+  "resolved": {
+    "model": {
+      "name": "gru",
+      "parameters": {
+        "input_dim": 1024,
+        "hidden_size": 256,
+        "num_layers": 1,
+        "dropout": 0.0,
+        "num_classes": 2
+      }
+    },
+    "optimizer": {
+      "name": "adamw",
+      "learning_rate": 0.001,
+      "weight_decay": 0.0
+    },
+    "training": {
+      "batch_size": 8,
+      "epochs": 10,
+      "device": "cpu",
+      "use_amp": false,
+      "shuffle": true,
+      "seed": 0,
+      "loss": "cross_entropy"
+    },
+    "evaluation": {
+      "threshold": 0.5
+    },
+    "checkpoint": {
+      "format_version": 1,
+      "strict_load": true,
+      "directory": "artifacts/gru",
+      "best_metric": "eer",
+      "best_mode": "min"
+    }
+  },
+  "scheduler": null,
+  "gradient_clipping": null,
+  "notes": [
+    "no learning-rate scheduler is configured",
+    "no gradient clipping is configured",
+    "balanced genuine/synthetic sampling is a property of the dataset (equal counts)",
+    "no class weighting or oversampling is applied",
+    "checkpoint selection: lowest validation ER (configured metric), earliest epoch wins ties",
+    "CPU float32 execution (config training.device)",
+    "label mapping: 0 = genuine, 1 = synthetic; the head uses two-logit cross-entropy"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "status": "completed",
+  "started": "2026-09-18T07:43:50.940605+00:00",
+  "finished": "2026-09-18T07:44:35.013806+00:00",
+  "head_training_seconds": 43.87162204203196,
+  "feature_regeneration_seconds": 0,
+  "device": "cpu",
+  "selected_epoch": 2,
+  "selected_metric": {
+    "name": "eer",
+    "value": 0.22916666666666666,
+    "mode": "min"
+  },
+  "checkpoint_reload_verified": true,
+  "resumed": false,
+  "note": "features were reused from the frozen cache; no encoder forward pass during training"
+}

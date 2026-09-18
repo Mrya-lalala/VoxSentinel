@@ -1,0 +1,19 @@
+{
+  "shape": [
+    1,
+    292,
+    1024
+  ],
+  "valid_lengths": [
+    292
+  ],
+  "padding_mask": "True = ignore; False = valid",
+  "frame_hop_ms": 20.0,
+  "checkpoint_sha256": "26bb5ada18952fd7355f691d25927b34a0e46d6afda7658bf5c254621831ab59",
+  "output_layer": null,
+  "normalize": true,
+  "load_seconds": 7.342556125018746,
+  "extraction_seconds": 0.39075604104436934,
+  "device": "cpu",
+  "threads": 4
+}

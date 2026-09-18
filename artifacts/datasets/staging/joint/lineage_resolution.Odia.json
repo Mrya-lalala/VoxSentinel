@@ -1,0 +1,90 @@
+{
+  "844424930405215": {
+    "evidence": {
+      "fname": "844424930405215-460-f.m4a",
+      "method": "full_train_shard_scan",
+      "row_group": 3,
+      "row_index": 304,
+      "shard": "odia/train-00009-of-00019.parquet"
+    },
+    "status": "verified_train"
+  },
+  "844424930475622": {
+    "evidence": {
+      "fname": "844424930475622-460-f.m4a",
+      "method": "full_train_shard_scan",
+      "row_group": 10,
+      "row_index": 1031,
+      "shard": "odia/train-00009-of-00019.parquet"
+    },
+    "status": "verified_train"
+  },
+  "844424930500084": {
+    "evidence": {
+      "method": "full_train_shard_scan"
+    },
+    "status": "not_found"
+  },
+  "844424930508575": {
+    "evidence": {
+      "fname": "844424930508575-692-f.m4a",
+      "method": "full_train_shard_scan",
+      "row_group": 20,
+      "row_index": 2097,
+      "shard": "odia/train-00007-of-00019.parquet"
+    },
+    "status": "verified_train"
+  },
+  "844424931105270": {
+    "evidence": {
+      "fname": "844424931105270-547-f.m4a",
+      "method": "full_train_shard_scan",
+      "row_group": 12,
+      "row_index": 1218,
+      "shard": "odia/train-00006-of-00019.parquet"
+    },
+    "status": "verified_train"
+  },
+  "844424931380930": {
+    "evidence": {
+      "method": "full_train_shard_scan"
+    },
+    "status": "not_found"
+  },
+  "844424931383605": {
+    "evidence": {
+      "fname": "844424931383605-547-f.m4a",
+      "method": "full_train_shard_scan",
+      "row_group": 6,
+      "row_index": 606,
+      "shard": "odia/train-00009-of-00019.parquet"
+    },
+    "status": "verified_train"
+  },
+  "844424931545735": {
+    "evidence": {
+      "fname": "844424931545735-43-f.m4a",
+      "method": "full_train_shard_scan",
+      "row_group": 23,
+      "row_index": 2307,
+      "shard": "odia/train-00006-of-00019.parquet"
+    },
+    "status": "verified_train"
+  },
+  "844424932377233": {
+    "evidence": {
+      "fname": "844424932377233-656-f.m4a",
+      "method": "full_train_shard_scan",
+      "row_group": 0,
+      "row_index": 26,
+      "shard": "odia/train-00008-of-00019.parquet"
+    },
+    "status": "verified_train"
+  },
+  "844424932377243": {
+    "evidence": {
+      "method": "full_train_shard_scan"
+    },
+    "status": "not_found"
+  }
+}

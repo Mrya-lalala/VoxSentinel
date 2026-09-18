@@ -1,0 +1,17 @@
+{
+  "synthetic_windows": 240,
+  "verification_status_counts": {
+    "not_applicable_tts": 114,
+    "verified_train": 366
+  },
+  "verification_evidence_methods": {
+    "full_train_shard_scan": 236,
+    "none": 114,
+    "scanned_inventory": 130
+  },
+  "rows_replaced_by_language": {},
+  "reference_exclusions_by_reason": {
+    "lineage_replacement_required": 12,
+    "reference_unresolvable_precheck": 72
+  }
+}

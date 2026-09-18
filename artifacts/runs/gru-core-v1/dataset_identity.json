@@ -1,0 +1,219 @@
+{
+  "dataset_root": "artifacts/datasets",
+  "train": {
+    "manifest": "artifacts/datasets/manifests/windows.core_train.jsonl",
+    "manifest_sha256": "1b361e14cb60cb739b6bbd55692529b94e8a7b37efc8530f4b03cb2ed2253ad4",
+    "bundle": "artifacts/datasets/features/train.pt",
+    "bundle_sha256": "a893b5038cfc2375e027d7f2bc335aa48dd1f215af488c297eada13a4ea1b56b",
+    "cache_identity": {
+      "backbone_id": "indicwav2vec-large",
+      "dtype": "float32",
+      "embedding_dim": 1024,
+      "encoder_checkpoint_sha256": "26bb5ada18952fd7355f691d25927b34a0e46d6afda7658bf5c254621831ab59",
+      "frame_hop_ms": 20.0,
+      "implementation": "src.backbones.indic_wav2vec:extract_batch",
+      "label_counts": {
+        "0": 192,
+        "1": 192
+      },
+      "languages": [
+        "Bengali",
+        "Gujarati",
+        "Hindi",
+        "Kannada",
+        "Malayalam",
+        "Marathi",
+        "Odia",
+        "Punjabi",
+        "Sanskrit",
+        "Tamil",
+        "Telugu",
+        "Urdu"
+      ],
+      "manifest_file_sha256": "1b361e14cb60cb739b6bbd55692529b94e8a7b37efc8530f4b03cb2ed2253ad4",
+      "manifest_items": 384,
+      "manifest_sha256": "78b1ace26de1dec09de0f70eeb3d3af94a0a7f834b0fabbee6b268ac54739b38",
+      "output_layer": null,
+      "preprocessing_version": "voxsentinel-prep-2",
+      "runtime": {
+        "fairseq": "0.12.1",
+        "numpy": "1.23.5",
+        "platform": "macOS-26.5.2-arm64-arm-64bit",
+        "python": "3.10.18",
+        "torch": "2.2.2",
+        "torchaudio": "2.2.2"
+      }
+    },
+    "label_counts": {
+      "0": 192,
+      "1": 192
+    },
+    "by_language": {
+      "Bengali": {
+        "0": 16,
+        "1": 16
+      },
+      "Gujarati": {
+        "0": 16,
+        "1": 16
+      },
+      "Hindi": {
+        "0": 16,
+        "1": 16
+      },
+      "Kannada": {
+        "0": 16,
+        "1": 16
+      },
+      "Malayalam": {
+        "0": 16,
+        "1": 16
+      },
+      "Marathi": {
+        "0": 16,
+        "1": 16
+      },
+      "Odia": {
+        "0": 16,
+        "1": 16
+      },
+      "Punjabi": {
+        "0": 16,
+        "1": 16
+      },
+      "Sanskrit": {
+        "0": 16,
+        "1": 16
+      },
+      "Tamil": {
+        "0": 16,
+        "1": 16
+      },
+      "Telugu": {
+        "0": 16,
+        "1": 16
+      },
+      "Urdu": {
+        "0": 16,
+        "1": 16
+      }
+    }
+  },
+  "val": {
+    "manifest": "artifacts/datasets/manifests/windows.core_val.jsonl",
+    "manifest_sha256": "a23acb1cdbe86a940c984bd9fb206abbd3dd6612733fa88b4de755b980e13342",
+    "bundle": "artifacts/datasets/features/val.pt",
+    "bundle_sha256": "069b3b78e2c4f767146966a1a4f2c1596b569eaa26663aecd6835df35ad03360",
+    "cache_identity": {
+      "backbone_id": "indicwav2vec-large",
+      "dtype": "float32",
+      "embedding_dim": 1024,
+      "encoder_checkpoint_sha256": "26bb5ada18952fd7355f691d25927b34a0e46d6afda7658bf5c254621831ab59",
+      "frame_hop_ms": 20.0,
+      "implementation": "src.backbones.indic_wav2vec:extract_batch",
+      "label_counts": {
+        "0": 48,
+        "1": 48
+      },
+      "languages": [
+        "Bengali",
+        "Gujarati",
+        "Hindi",
+        "Kannada",
+        "Malayalam",
+        "Marathi",
+        "Odia",
+        "Punjabi",
+        "Sanskrit",
+        "Tamil",
+        "Telugu",
+        "Urdu"
+      ],
+      "manifest_file_sha256": "a23acb1cdbe86a940c984bd9fb206abbd3dd6612733fa88b4de755b980e13342",
+      "manifest_items": 96,
+      "manifest_sha256": "6fe19ac906e5ef4865342d92892f82f5747b81075392403ef40d2200c67206ae",
+      "output_layer": null,
+      "preprocessing_version": "voxsentinel-prep-2",
+      "runtime": {
+        "fairseq": "0.12.1",
+        "numpy": "1.23.5",
+        "platform": "macOS-26.5.2-arm64-arm-64bit",
+        "python": "3.10.18",
+        "torch": "2.2.2",
+        "torchaudio": "2.2.2"
+      }
+    },
+    "label_counts": {
+      "0": 48,
+      "1": 48
+    },
+    "by_language": {
+      "Bengali": {
+        "0": 4,
+        "1": 4
+      },
+      "Gujarati": {
+        "0": 4,
+        "1": 4
+      },
+      "Hindi": {
+        "0": 4,
+        "1": 4
+      },
+      "Kannada": {
+        "0": 4,
+        "1": 4
+      },
+      "Malayalam": {
+        "0": 4,
+        "1": 4
+      },
+      "Marathi": {
+        "0": 4,
+        "1": 4
+      },
+      "Odia": {
+        "0": 4,
+        "1": 4
+      },
+      "Punjabi": {
+        "0": 4,
+        "1": 4
+      },
+      "Sanskrit": {
+        "0": 4,
+        "1": 4
+      },
+      "Tamil": {
+        "0": 4,
+        "1": 4
+      },
+      "Telugu": {
+        "0": 4,
+        "1": 4
+      },
+      "Urdu": {
+        "0": 4,
+        "1": 4
+      }
+    }
+  },
+  "label_mapping": {
+    "0": "genuine",
+    "1": "synthetic/spoof"
+  },
+  "ledger": {
+    "cap_bytes": 5368709120,
+    "events": 1379,
+    "per_source_bytes": {
+      "asvspoof2019": 16272703,
+      "indicsynth": 247743522,
+      "kathbath": 1730201852,
+      "nisp": 1294991360,
+      "nptel": 188815224,
+      "svarah": 142472502
+    },
+    "remaining_bytes": 1748211957,
+    "total_bytes": 3620497163
+  }
+}

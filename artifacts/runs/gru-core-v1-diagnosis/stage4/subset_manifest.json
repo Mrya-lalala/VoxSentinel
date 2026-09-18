@@ -1,0 +1,175 @@
+{
+  "seed": 0,
+  "selection": "one genuine + one synthetic per core language from windows.core_train.jsonl, rng.choice over window_id-sorted candidates",
+  "count": 24,
+  "windows": [
+    {
+      "window_id": "kathbath-bengali-844424932395323-592-f",
+      "label": 0,
+      "spoken_language": "Bengali",
+      "dataset_id": "kathbath",
+      "generator": null
+    },
+    {
+      "window_id": "indicsynth-bengali-070439",
+      "label": 1,
+      "spoken_language": "Bengali",
+      "dataset_id": "indicsynth",
+      "generator": "xtts_v2"
+    },
+    {
+      "window_id": "kathbath-gujarati-844424930433569-369-f",
+      "label": 0,
+      "spoken_language": "Gujarati",
+      "dataset_id": "kathbath",
+      "generator": null
+    },
+    {
+      "window_id": "indicsynth-gujarati-070319",
+      "label": 1,
+      "spoken_language": "Gujarati",
+      "dataset_id": "indicsynth",
+      "generator": "xtts_v2"
+    },
+    {
+      "window_id": "kathbath-hindi-844424932902388-468-f",
+      "label": 0,
+      "spoken_language": "Hindi",
+      "dataset_id": "kathbath",
+      "generator": null
+    },
+    {
+      "window_id": "indicsynth-hindi-140467",
+      "label": 1,
+      "spoken_language": "Hindi",
+      "dataset_id": "indicsynth",
+      "generator": "xtts_v2"
+    },
+    {
+      "window_id": "kathbath-kannada-844424930821783-991-f",
+      "label": 0,
+      "spoken_language": "Kannada",
+      "dataset_id": "kathbath",
+      "generator": null
+    },
+    {
+      "window_id": "indicsynth-kannada-098948",
+      "label": 1,
+      "spoken_language": "Kannada",
+      "dataset_id": "indicsynth",
+      "generator": "xtts_v2"
+    },
+    {
+      "window_id": "kathbath-malayalam-844424933053149-474-f",
+      "label": 0,
+      "spoken_language": "Malayalam",
+      "dataset_id": "kathbath",
+      "generator": null
+    },
+    {
+      "window_id": "indicsynth-malayalam-014524",
+      "label": 1,
+      "spoken_language": "Malayalam",
+      "dataset_id": "indicsynth",
+      "generator": "freevc24"
+    },
+    {
+      "window_id": "kathbath-marathi-844424930778591-18-f",
+      "label": 0,
+      "spoken_language": "Marathi",
+      "dataset_id": "kathbath",
+      "generator": null
+    },
+    {
+      "window_id": "indicsynth-marathi-063401",
+      "label": 1,
+      "spoken_language": "Marathi",
+      "dataset_id": "indicsynth",
+      "generator": "freevc24"
+    },
+    {
+      "window_id": "kathbath-odia-844424930464667-388-f",
+      "label": 0,
+      "spoken_language": "Odia",
+      "dataset_id": "kathbath",
+      "generator": null
+    },
+    {
+      "window_id": "indicsynth-odia-011284",
+      "label": 1,
+      "spoken_language": "Odia",
+      "dataset_id": "indicsynth",
+      "generator": "freevc24"
+    },
+    {
+      "window_id": "kathbath-punjabi-844424931370353-361-f",
+      "label": 0,
+      "spoken_language": "Punjabi",
+      "dataset_id": "kathbath",
+      "generator": null
+    },
+    {
+      "window_id": "indicsynth-punjabi-060594",
+      "label": 1,
+      "spoken_language": "Punjabi",
+      "dataset_id": "indicsynth",
+      "generator": "freevc24"
+    },
+    {
+      "window_id": "kathbath-sanskrit-844424932880815-1102-f",
+      "label": 0,
+      "spoken_language": "Sanskrit",
+      "dataset_id": "kathbath",
+      "generator": null
+    },
+    {
+      "window_id": "indicsynth-sanskrit-101029",
+      "label": 1,
+      "spoken_language": "Sanskrit",
+      "dataset_id": "indicsynth",
+      "generator": "freevc24"
+    },
+    {
+      "window_id": "kathbath-tamil-844424930790491-203-f",
+      "label": 0,
+      "spoken_language": "Tamil",
+      "dataset_id": "kathbath",
+      "generator": null
+    },
+    {
+      "window_id": "indicsynth-tamil-165819",
+      "label": 1,
+      "spoken_language": "Tamil",
+      "dataset_id": "indicsynth",
+      "generator": "xtts_v2"
+    },
+    {
+      "window_id": "kathbath-telugu-844424932718850-1141-f",
+      "label": 0,
+      "spoken_language": "Telugu",
+      "dataset_id": "kathbath",
+      "generator": null
+    },
+    {
+      "window_id": "indicsynth-telugu-029339",
+      "label": 1,
+      "spoken_language": "Telugu",
+      "dataset_id": "indicsynth",
+      "generator": "freevc24"
+    },
+    {
+      "window_id": "kathbath-urdu-844424932876751-93-f",
+      "label": 0,
+      "spoken_language": "Urdu",
+      "dataset_id": "kathbath",
+      "generator": null
+    },
+    {
+      "window_id": "indicsynth-urdu-070063",
+      "label": 1,
+      "spoken_language": "Urdu",
+      "dataset_id": "indicsynth",
+      "generator": "xtts_v2"
+    }
+  ]
+}

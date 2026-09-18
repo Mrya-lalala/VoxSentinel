@@ -1,0 +1,13 @@
+{
+  "learning_rate": 0.001,
+  "steps_run": 245,
+  "reached_target": true,
+  "reached_target_at_step": 245,
+  "final_eval_loss": 0.010928860865533352,
+  "final_eval_accuracy": 1.0,
+  "min_eval_loss": 0.010928860865533352,
+  "best_eval_accuracy": 1.0,
+  "elapsed_seconds": 47.92810954200104,
+  "selection_seed": 0,
+  "note": "diagnostic fit-capacity test on 24 fixed training windows; not generalization evidence"
+}

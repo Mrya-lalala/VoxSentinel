@@ -1,0 +1,24 @@
+{
+  "perfect_separation": {
+    "auc": 1.0,
+    "eer": 0.0
+  },
+  "reversed_separation": {
+    "auc": 0.0,
+    "eer": 1.0
+  },
+  "random_large_n": {
+    "auc": 0.5020331711065574,
+    "eer": 0.4918032786885246
+  },
+  "manual_midpoint": {
+    "auc": 1.0,
+    "eer": 0.0,
+    "expected_eer": 0.25,
+    "expected_auc": 1.0
+  },
+  "all_ties_within_groups": {
+    "auc": 0.5,
+    "eer": 0.5
+  }
+}

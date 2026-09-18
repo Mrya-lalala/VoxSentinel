@@ -1,0 +1,3566 @@
+{
+  "all_by_pool": {
+    "core|indicsynth": {
+      "durations_minutes": 15.992,
+      "durations_seconds": 959.491,
+      "generators": {
+        "freevc24": 126,
+        "vits": 5,
+        "xtts_v2": 109
+      },
+      "labels": {
+        "spoof": 240
+      },
+      "speakers": 146,
+      "windows": 240
+    },
+    "core|kathbath": {
+      "durations_minutes": 15.996,
+      "durations_seconds": 959.762,
+      "generators": {},
+      "labels": {
+        "genuine": 240
+      },
+      "speakers": 100,
+      "windows": 240
+    },
+    "external_eval|svarah": {
+      "durations_minutes": 1.072,
+      "durations_seconds": 64.311,
+      "generators": {},
+      "labels": {
+        "genuine": 20
+      },
+      "speakers": 40,
+      "windows": 20
+    },
+    "fallback_baseline|asvspoof2019": {
+      "durations_minutes": 2.645,
+      "durations_seconds": 158.679,
+      "generators": {},
+      "labels": {
+        "genuine": 25,
+        "spoof": 25
+      },
+      "speakers": 28,
+      "windows": 50
+    },
+    "supplementary|nptel": {
+      "durations_minutes": 0.667,
+      "durations_seconds": 40.0,
+      "generators": {},
+      "labels": {
+        "genuine": 10
+      },
+      "speakers": 0,
+      "windows": 10
+    },
+    "unpaired_candidate|nisp": {
+      "durations_minutes": 2.649,
+      "durations_seconds": 158.938,
+      "generators": {},
+      "labels": {
+        "genuine": 40
+      },
+      "speakers": 25,
+      "windows": 40
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "catalog"
+      ],
+      "stage": "catalog",
+      "timestamp": "2026-09-17T17:28:06.951118+00:00"
+    },
+    {
+      "argv": [
+        "fetch",
+        "--source",
+        "indicsynth",
+        "--languages",
+        "Malayalam"
+      ],
+      "stage": "fetch",
+      "timestamp": "2026-09-17T17:29:12.549664+00:00"
+    },
+    {
+      "argv": [
+        "fetch",
+        "--source",
+        "indicsynth",
+        "--languages",
+        "Malayalam"
+      ],
+      "stage": "fetch",
+      "timestamp": "2026-09-17T17:31:07.282282+00:00"
+    },
+    {
+      "argv": [
+        "fetch",
+        "--source",
+        "indicsynth",
+        "--languages",
+        "Malayalam"
+      ],
+      "stage": "fetch",
+      "timestamp": "2026-09-17T17:32:38.657966+00:00"
+    },
+    {
+      "argv": [
+        "fetch",
+        "--source",
+        "indicsynth",
+        "--languages",
+        "Bengali",
+        "Gujarati",
+        "Hindi",
+        "Kannada",
+        "Marathi",
+        "Odia",
+        "Punjabi",
+        "Sanskrit",
+        "Tamil",
+        "Telugu",
+        "Urdu"
+      ],
+      "stage": "fetch",
+      "timestamp": "2026-09-17T17:42:13.804887+00:00"
+    },
+    {
+      "argv": [
+        "fetch",
+        "--source",
+        "indicsynth",
+        "--languages",
+        "Telugu"
+      ],
+      "stage": "fetch",
+      "timestamp": "2026-09-17T17:46:27.609848+00:00"
+    },
+    {
+      "argv": [
+        "fetch",
+        "--source",
+        "nisp"
+      ],
+      "stage": "fetch",
+      "timestamp": "2026-09-17T17:49:24.011684+00:00"
+    },
+    {
+      "argv": [
+        "fetch",
+        "--source",
+        "nisp"
+      ],
+      "stage": "fetch",
+      "timestamp": "2026-09-17T17:53:47.404148+00:00"
+    },
+    {
+      "argv": [
+        "fetch",
+        "--source",
+        "asvspoof2019"
+      ],
+      "stage": "fetch",
+      "timestamp": "2026-09-17T18:04:01.728742+00:00"
+    },
+    {
+      "argv": [
+        "fetch",
+        "--source",
+        "nptel"
+      ],
+      "stage": "fetch",
+      "timestamp": "2026-09-17T18:05:23.378741+00:00"
+    },
+    {
+      "argv": [
+        "fetch",
+        "--source",
+        "synthetic_english"
+      ],
+      "stage": "fetch",
+      "timestamp": "2026-09-17T18:05:44.496035+00:00"
+    },
+    {
+      "argv": [
+        "split"
+      ],
+      "stage": "split",
+      "timestamp": "2026-09-17T18:05:44.606062+00:00"
+    },
+    {
+      "argv": [
+        "split"
+      ],
+      "stage": "split",
+      "timestamp": "2026-09-17T18:05:57.813658+00:00"
+    },
+    {
+      "argv": [
+        "split"
+      ],
+      "stage": "split",
+      "timestamp": "2026-09-17T18:08:43.877909+00:00"
+    },
+    {
+      "argv": [
+        "features",
+        "--threads",
+        "4"
+      ],
+      "stage": "features",
+      "timestamp": "2026-09-17T18:10:40.053121+00:00"
+    },
+    {
+      "argv": [
+        "report"
+      ],
+      "stage": "report",
+      "timestamp": "2026-09-17T18:11:12.249100+00:00"
+    },
+    {
+      "argv": [
+        "status"
+      ],
+      "stage": "status",
+      "timestamp": "2026-09-17T18:11:12.311345+00:00"
+    },
+    {
+      "argv": [
+        "report"
+      ],
+      "stage": "report",
+      "timestamp": "2026-09-17T18:12:50.873498+00:00"
+    },
+    {
+      "argv": [
+        "report"
+      ],
+      "stage": "report",
+      "timestamp": "2026-09-17T18:13:01.668643+00:00"
+    },
+    {
+      "argv": [
+        "features",
+        "--threads",
+        "4",
+        "--force"
+      ],
+      "stage": "features",
+      "timestamp": "2026-09-17T18:17:27.603338+00:00"
+    },
+    {
+      "argv": [
+        "report"
+      ],
+      "stage": "report",
+      "timestamp": "2026-09-17T18:17:28.245920+00:00"
+    },
+    {
+      "argv": [
+        "status"
+      ],
+      "stage": "status",
+      "timestamp": "2026-09-17T18:17:39.600353+00:00"
+    },
+    {
+      "argv": [
+        "core",
+        "--plan-only",
+        "--languages",
+        "Malayalam"
+      ],
+      "stage": "core",
+      "timestamp": "2026-09-18T03:50:23.552625+00:00"
+    },
+    {
+      "argv": [
+        "core",
+        "--plan-only",
+        "--languages",
+        "Malayalam"
+      ],
+      "stage": "core",
+      "timestamp": "2026-09-18T03:51:59.231975+00:00"
+    },
+    {
+      "argv": [
+        "core",
+        "--plan-only",
+        "--languages",
+        "Malayalam"
+      ],
+      "stage": "core",
+      "timestamp": "2026-09-18T03:53:05.041385+00:00"
+    },
+    {
+      "argv": [
+        "core",
+        "--plan-only",
+        "--languages",
+        "Malayalam"
+      ],
+      "stage": "core",
+      "timestamp": "2026-09-18T03:55:04.900500+00:00"
+    },
+    {
+      "argv": [
+        "core",
+        "--languages",
+        "Malayalam"
+      ],
+      "stage": "core",
+      "timestamp": "2026-09-18T03:56:26.409843+00:00"
+    },
+    {
+      "argv": [
+        "core",
+        "--languages",
+        "Malayalam"
+      ],
+      "stage": "core",
+      "timestamp": "2026-09-18T03:57:33.937498+00:00"
+    },
+    {
+      "argv": [
+        "fetch",
+        "--source",
+        "svarah"
+      ],
+      "stage": "fetch",
+      "timestamp": "2026-09-18T04:01:21.009809+00:00"
+    },
+    {
+      "argv": [
+        "core",
+        "--languages",
+        "Bengali",
+        "Gujarati",
+        "Hindi",
+        "Kannada",
+        "Marathi",
+        "Odia",
+        "Punjabi",
+        "Sanskrit",
+        "Tamil",
+        "Telugu",
+        "Urdu"
+      ],
+      "stage": "core",
+      "timestamp": "2026-09-18T05:22:56.204928+00:00"
+    },
+    {
+      "argv": [
+        "core",
+        "--languages",
+        "Malayalam",
+        "Sanskrit"
+      ],
+      "stage": "core",
+      "timestamp": "2026-09-18T05:23:19.816638+00:00"
+    },
+    {
+      "argv": [
+        "promote"
+      ],
+      "stage": "promote",
+      "timestamp": "2026-09-18T05:23:38.345366+00:00"
+    },
+    {
+      "argv": [
+        "catalog"
+      ],
+      "stage": "catalog",
+      "timestamp": "2026-09-18T05:23:43.077101+00:00"
+    },
+    {
+      "argv": [
+        "split"
+      ],
+      "stage": "split",
+      "timestamp": "2026-09-18T05:23:43.202445+00:00"
+    },
+    {
+      "argv": [
+        "features",
+        "--force",
+        "--threads",
+        "4"
+      ],
+      "stage": "features",
+      "timestamp": "2026-09-18T05:25:58.742837+00:00"
+    },
+    {
+      "argv": [
+        "report"
+      ],
+      "stage": "report",
+      "timestamp": "2026-09-18T05:26:08.912283+00:00"
+    },
+    {
+      "argv": [
+        "split"
+      ],
+      "stage": "split",
+      "timestamp": "2026-09-18T05:26:53.644596+00:00"
+    },
+    {
+      "argv": [
+        "report"
+      ],
+      "stage": "report",
+      "timestamp": "2026-09-18T05:26:59.259876+00:00"
+    },
+    {
+      "argv": [
+        "report"
+      ],
+      "stage": "report",
+      "timestamp": "2026-09-18T05:27:27.074958+00:00"
+    },
+    {
+      "argv": [
+        "core",
+        "--plan-only",
+        "--languages",
+        "Bengali",
+        "Gujarati",
+        "Kannada",
+        "Marathi",
+        "Odia",
+        "Sanskrit"
+      ],
+      "stage": "core",
+      "timestamp": "2026-09-18T07:05:13.600608+00:00"
+    },
+    {
+      "argv": [
+        "core",
+        "--plan-only",
+        "--languages",
+        "Sanskrit"
+      ],
+      "stage": "core",
+      "timestamp": "2026-09-18T07:05:43.204177+00:00"
+    },
+    {
+      "argv": [
+        "core",
+        "--languages",
+        "Bengali",
+        "Gujarati",
+        "Kannada",
+        "Marathi",
+        "Odia",
+        "Sanskrit"
+      ],
+      "stage": "core",
+      "timestamp": "2026-09-18T07:13:01.917142+00:00"
+    },
+    {
+      "argv": [
+        "promote"
+      ],
+      "stage": "promote",
+      "timestamp": "2026-09-18T07:13:07.156809+00:00"
+    },
+    {
+      "argv": [
+        "promote"
+      ],
+      "stage": "promote",
+      "timestamp": "2026-09-18T07:13:31.278938+00:00"
+    },
+    {
+      "argv": [
+        "core",
+        "--languages",
+        "Bengali",
+        "Kannada",
+        "Sanskrit"
+      ],
+      "stage": "core",
+      "timestamp": "2026-09-18T07:31:04.953525+00:00"
+    },
+    {
+      "argv": [
+        "promote"
+      ],
+      "stage": "promote",
+      "timestamp": "2026-09-18T07:31:09.496109+00:00"
+    },
+    {
+      "argv": [
+        "core",
+        "--languages",
+        "Sanskrit"
+      ],
+      "stage": "core",
+      "timestamp": "2026-09-18T07:41:03.690392+00:00"
+    },
+    {
+      "argv": [
+        "promote"
+      ],
+      "stage": "promote",
+      "timestamp": "2026-09-18T07:41:03.949042+00:00"
+    },
+    {
+      "argv": [
+        "split"
+      ],
+      "stage": "split",
+      "timestamp": "2026-09-18T07:41:11.844305+00:00"
+    },
+    {
+      "argv": [
+        "report"
+      ],
+      "stage": "report",
+      "timestamp": "2026-09-18T07:41:17.559558+00:00"
+    },
+    {
+      "argv": [
+        "features",
+        "--force",
+        "--threads",
+        "4"
+      ],
+      "stage": "features",
+      "timestamp": "2026-09-18T07:43:38.464885+00:00"
+    }
+  ],
+  "config_path": "configs/datasets.yaml",
+  "core_build": {
+    "languages": {
+      "Bengali": {
+        "materialized": {
+          "train_genuine": 16,
+          "train_synthetic": 16,
+          "val_genuine": 4,
+          "val_synthetic": 4,
+          "windows": 40
+        },
+        "plan": {
+          "assignment": {
+            "train": 6,
+            "unused": 10,
+            "val": 2
+          },
+          "available_generators": [
+            "freevc24",
+            "vits",
+            "xtts_v2"
+          ],
+          "free_agents": {},
+          "train": {
+            "checks": {
+              "generator_mix_ok": true,
+              "genuine_speakers_ok": true,
+              "synth_speakers_ok": true
+            },
+            "generators": [
+              "freevc24",
+              "vits",
+              "xtts_v2"
+            ],
+            "genuine": {
+              "attached_windows": 16,
+              "free_windows": 0,
+              "row_groups": 2,
+              "speakers": 5,
+              "windows": 16
+            },
+            "min_speakers_required": 3,
+            "synthetic": {
+              "components": 6,
+              "generators": {
+                "freevc24": 6,
+                "vits": 3,
+                "xtts_v2": 7
+              },
+              "source_speakers": 2,
+              "target_speakers": 6,
+              "windows": 16
+            }
+          },
+          "val": {
+            "checks": {
+              "generator_mix_ok": true,
+              "genuine_speakers_ok": true,
+              "synth_speakers_ok": true
+            },
+            "generators": [
+              "freevc24",
+              "vits"
+            ],
+            "genuine": {
+              "attached_windows": 4,
+              "free_windows": 0,
+              "row_groups": 2,
+              "speakers": 3,
+              "windows": 4
+            },
+            "min_speakers_required": 2,
+            "synthetic": {
+              "components": 2,
+              "generators": {
+                "freevc24": 2,
+                "vits": 2
+              },
+              "source_speakers": 1,
+              "target_speakers": 2,
+              "windows": 4
+            }
+          },
+          "val_components": [
+            "('r', '844424930460558')",
+            "('r', '844424930463554')"
+          ]
+        }
+      },
+      "Gujarati": {
+        "materialized": {
+          "train_genuine": 16,
+          "train_synthetic": 16,
+          "val_genuine": 4,
+          "val_synthetic": 4,
+          "windows": 40
+        },
+        "plan": {
+          "assignment": {
+            "train": 6,
+            "unused": 17,
+            "val": 2
+          },
+          "available_generators": [
+            "freevc24",
+            "xtts_v2"
+          ],
+          "free_agents": {},
+          "train": {
+            "checks": {
+              "generator_mix_ok": true,
+              "genuine_speakers_ok": true,
+              "synth_speakers_ok": true
+            },
+            "generators": [
+              "freevc24",
+              "xtts_v2"
+            ],
+            "genuine": {
+              "attached_windows": 16,
+              "free_windows": 0,
+              "row_groups": 4,
+              "speakers": 5,
+              "windows": 16
+            },
+            "min_speakers_required": 3,
+            "synthetic": {
+              "components": 6,
+              "generators": {
+                "freevc24": 8,
+                "xtts_v2": 8
+              },
+              "source_speakers": 3,
+              "target_speakers": 6,
+              "windows": 16
+            }
+          },
+          "val": {
+            "checks": {
+              "generator_mix_ok": true,
+              "genuine_speakers_ok": true,
+              "synth_speakers_ok": true
+            },
+            "generators": [
+              "freevc24",
+              "xtts_v2"
+            ],
+            "genuine": {
+              "attached_windows": 4,
+              "free_windows": 0,
+              "row_groups": 2,
+              "speakers": 3,
+              "windows": 4
+            },
+            "min_speakers_required": 2,
+            "synthetic": {
+              "components": 2,
+              "generators": {
+                "freevc24": 2,
+                "xtts_v2": 2
+              },
+              "source_speakers": 1,
+              "target_speakers": 2,
+              "windows": 4
+            }
+          },
+          "val_components": [
+            "('r', '844424930298613')",
+            "('r', '844424930331965')"
+          ]
+        }
+      },
+      "Hindi": {
+        "materialized": {
+          "train_genuine": 16,
+          "train_synthetic": 16,
+          "val_genuine": 4,
+          "val_synthetic": 4,
+          "windows": 40
+        },
+        "plan": {
+          "assignment": {
+            "train": 6,
+            "unused": 44,
+            "val": 2
+          },
+          "available_generators": [
+            "freevc24",
+            "xtts_v2"
+          ],
+          "free_agents": {},
+          "train": {
+            "checks": {
+              "generator_mix_ok": true,
+              "genuine_speakers_ok": true,
+              "synth_speakers_ok": true
+            },
+            "generators": [
+              "freevc24",
+              "xtts_v2"
+            ],
+            "genuine": {
+              "attached_windows": 16,
+              "free_windows": 0,
+              "row_groups": 6,
+              "speakers": 6,
+              "windows": 16
+            },
+            "min_speakers_required": 3,
+            "synthetic": {
+              "components": 6,
+              "generators": {
+                "freevc24": 8,
+                "xtts_v2": 8
+              },
+              "source_speakers": 3,
+              "target_speakers": 6,
+              "windows": 16
+            }
+          },
+          "val": {
+            "checks": {
+              "generator_mix_ok": true,
+              "genuine_speakers_ok": true,
+              "synth_speakers_ok": true
+            },
+            "generators": [
+              "freevc24",
+              "xtts_v2"
+            ],
+            "genuine": {
+              "attached_windows": 4,
+              "free_windows": 0,
+              "row_groups": 2,
+              "speakers": 3,
+              "windows": 4
+            },
+            "min_speakers_required": 2,
+            "synthetic": {
+              "components": 2,
+              "generators": {
+                "freevc24": 2,
+                "xtts_v2": 2
+              },
+              "source_speakers": 1,
+              "target_speakers": 2,
+              "windows": 4
+            }
+          },
+          "val_components": [
+            "('r', '844424930324970')",
+            "('r', '844424930557297')"
+          ]
+        }
+      },
+      "Kannada": {
+        "materialized": {
+          "train_genuine": 16,
+          "train_synthetic": 16,
+          "val_genuine": 4,
+          "val_synthetic": 4,
+          "windows": 40
+        },
+        "plan": {
+          "assignment": {
+            "train": 9,
+            "unused": 9,
+            "val": 2
+          },
+          "available_generators": [
+            "freevc24",
+            "xtts_v2"
+          ],
+          "free_agents": {
+            "235": "train",
+            "734": "train",
+            "991": "train"
+          },
+          "train": {
+            "checks": {
+              "generator_mix_ok": true,
+              "genuine_speakers_ok": true,
+              "synth_speakers_ok": true
+            },
+            "generators": [
+              "freevc24",
+              "xtts_v2"
+            ],
+            "genuine": {
+              "attached_windows": 4,
+              "free_windows": 12,
+              "row_groups": 3,
+              "speakers": 4,
+              "windows": 16
+            },
+            "min_speakers_required": 3,
+            "synthetic": {
+              "components": 6,
+              "generators": {
+                "freevc24": 8,
+                "xtts_v2": 8
+              },
+              "source_speakers": 3,
+              "target_speakers": 6,
+              "windows": 16
+            }
+          },
+          "val": {
+            "checks": {
+              "generator_mix_ok": true,
+              "genuine_speakers_ok": true,
+              "synth_speakers_ok": true
+            },
+            "generators": [
+              "freevc24",
+              "xtts_v2"
+            ],
+            "genuine": {
+              "attached_windows": 4,
+              "free_windows": 0,
+              "row_groups": 2,
+              "speakers": 3,
+              "windows": 4
+            },
+            "min_speakers_required": 2,
+            "synthetic": {
+              "components": 2,
+              "generators": {
+                "freevc24": 2,
+                "xtts_v2": 2
+              },
+              "source_speakers": 1,
+              "target_speakers": 2,
+              "windows": 4
+            }
+          },
+          "val_components": [
+            "('r', '844424930298111')",
+            "('r', '844424930301310')"
+          ]
+        }
+      },
+      "Malayalam": {
+        "materialized": {
+          "train_genuine": 16,
+          "train_synthetic": 16,
+          "val_genuine": 4,
+          "val_synthetic": 4,
+          "windows": 40
+        },
+        "plan": {
+          "assignment": {
+            "train": 6,
+            "unused": 3,
+            "val": 2
+          },
+          "available_generators": [
+            "freevc24",
+            "xtts_v2"
+          ],
+          "free_agents": {},
+          "train": {
+            "checks": {
+              "generator_mix_ok": true,
+              "genuine_speakers_ok": true,
+              "synth_speakers_ok": true
+            },
+            "generators": [
+              "freevc24",
+              "xtts_v2"
+            ],
+            "genuine": {
+              "attached_windows": 16,
+              "free_windows": 0,
+              "row_groups": 3,
+              "speakers": 4,
+              "windows": 16
+            },
+            "min_speakers_required": 3,
+            "synthetic": {
+              "components": 6,
+              "generators": {
+                "freevc24": 8,
+                "xtts_v2": 8
+              },
+              "source_speakers": 3,
+              "target_speakers": 6,
+              "windows": 16
+            }
+          },
+          "val": {
+            "checks": {
+              "generator_mix_ok": true,
+              "genuine_speakers_ok": true,
+              "synth_speakers_ok": true
+            },
+            "generators": [
+              "freevc24",
+              "xtts_v2"
+            ],
+            "genuine": {
+              "attached_windows": 4,
+              "free_windows": 0,
+              "row_groups": 2,
+              "speakers": 3,
+              "windows": 4
+            },
+            "min_speakers_required": 2,
+            "synthetic": {
+              "components": 2,
+              "generators": {
+                "freevc24": 2,
+                "xtts_v2": 2
+              },
+              "source_speakers": 1,
+              "target_speakers": 2,
+              "windows": 4
+            }
+          },
+          "val_components": [
+            "('r', '844424930309260')",
+            "('r', '844424930310361')"
+          ]
+        }
+      },
+      "Marathi": {
+        "materialized": {
+          "train_genuine": 16,
+          "train_synthetic": 16,
+          "val_genuine": 4,
+          "val_synthetic": 4,
+          "windows": 40
+        },
+        "plan": {
+          "assignment": {
+            "train": 6,
+            "unused": 41,
+            "val": 2
+          },
+          "available_generators": [
+            "freevc24"
+          ],
+          "free_agents": {},
+          "train": {
+            "checks": {
+              "generator_mix_ok": true,
+              "genuine_speakers_ok": true,
+              "synth_speakers_ok": true
+            },
+            "generators": [
+              "freevc24"
+            ],
+            "genuine": {
+              "attached_windows": 16,
+              "free_windows": 0,
+              "row_groups": 8,
+              "speakers": 6,
+              "windows": 16
+            },
+            "min_speakers_required": 3,
+            "synthetic": {
+              "components": 6,
+              "generators": {
+                "freevc24": 16
+              },
+              "source_speakers": 6,
+              "target_speakers": 6,
+              "windows": 16
+            }
+          },
+          "val": {
+            "checks": {
+              "generator_mix_ok": true,
+              "genuine_speakers_ok": true,
+              "synth_speakers_ok": true
+            },
+            "generators": [
+              "freevc24"
+            ],
+            "genuine": {
+              "attached_windows": 4,
+              "free_windows": 0,
+              "row_groups": 4,
+              "speakers": 4,
+              "windows": 4
+            },
+            "min_speakers_required": 2,
+            "synthetic": {
+              "components": 2,
+              "generators": {
+                "freevc24": 4
+              },
+              "source_speakers": 2,
+              "target_speakers": 2,
+              "windows": 4
+            }
+          },
+          "val_components": [
+            "('r', '844424930571098')",
+            "('r', '844424930584601')"
+          ]
+        }
+      },
+      "Odia": {
+        "materialized": {
+          "train_genuine": 16,
+          "train_synthetic": 16,
+          "val_genuine": 4,
+          "val_synthetic": 4,
+          "windows": 40
+        },
+        "plan": {
+          "assignment": {
+            "train": 6,
+            "unused": 9,
+            "val": 2
+          },
+          "available_generators": [
+            "freevc24",
+            "xtts_v2"
+          ],
+          "free_agents": {},
+          "train": {
+            "checks": {
+              "generator_mix_ok": true,
+              "genuine_speakers_ok": true,
+              "synth_speakers_ok": true
+            },
+            "generators": [
+              "freevc24",
+              "xtts_v2"
+            ],
+            "genuine": {
+              "attached_windows": 16,
+              "free_windows": 0,
+              "row_groups": 5,
+              "speakers": 9,
+              "windows": 16
+            },
+            "min_speakers_required": 3,
+            "synthetic": {
+              "components": 6,
+              "generators": {
+                "freevc24": 8,
+                "xtts_v2": 8
+              },
+              "source_speakers": 3,
+              "target_speakers": 6,
+              "windows": 16
+            }
+          },
+          "val": {
+            "checks": {
+              "generator_mix_ok": true,
+              "genuine_speakers_ok": true,
+              "synth_speakers_ok": true
+            },
+            "generators": [
+              "freevc24",
+              "xtts_v2"
+            ],
+            "genuine": {
+              "attached_windows": 4,
+              "free_windows": 0,
+              "row_groups": 2,
+              "speakers": 3,
+              "windows": 4
+            },
+            "min_speakers_required": 2,
+            "synthetic": {
+              "components": 2,
+              "generators": {
+                "freevc24": 2,
+                "xtts_v2": 2
+              },
+              "source_speakers": 1,
+              "target_speakers": 2,
+              "windows": 4
+            }
+          },
+          "val_components": [
+            "('r', '844424930330068')",
+            "('r', '844424930362250')"
+          ]
+        }
+      },
+      "Punjabi": {
+        "materialized": {
+          "train_genuine": 16,
+          "train_synthetic": 16,
+          "val_genuine": 4,
+          "val_synthetic": 4,
+          "windows": 40
+        },
+        "plan": {
+          "assignment": {
+            "train": 6,
+            "unused": 58,
+            "val": 2
+          },
+          "available_generators": [
+            "freevc24",
+            "xtts_v2"
+          ],
+          "free_agents": {},
+          "train": {
+            "checks": {
+              "generator_mix_ok": true,
+              "genuine_speakers_ok": true,
+              "synth_speakers_ok": true
+            },
+            "generators": [
+              "freevc24",
+              "xtts_v2"
+            ],
+            "genuine": {
+              "attached_windows": 16,
+              "free_windows": 0,
+              "row_groups": 6,
+              "speakers": 5,
+              "windows": 16
+            },
+            "min_speakers_required": 3,
+            "synthetic": {
+              "components": 6,
+              "generators": {
+                "freevc24": 8,
+                "xtts_v2": 8
+              },
+              "source_speakers": 3,
+              "target_speakers": 6,
+              "windows": 16
+            }
+          },
+          "val": {
+            "checks": {
+              "generator_mix_ok": true,
+              "genuine_speakers_ok": true,
+              "synth_speakers_ok": true
+            },
+            "generators": [
+              "freevc24",
+              "xtts_v2"
+            ],
+            "genuine": {
+              "attached_windows": 4,
+              "free_windows": 0,
+              "row_groups": 1,
+              "speakers": 3,
+              "windows": 4
+            },
+            "min_speakers_required": 2,
+            "synthetic": {
+              "components": 2,
+              "generators": {
+                "freevc24": 2,
+                "xtts_v2": 2
+              },
+              "source_speakers": 1,
+              "target_speakers": 2,
+              "windows": 4
+            }
+          },
+          "val_components": [
+            "('r', '844424930566693')",
+            "('r', '844424930441068')"
+          ]
+        }
+      },
+      "Sanskrit": {
+        "materialized": {
+          "train_genuine": 16,
+          "train_synthetic": 16,
+          "val_genuine": 4,
+          "val_synthetic": 4,
+          "windows": 40
+        },
+        "plan": {
+          "assignment": {
+            "train": 6,
+            "unused": 89,
+            "val": 2
+          },
+          "available_generators": [
+            "freevc24",
+            "xtts_v2"
+          ],
+          "free_agents": {},
+          "train": {
+            "checks": {
+              "generator_mix_ok": true,
+              "genuine_speakers_ok": true,
+              "synth_speakers_ok": true
+            },
+            "generators": [
+              "freevc24",
+              "xtts_v2"
+            ],
+            "genuine": {
+              "attached_windows": 16,
+              "free_windows": 0,
+              "row_groups": 6,
+              "speakers": 7,
+              "windows": 16
+            },
+            "min_speakers_required": 3,
+            "synthetic": {
+              "components": 6,
+              "generators": {
+                "freevc24": 7,
+                "xtts_v2": 9
+              },
+              "source_speakers": 3,
+              "target_speakers": 6,
+              "windows": 16
+            }
+          },
+          "val": {
+            "checks": {
+              "generator_mix_ok": true,
+              "genuine_speakers_ok": true,
+              "synth_speakers_ok": true
+            },
+            "generators": [
+              "freevc24",
+              "xtts_v2"
+            ],
+            "genuine": {
+              "attached_windows": 4,
+              "free_windows": 0,
+              "row_groups": 2,
+              "speakers": 3,
+              "windows": 4
+            },
+            "min_speakers_required": 2,
+            "synthetic": {
+              "components": 2,
+              "generators": {
+                "freevc24": 1,
+                "xtts_v2": 3
+              },
+              "source_speakers": 1,
+              "target_speakers": 2,
+              "windows": 4
+            }
+          },
+          "val_components": [
+            "('r', '844424932355216')",
+            "('r', '844424932470964')"
+          ]
+        }
+      },
+      "Tamil": {
+        "materialized": {
+          "train_genuine": 16,
+          "train_synthetic": 16,
+          "val_genuine": 4,
+          "val_synthetic": 4,
+          "windows": 40
+        },
+        "plan": {
+          "assignment": {
+            "train": 10,
+            "unused": 25,
+            "val": 2
+          },
+          "available_generators": [
+            "freevc24",
+            "xtts_v2"
+          ],
+          "free_agents": {
+            "1099": "train",
+            "1142": "train",
+            "203": "train",
+            "347": "train"
+          },
+          "train": {
+            "checks": {
+              "generator_mix_ok": true,
+              "genuine_speakers_ok": true,
+              "synth_speakers_ok": true
+            },
+            "generators": [
+              "freevc24",
+              "xtts_v2"
+            ],
+            "genuine": {
+              "attached_windows": 0,
+              "free_windows": 16,
+              "row_groups": 3,
+              "speakers": 4,
+              "windows": 16
+            },
+            "min_speakers_required": 3,
+            "synthetic": {
+              "components": 6,
+              "generators": {
+                "freevc24": 8,
+                "xtts_v2": 8
+              },
+              "source_speakers": 3,
+              "target_speakers": 6,
+              "windows": 16
+            }
+          },
+          "val": {
+            "checks": {
+              "generator_mix_ok": true,
+              "genuine_speakers_ok": true,
+              "synth_speakers_ok": true
+            },
+            "generators": [
+              "freevc24",
+              "xtts_v2"
+            ],
+            "genuine": {
+              "attached_windows": 4,
+              "free_windows": 0,
+              "row_groups": 3,
+              "speakers": 3,
+              "windows": 4
+            },
+            "min_speakers_required": 2,
+            "synthetic": {
+              "components": 2,
+              "generators": {
+                "freevc24": 2,
+                "xtts_v2": 2
+              },
+              "source_speakers": 1,
+              "target_speakers": 2,
+              "windows": 4
+            }
+          },
+          "val_components": [
+            "('r', '844424930422166')",
+            "('r', '844424930457855')"
+          ]
+        }
+      },
+      "Telugu": {
+        "materialized": {
+          "train_genuine": 16,
+          "train_synthetic": 16,
+          "val_genuine": 4,
+          "val_synthetic": 4,
+          "windows": 40
+        },
+        "plan": {
+          "assignment": {
+            "train": 6,
+            "unused": 33,
+            "val": 2
+          },
+          "available_generators": [
+            "freevc24",
+            "xtts_v2"
+          ],
+          "free_agents": {},
+          "train": {
+            "checks": {
+              "generator_mix_ok": true,
+              "genuine_speakers_ok": true,
+              "synth_speakers_ok": true
+            },
+            "generators": [
+              "freevc24",
+              "xtts_v2"
+            ],
+            "genuine": {
+              "attached_windows": 16,
+              "free_windows": 0,
+              "row_groups": 6,
+              "speakers": 5,
+              "windows": 16
+            },
+            "min_speakers_required": 3,
+            "synthetic": {
+              "components": 6,
+              "generators": {
+                "freevc24": 8,
+                "xtts_v2": 8
+              },
+              "source_speakers": 3,
+              "target_speakers": 6,
+              "windows": 16
+            }
+          },
+          "val": {
+            "checks": {
+              "generator_mix_ok": true,
+              "genuine_speakers_ok": true,
+              "synth_speakers_ok": true
+            },
+            "generators": [
+              "freevc24",
+              "xtts_v2"
+            ],
+            "genuine": {
+              "attached_windows": 4,
+              "free_windows": 0,
+              "row_groups": 2,
+              "speakers": 3,
+              "windows": 4
+            },
+            "min_speakers_required": 2,
+            "synthetic": {
+              "components": 2,
+              "generators": {
+                "freevc24": 2,
+                "xtts_v2": 2
+              },
+              "source_speakers": 1,
+              "target_speakers": 2,
+              "windows": 4
+            }
+          },
+          "val_components": [
+            "('r', '844424930331868')",
+            "('r', '844424932469869')"
+          ]
+        }
+      },
+      "Urdu": {
+        "materialized": {
+          "train_genuine": 16,
+          "train_synthetic": 16,
+          "val_genuine": 4,
+          "val_synthetic": 4,
+          "windows": 40
+        },
+        "plan": {
+          "assignment": {
+            "train": 6,
+            "unused": 14,
+            "val": 2
+          },
+          "available_generators": [
+            "freevc24",
+            "xtts_v2"
+          ],
+          "free_agents": {},
+          "train": {
+            "checks": {
+              "generator_mix_ok": true,
+              "genuine_speakers_ok": true,
+              "synth_speakers_ok": true
+            },
+            "generators": [
+              "freevc24",
+              "xtts_v2"
+            ],
+            "genuine": {
+              "attached_windows": 16,
+              "free_windows": 0,
+              "row_groups": 9,
+              "speakers": 4,
+              "windows": 16
+            },
+            "min_speakers_required": 3,
+            "synthetic": {
+              "components": 6,
+              "generators": {
+                "freevc24": 8,
+                "xtts_v2": 8
+              },
+              "source_speakers": 3,
+              "target_speakers": 6,
+              "windows": 16
+            }
+          },
+          "val": {
+            "checks": {
+              "generator_mix_ok": true,
+              "genuine_speakers_ok": true,
+              "synth_speakers_ok": true
+            },
+            "generators": [
+              "freevc24",
+              "xtts_v2"
+            ],
+            "genuine": {
+              "attached_windows": 4,
+              "free_windows": 0,
+              "row_groups": 2,
+              "speakers": 3,
+              "windows": 4
+            },
+            "min_speakers_required": 2,
+            "synthetic": {
+              "components": 2,
+              "generators": {
+                "freevc24": 2,
+                "xtts_v2": 2
+              },
+              "source_speakers": 1,
+              "target_speakers": 2,
+              "windows": 4
+            }
+          },
+          "val_components": [
+            "('r', '844424930342538')",
+            "('r', '844424930358764')"
+          ]
+        }
+      }
+    },
+    "notes": [],
+    "revisions": {
+      "indicsynth": "c0a10386b723717aff682f757bd67f72983f269f",
+      "kathbath": "5b9e92849222026d9141acba4e8434fe816396bf",
+      "resolved_at": "2026-09-18T07:40:49.264546+00:00"
+    },
+    "totals": {
+      "download_bytes": 1369182468,
+      "exclusions": 8867,
+      "train_genuine": 192,
+      "train_synthetic": 192,
+      "val_genuine": 48,
+      "val_synthetic": 48,
+      "windows": 480
+    }
+  },
+  "core_by_generator": {
+    "indicsynth|freevc24|train": {
+      "durations_minutes": 6.727,
+      "durations_seconds": 403.64,
+      "generators": {
+        "freevc24": 101
+      },
+      "labels": {
+        "spoof": 101
+      },
+      "speakers": 76,
+      "windows": 101
+    },
+    "indicsynth|freevc24|val": {
+      "durations_minutes": 1.667,
+      "durations_seconds": 100.0,
+      "generators": {
+        "freevc24": 25
+      },
+      "labels": {
+        "spoof": 25
+      },
+      "speakers": 26,
+      "windows": 25
+    },
+    "indicsynth|vits|train": {
+      "durations_minutes": 0.2,
+      "durations_seconds": 12.0,
+      "generators": {
+        "vits": 3
+      },
+      "labels": {
+        "spoof": 3
+      },
+      "speakers": 1,
+      "windows": 3
+    },
+    "indicsynth|vits|val": {
+      "durations_minutes": 0.133,
+      "durations_seconds": 8.0,
+      "generators": {
+        "vits": 2
+      },
+      "labels": {
+        "spoof": 2
+      },
+      "speakers": 1,
+      "windows": 2
+    },
+    "indicsynth|xtts_v2|train": {
+      "durations_minutes": 5.864,
+      "durations_seconds": 351.851,
+      "generators": {
+        "xtts_v2": 88
+      },
+      "labels": {
+        "spoof": 88
+      },
+      "speakers": 33,
+      "windows": 88
+    },
+    "indicsynth|xtts_v2|val": {
+      "durations_minutes": 1.4,
+      "durations_seconds": 84.0,
+      "generators": {
+        "xtts_v2": 21
+      },
+      "labels": {
+        "spoof": 21
+      },
+      "speakers": 10,
+      "windows": 21
+    },
+    "kathbath|None|train": {
+      "durations_minutes": 12.8,
+      "durations_seconds": 768.0,
+      "generators": {},
+      "labels": {
+        "genuine": 192
+      },
+      "speakers": 64,
+      "windows": 192
+    },
+    "kathbath|None|val": {
+      "durations_minutes": 3.196,
+      "durations_seconds": 191.762,
+      "generators": {},
+      "labels": {
+        "genuine": 48
+      },
+      "speakers": 37,
+      "windows": 48
+    }
+  },
+  "core_by_language_split": {
+    "indicsynth|Bengali|train": {
+      "durations_minutes": 1.067,
+      "durations_seconds": 64.0,
+      "generators": {
+        "freevc24": 6,
+        "vits": 3,
+        "xtts_v2": 7
+      },
+      "labels": {
+        "spoof": 16
+      },
+      "speakers": 8,
+      "windows": 16
+    },
+    "indicsynth|Bengali|val": {
+      "durations_minutes": 0.267,
+      "durations_seconds": 16.0,
+      "generators": {
+        "freevc24": 2,
+        "vits": 2
+      },
+      "labels": {
+        "spoof": 4
+      },
+      "speakers": 3,
+      "windows": 4
+    },
+    "indicsynth|Gujarati|train": {
+      "durations_minutes": 1.067,
+      "durations_seconds": 64.0,
+      "generators": {
+        "freevc24": 8,
+        "xtts_v2": 8
+      },
+      "labels": {
+        "spoof": 16
+      },
+      "speakers": 9,
+      "windows": 16
+    },
+    "indicsynth|Gujarati|val": {
+      "durations_minutes": 0.267,
+      "durations_seconds": 16.0,
+      "generators": {
+        "freevc24": 2,
+        "xtts_v2": 2
+      },
+      "labels": {
+        "spoof": 4
+      },
+      "speakers": 3,
+      "windows": 4
+    },
+    "indicsynth|Hindi|train": {
+      "durations_minutes": 1.064,
+      "durations_seconds": 63.851,
+      "generators": {
+        "freevc24": 8,
+        "xtts_v2": 8
+      },
+      "labels": {
+        "spoof": 16
+      },
+      "speakers": 9,
+      "windows": 16
+    },
+    "indicsynth|Hindi|val": {
+      "durations_minutes": 0.267,
+      "durations_seconds": 16.0,
+      "generators": {
+        "freevc24": 2,
+        "xtts_v2": 2
+      },
+      "labels": {
+        "spoof": 4
+      },
+      "speakers": 3,
+      "windows": 4
+    },
+    "indicsynth|Kannada|train": {
+      "durations_minutes": 1.067,
+      "durations_seconds": 64.0,
+      "generators": {
+        "freevc24": 8,
+        "xtts_v2": 8
+      },
+      "labels": {
+        "spoof": 16
+      },
+      "speakers": 9,
+      "windows": 16
+    },
+    "indicsynth|Kannada|val": {
+      "durations_minutes": 0.267,
+      "durations_seconds": 16.0,
+      "generators": {
+        "freevc24": 2,
+        "xtts_v2": 2
+      },
+      "labels": {
+        "spoof": 4
+      },
+      "speakers": 3,
+      "windows": 4
+    },
+    "indicsynth|Malayalam|train": {
+      "durations_minutes": 1.067,
+      "durations_seconds": 64.0,
+      "generators": {
+        "freevc24": 8,
+        "xtts_v2": 8
+      },
+      "labels": {
+        "spoof": 16
+      },
+      "speakers": 9,
+      "windows": 16
+    },
+    "indicsynth|Malayalam|val": {
+      "durations_minutes": 0.267,
+      "durations_seconds": 16.0,
+      "generators": {
+        "freevc24": 2,
+        "xtts_v2": 2
+      },
+      "labels": {
+        "spoof": 4
+      },
+      "speakers": 3,
+      "windows": 4
+    },
+    "indicsynth|Marathi|train": {
+      "durations_minutes": 1.061,
+      "durations_seconds": 63.64,
+      "generators": {
+        "freevc24": 16
+      },
+      "labels": {
+        "spoof": 16
+      },
+      "speakers": 12,
+      "windows": 16
+    },
+    "indicsynth|Marathi|val": {
+      "durations_minutes": 0.267,
+      "durations_seconds": 16.0,
+      "generators": {
+        "freevc24": 4
+      },
+      "labels": {
+        "spoof": 4
+      },
+      "speakers": 4,
+      "windows": 4
+    },
+    "indicsynth|Odia|train": {
+      "durations_minutes": 1.067,
+      "durations_seconds": 64.0,
+      "generators": {
+        "freevc24": 8,
+        "xtts_v2": 8
+      },
+      "labels": {
+        "spoof": 16
+      },
+      "speakers": 9,
+      "windows": 16
+    },
+    "indicsynth|Odia|val": {
+      "durations_minutes": 0.267,
+      "durations_seconds": 16.0,
+      "generators": {
+        "freevc24": 2,
+        "xtts_v2": 2
+      },
+      "labels": {
+        "spoof": 4
+      },
+      "speakers": 3,
+      "windows": 4
+    },
+    "indicsynth|Punjabi|train": {
+      "durations_minutes": 1.067,
+      "durations_seconds": 64.0,
+      "generators": {
+        "freevc24": 8,
+        "xtts_v2": 8
+      },
+      "labels": {
+        "spoof": 16
+      },
+      "speakers": 9,
+      "windows": 16
+    },
+    "indicsynth|Punjabi|val": {
+      "durations_minutes": 0.267,
+      "durations_seconds": 16.0,
+      "generators": {
+        "freevc24": 2,
+        "xtts_v2": 2
+      },
+      "labels": {
+        "spoof": 4
+      },
+      "speakers": 3,
+      "windows": 4
+    },
+    "indicsynth|Sanskrit|train": {
+      "durations_minutes": 1.067,
+      "durations_seconds": 64.0,
+      "generators": {
+        "freevc24": 7,
+        "xtts_v2": 9
+      },
+      "labels": {
+        "spoof": 16
+      },
+      "speakers": 9,
+      "windows": 16
+    },
+    "indicsynth|Sanskrit|val": {
+      "durations_minutes": 0.267,
+      "durations_seconds": 16.0,
+      "generators": {
+        "freevc24": 1,
+        "xtts_v2": 3
+      },
+      "labels": {
+        "spoof": 4
+      },
+      "speakers": 3,
+      "windows": 4
+    },
+    "indicsynth|Tamil|train": {
+      "durations_minutes": 1.067,
+      "durations_seconds": 64.0,
+      "generators": {
+        "freevc24": 8,
+        "xtts_v2": 8
+      },
+      "labels": {
+        "spoof": 16
+      },
+      "speakers": 9,
+      "windows": 16
+    },
+    "indicsynth|Tamil|val": {
+      "durations_minutes": 0.267,
+      "durations_seconds": 16.0,
+      "generators": {
+        "freevc24": 2,
+        "xtts_v2": 2
+      },
+      "labels": {
+        "spoof": 4
+      },
+      "speakers": 3,
+      "windows": 4
+    },
+    "indicsynth|Telugu|train": {
+      "durations_minutes": 1.067,
+      "durations_seconds": 64.0,
+      "generators": {
+        "freevc24": 8,
+        "xtts_v2": 8
+      },
+      "labels": {
+        "spoof": 16
+      },
+      "speakers": 9,
+      "windows": 16
+    },
+    "indicsynth|Telugu|val": {
+      "durations_minutes": 0.267,
+      "durations_seconds": 16.0,
+      "generators": {
+        "freevc24": 2,
+        "xtts_v2": 2
+      },
+      "labels": {
+        "spoof": 4
+      },
+      "speakers": 3,
+      "windows": 4
+    },
+    "indicsynth|Urdu|train": {
+      "durations_minutes": 1.067,
+      "durations_seconds": 64.0,
+      "generators": {
+        "freevc24": 8,
+        "xtts_v2": 8
+      },
+      "labels": {
+        "spoof": 16
+      },
+      "speakers": 9,
+      "windows": 16
+    },
+    "indicsynth|Urdu|val": {
+      "durations_minutes": 0.267,
+      "durations_seconds": 16.0,
+      "generators": {
+        "freevc24": 2,
+        "xtts_v2": 2
+      },
+      "labels": {
+        "spoof": 4
+      },
+      "speakers": 3,
+      "windows": 4
+    },
+    "kathbath|Bengali|train": {
+      "durations_minutes": 1.067,
+      "durations_seconds": 64.0,
+      "generators": {},
+      "labels": {
+        "genuine": 16
+      },
+      "speakers": 5,
+      "windows": 16
+    },
+    "kathbath|Bengali|val": {
+      "durations_minutes": 0.267,
+      "durations_seconds": 16.0,
+      "generators": {},
+      "labels": {
+        "genuine": 4
+      },
+      "speakers": 3,
+      "windows": 4
+    },
+    "kathbath|Gujarati|train": {
+      "durations_minutes": 1.067,
+      "durations_seconds": 64.0,
+      "generators": {},
+      "labels": {
+        "genuine": 16
+      },
+      "speakers": 5,
+      "windows": 16
+    },
+    "kathbath|Gujarati|val": {
+      "durations_minutes": 0.267,
+      "durations_seconds": 16.0,
+      "generators": {},
+      "labels": {
+        "genuine": 4
+      },
+      "speakers": 3,
+      "windows": 4
+    },
+    "kathbath|Hindi|train": {
+      "durations_minutes": 1.067,
+      "durations_seconds": 64.0,
+      "generators": {},
+      "labels": {
+        "genuine": 16
+      },
+      "speakers": 6,
+      "windows": 16
+    },
+    "kathbath|Hindi|val": {
+      "durations_minutes": 0.267,
+      "durations_seconds": 16.0,
+      "generators": {},
+      "labels": {
+        "genuine": 4
+      },
+      "speakers": 3,
+      "windows": 4
+    },
+    "kathbath|Kannada|train": {
+      "durations_minutes": 1.067,
+      "durations_seconds": 64.0,
+      "generators": {},
+      "labels": {
+        "genuine": 16
+      },
+      "speakers": 4,
+      "windows": 16
+    },
+    "kathbath|Kannada|val": {
+      "durations_minutes": 0.267,
+      "durations_seconds": 16.0,
+      "generators": {},
+      "labels": {
+        "genuine": 4
+      },
+      "speakers": 3,
+      "windows": 4
+    },
+    "kathbath|Malayalam|train": {
+      "durations_minutes": 1.067,
+      "durations_seconds": 64.0,
+      "generators": {},
+      "labels": {
+        "genuine": 16
+      },
+      "speakers": 4,
+      "windows": 16
+    },
+    "kathbath|Malayalam|val": {
+      "durations_minutes": 0.267,
+      "durations_seconds": 16.0,
+      "generators": {},
+      "labels": {
+        "genuine": 4
+      },
+      "speakers": 3,
+      "windows": 4
+    },
+    "kathbath|Marathi|train": {
+      "durations_minutes": 1.067,
+      "durations_seconds": 64.0,
+      "generators": {},
+      "labels": {
+        "genuine": 16
+      },
+      "speakers": 6,
+      "windows": 16
+    },
+    "kathbath|Marathi|val": {
+      "durations_minutes": 0.267,
+      "durations_seconds": 16.0,
+      "generators": {},
+      "labels": {
+        "genuine": 4
+      },
+      "speakers": 4,
+      "windows": 4
+    },
+    "kathbath|Odia|train": {
+      "durations_minutes": 1.067,
+      "durations_seconds": 64.0,
+      "generators": {},
+      "labels": {
+        "genuine": 16
+      },
+      "speakers": 9,
+      "windows": 16
+    },
+    "kathbath|Odia|val": {
+      "durations_minutes": 0.267,
+      "durations_seconds": 16.0,
+      "generators": {},
+      "labels": {
+        "genuine": 4
+      },
+      "speakers": 3,
+      "windows": 4
+    },
+    "kathbath|Punjabi|train": {
+      "durations_minutes": 1.067,
+      "durations_seconds": 64.0,
+      "generators": {},
+      "labels": {
+        "genuine": 16
+      },
+      "speakers": 5,
+      "windows": 16
+    },
+    "kathbath|Punjabi|val": {
+      "durations_minutes": 0.263,
+      "durations_seconds": 15.762,
+      "generators": {},
+      "labels": {
+        "genuine": 4
+      },
+      "speakers": 3,
+      "windows": 4
+    },
+    "kathbath|Sanskrit|train": {
+      "durations_minutes": 1.067,
+      "durations_seconds": 64.0,
+      "generators": {},
+      "labels": {
+        "genuine": 16
+      },
+      "speakers": 7,
+      "windows": 16
+    },
+    "kathbath|Sanskrit|val": {
+      "durations_minutes": 0.267,
+      "durations_seconds": 16.0,
+      "generators": {},
+      "labels": {
+        "genuine": 4
+      },
+      "speakers": 3,
+      "windows": 4
+    },
+    "kathbath|Tamil|train": {
+      "durations_minutes": 1.067,
+      "durations_seconds": 64.0,
+      "generators": {},
+      "labels": {
+        "genuine": 16
+      },
+      "speakers": 4,
+      "windows": 16
+    },
+    "kathbath|Tamil|val": {
+      "durations_minutes": 0.267,
+      "durations_seconds": 16.0,
+      "generators": {},
+      "labels": {
+        "genuine": 4
+      },
+      "speakers": 3,
+      "windows": 4
+    },
+    "kathbath|Telugu|train": {
+      "durations_minutes": 1.067,
+      "durations_seconds": 64.0,
+      "generators": {},
+      "labels": {
+        "genuine": 16
+      },
+      "speakers": 5,
+      "windows": 16
+    },
+    "kathbath|Telugu|val": {
+      "durations_minutes": 0.267,
+      "durations_seconds": 16.0,
+      "generators": {},
+      "labels": {
+        "genuine": 4
+      },
+      "speakers": 3,
+      "windows": 4
+    },
+    "kathbath|Urdu|train": {
+      "durations_minutes": 1.067,
+      "durations_seconds": 64.0,
+      "generators": {},
+      "labels": {
+        "genuine": 16
+      },
+      "speakers": 4,
+      "windows": 16
+    },
+    "kathbath|Urdu|val": {
+      "durations_minutes": 0.267,
+      "durations_seconds": 16.0,
+      "generators": {},
+      "labels": {
+        "genuine": 4
+      },
+      "speakers": 3,
+      "windows": 4
+    }
+  },
+  "core_identity": {
+    "languages": {
+      "Bengali": {
+        "train": {
+          "generator:freevc24": 6,
+          "generator:vits": 3,
+          "generator:xtts_v2": 7,
+          "genuine": 16,
+          "spoof": 16
+        },
+        "val": {
+          "generator:freevc24": 2,
+          "generator:vits": 2,
+          "genuine": 4,
+          "spoof": 4
+        }
+      },
+      "Gujarati": {
+        "train": {
+          "generator:freevc24": 8,
+          "generator:xtts_v2": 8,
+          "genuine": 16,
+          "spoof": 16
+        },
+        "val": {
+          "generator:freevc24": 2,
+          "generator:xtts_v2": 2,
+          "genuine": 4,
+          "spoof": 4
+        }
+      },
+      "Hindi": {
+        "train": {
+          "generator:freevc24": 8,
+          "generator:xtts_v2": 8,
+          "genuine": 16,
+          "spoof": 16
+        },
+        "val": {
+          "generator:freevc24": 2,
+          "generator:xtts_v2": 2,
+          "genuine": 4,
+          "spoof": 4
+        }
+      },
+      "Kannada": {
+        "train": {
+          "generator:freevc24": 8,
+          "generator:xtts_v2": 8,
+          "genuine": 16,
+          "spoof": 16
+        },
+        "val": {
+          "generator:freevc24": 2,
+          "generator:xtts_v2": 2,
+          "genuine": 4,
+          "spoof": 4
+        }
+      },
+      "Malayalam": {
+        "train": {
+          "generator:freevc24": 8,
+          "generator:xtts_v2": 8,
+          "genuine": 16,
+          "spoof": 16
+        },
+        "val": {
+          "generator:freevc24": 2,
+          "generator:xtts_v2": 2,
+          "genuine": 4,
+          "spoof": 4
+        }
+      },
+      "Marathi": {
+        "train": {
+          "generator:freevc24": 16,
+          "genuine": 16,
+          "spoof": 16
+        },
+        "val": {
+          "generator:freevc24": 4,
+          "genuine": 4,
+          "spoof": 4
+        }
+      },
+      "Odia": {
+        "train": {
+          "generator:freevc24": 8,
+          "generator:xtts_v2": 8,
+          "genuine": 16,
+          "spoof": 16
+        },
+        "val": {
+          "generator:freevc24": 2,
+          "generator:xtts_v2": 2,
+          "genuine": 4,
+          "spoof": 4
+        }
+      },
+      "Punjabi": {
+        "train": {
+          "generator:freevc24": 8,
+          "generator:xtts_v2": 8,
+          "genuine": 16,
+          "spoof": 16
+        },
+        "val": {
+          "generator:freevc24": 2,
+          "generator:xtts_v2": 2,
+          "genuine": 4,
+          "spoof": 4
+        }
+      },
+      "Sanskrit": {
+        "train": {
+          "generator:freevc24": 7,
+          "generator:xtts_v2": 9,
+          "genuine": 16,
+          "spoof": 16
+        },
+        "val": {
+          "generator:freevc24": 1,
+          "generator:xtts_v2": 3,
+          "genuine": 4,
+          "spoof": 4
+        }
+      },
+      "Tamil": {
+        "train": {
+          "generator:freevc24": 8,
+          "generator:xtts_v2": 8,
+          "genuine": 16,
+          "spoof": 16
+        },
+        "val": {
+          "generator:freevc24": 2,
+          "generator:xtts_v2": 2,
+          "genuine": 4,
+          "spoof": 4
+        }
+      },
+      "Telugu": {
+        "train": {
+          "generator:freevc24": 8,
+          "generator:xtts_v2": 8,
+          "genuine": 16,
+          "spoof": 16
+        },
+        "val": {
+          "generator:freevc24": 2,
+          "generator:xtts_v2": 2,
+          "genuine": 4,
+          "spoof": 4
+        }
+      },
+      "Urdu": {
+        "train": {
+          "generator:freevc24": 8,
+          "generator:xtts_v2": 8,
+          "genuine": 16,
+          "spoof": 16
+        },
+        "val": {
+          "generator:freevc24": 2,
+          "generator:xtts_v2": 2,
+          "genuine": 4,
+          "spoof": 4
+        }
+      }
+    },
+    "reference_overlap": [],
+    "speaker_overlap": [],
+    "train_unique_originals": 224,
+    "train_unique_speakers": 174,
+    "train_windows": 384,
+    "val_unique_originals": 61,
+    "val_unique_speakers": 74,
+    "val_windows": 96
+  },
+  "dataset_revisions": {
+    "asvspoof2019": {
+      "as-published": 50
+    },
+    "indicsynth": {
+      "c0a10386b723717aff682f757bd67f72983f269f": 240
+    },
+    "kathbath": {
+      "5b9e92849222026d9141acba4e8434fe816396bf": 240
+    },
+    "nisp": {
+      "master": 40
+    },
+    "nptel": {
+      "v0.1": 10
+    },
+    "svarah": {
+      "ebbf7777fe771490696a3f7b007097606fa8c924": 20
+    }
+  },
+  "dataset_root": "artifacts/datasets",
+  "dataset_version": {
+    "created": "2026-09-18T07:44:49.764556+00:00",
+    "feature_caches": {
+      "train": {
+        "bundle_sha256": "a893b5038cfc2375e027d7f2bc335aa48dd1f215af488c297eada13a4ea1b56b",
+        "identity": {
+          "backbone_id": "indicwav2vec-large",
+          "dtype": "float32",
+          "embedding_dim": 1024,
+          "encoder_checkpoint_sha256": "26bb5ada18952fd7355f691d25927b34a0e46d6afda7658bf5c254621831ab59",
+          "frame_hop_ms": 20.0,
+          "implementation": "src.backbones.indic_wav2vec:extract_batch",
+          "label_counts": {
+            "0": 192,
+            "1": 192
+          },
+          "languages": [
+            "Bengali",
+            "Gujarati",
+            "Hindi",
+            "Kannada",
+            "Malayalam",
+            "Marathi",
+            "Odia",
+            "Punjabi",
+            "Sanskrit",
+            "Tamil",
+            "Telugu",
+            "Urdu"
+          ],
+          "manifest_file_sha256": "1b361e14cb60cb739b6bbd55692529b94e8a7b37efc8530f4b03cb2ed2253ad4",
+          "manifest_items": 384,
+          "manifest_sha256": "78b1ace26de1dec09de0f70eeb3d3af94a0a7f834b0fabbee6b268ac54739b38",
+          "output_layer": null,
+          "preprocessing_version": "voxsentinel-prep-2",
+          "runtime": {
+            "fairseq": "0.12.1",
+            "numpy": "1.23.5",
+            "platform": "macOS-26.5.2-arm64-arm-64bit",
+            "python": "3.10.18",
+            "torch": "2.2.2",
+            "torchaudio": "2.2.2"
+          }
+        },
+        "items": 384,
+        "label_counts": {
+          "0": 192,
+          "1": 192
+        }
+      },
+      "val": {
+        "bundle_sha256": "069b3b78e2c4f767146966a1a4f2c1596b569eaa26663aecd6835df35ad03360",
+        "identity": {
+          "backbone_id": "indicwav2vec-large",
+          "dtype": "float32",
+          "embedding_dim": 1024,
+          "encoder_checkpoint_sha256": "26bb5ada18952fd7355f691d25927b34a0e46d6afda7658bf5c254621831ab59",
+          "frame_hop_ms": 20.0,
+          "implementation": "src.backbones.indic_wav2vec:extract_batch",
+          "label_counts": {
+            "0": 48,
+            "1": 48
+          },
+          "languages": [
+            "Bengali",
+            "Gujarati",
+            "Hindi",
+            "Kannada",
+            "Malayalam",
+            "Marathi",
+            "Odia",
+            "Punjabi",
+            "Sanskrit",
+            "Tamil",
+            "Telugu",
+            "Urdu"
+          ],
+          "manifest_file_sha256": "a23acb1cdbe86a940c984bd9fb206abbd3dd6612733fa88b4de755b980e13342",
+          "manifest_items": 96,
+          "manifest_sha256": "6fe19ac906e5ef4865342d92892f82f5747b81075392403ef40d2200c67206ae",
+          "output_layer": null,
+          "preprocessing_version": "voxsentinel-prep-2",
+          "runtime": {
+            "fairseq": "0.12.1",
+            "numpy": "1.23.5",
+            "platform": "macOS-26.5.2-arm64-arm-64bit",
+            "python": "3.10.18",
+            "torch": "2.2.2",
+            "torchaudio": "2.2.2"
+          }
+        },
+        "items": 96,
+        "label_counts": {
+          "0": 48,
+          "1": 48
+        }
+      }
+    },
+    "lineage_status_counts": {
+      "not_applicable_tts": 114,
+      "verified_train": 366
+    },
+    "manifest_hashes": {
+      "source_windows.asvspoof2019.jsonl": "6414fd4f6c54e3745d44707fb2e22a5e78d2278732fc22842f64823c4472cc96",
+      "source_windows.indicsynth.jsonl": "23bae4229d7e236abe44f14fab9e37c938390dda3838d7b9be1fd1198f81ddd6",
+      "source_windows.kathbath.jsonl": "84740317d6ac519556ab98b38ae359d051d497da6d1e3b85c7b787747d8482f2",
+      "source_windows.nisp.jsonl": "70669e06c05d70fa59636d6c12c9348935439e3b2b6ceb9d359c176d5d8edac0",
+      "source_windows.nptel.jsonl": "df5349bdf6a7014fe58cc157dcbfd19b06fa48bb8b5b0a410edacb9b52fd1a7a",
+      "source_windows.svarah.jsonl": "ebb037615232e4529086ae72479b40d0b1d79d49d118d56aa080a58497708645",
+      "windows.core_train.jsonl": "1b361e14cb60cb739b6bbd55692529b94e8a7b37efc8530f4b03cb2ed2253ad4",
+      "windows.core_val.jsonl": "a23acb1cdbe86a940c984bd9fb206abbd3dd6612733fa88b4de755b980e13342",
+      "windows.excluded.jsonl": "16f89875921fab3356c79514bdea6395e7708fc991c1dc40bfd73375b948f02c",
+      "windows.external_eval.jsonl": "6e1c23be012d565692064277114b97d50e77808e94cd2ef9eca89a30d19b6a27",
+      "windows.fallback_baseline.jsonl": "b0cf742ea387b373c73e894d6487ee7d7c01830ad1eb8c50986bfa20bae70a84",
+      "windows.missing_coverage.jsonl": "5c220ea35dce7fe2e7dcc884e06b24169ff2e77edbb08a488de11bf54411fbd9",
+      "windows.supplementary.jsonl": "df5349bdf6a7014fe58cc157dcbfd19b06fa48bb8b5b0a410edacb9b52fd1a7a",
+      "windows.unpaired_candidate.jsonl": "15628344ab1aff8020cd21f337e46940124daeeebb6362ea2f58d4eea222f5ca"
+    },
+    "pools": {
+      "core_train": 384,
+      "core_val": 96,
+      "external_eval": 20,
+      "fallback_baseline": 50,
+      "supplementary": 10,
+      "unpaired_candidate": 40
+    },
+    "preprocessing_version": "voxsentinel-prep-2",
+    "readiness": {
+      "core_indic_training_ready": {
+        "languages": 12,
+        "ready": true,
+        "train_labels": {
+          "genuine": 192,
+          "spoof": 192
+        },
+        "train_windows": 384,
+        "val_labels": {
+          "genuine": 48,
+          "spoof": 48
+        },
+        "val_windows": 96
+      },
+      "external_audio_ready": {
+        "ready": true,
+        "sources": [
+          "svarah"
+        ],
+        "windows": 20
+      },
+      "indian_english_training_ready": {
+        "ready": false,
+        "reason": "No traceable synthetic Indian-English source exists and no user assets were supplied.",
+        "user_action": "Provide user-authorized synthetic assets following configs/synthetic_english_template.json."
+      }
+    },
+    "seed": 42
+  },
+  "downloaded_bytes": {
+    "cap_bytes": 5368709120,
+    "events": 1379,
+    "per_source_bytes": {
+      "asvspoof2019": 16272703,
+      "indicsynth": 247743522,
+      "kathbath": 1730201852,
+      "nisp": 1294991360,
+      "nptel": 188815224,
+      "svarah": 142472502
+    },
+    "remaining_bytes": 1748211957,
+    "total_bytes": 3620497163
+  },
+  "exclusions_by_reason": {
+    "audio_fetch_missing": 1,
+    "candidate_pool_not_selected": 8768,
+    "lineage_replacement_required: not_found": 12,
+    "reference_unresolvable_precheck: source:not_found": 40,
+    "reference_unresolvable_precheck: source:not_found, target:not_found": 5,
+    "reference_unresolvable_precheck: target:not_found": 27
+  },
+  "exclusions_total": 8853,
+  "external_eval_summary": {
+    "svarah|Bodo": {
+      "durations_minutes": 0.095,
+      "durations_seconds": 5.689,
+      "generators": {},
+      "labels": {
+        "genuine": 2
+      },
+      "speakers": 4,
+      "windows": 2
+    },
+    "svarah|Dogri": {
+      "durations_minutes": 0.037,
+      "durations_seconds": 2.22,
+      "generators": {},
+      "labels": {
+        "genuine": 1
+      },
+      "speakers": 2,
+      "windows": 1
+    },
+    "svarah|Gujarati": {
+      "durations_minutes": 0.063,
+      "durations_seconds": 3.796,
+      "generators": {},
+      "labels": {
+        "genuine": 1
+      },
+      "speakers": 2,
+      "windows": 1
+    },
+    "svarah|Kannada": {
+      "durations_minutes": 0.133,
+      "durations_seconds": 8.0,
+      "generators": {},
+      "labels": {
+        "genuine": 2
+      },
+      "speakers": 4,
+      "windows": 2
+    },
+    "svarah|Kashmiri": {
+      "durations_minutes": 0.04,
+      "durations_seconds": 2.429,
+      "generators": {},
+      "labels": {
+        "genuine": 1
+      },
+      "speakers": 2,
+      "windows": 1
+    },
+    "svarah|Konkani": {
+      "durations_minutes": 0.081,
+      "durations_seconds": 4.845,
+      "generators": {},
+      "labels": {
+        "genuine": 2
+      },
+      "speakers": 4,
+      "windows": 2
+    },
+    "svarah|Maithili": {
+      "durations_minutes": 0.13,
+      "durations_seconds": 7.786,
+      "generators": {},
+      "labels": {
+        "genuine": 2
+      },
+      "speakers": 4,
+      "windows": 2
+    },
+    "svarah|Malayalam": {
+      "durations_minutes": 0.109,
+      "durations_seconds": 6.521,
+      "generators": {},
+      "labels": {
+        "genuine": 2
+      },
+      "speakers": 4,
+      "windows": 2
+    },
+    "svarah|Marathi": {
+      "durations_minutes": 0.104,
+      "durations_seconds": 6.265,
+      "generators": {},
+      "labels": {
+        "genuine": 2
+      },
+      "speakers": 4,
+      "windows": 2
+    },
+    "svarah|Punjabi": {
+      "durations_minutes": 0.079,
+      "durations_seconds": 4.76,
+      "generators": {},
+      "labels": {
+        "genuine": 2
+      },
+      "speakers": 4,
+      "windows": 2
+    },
+    "svarah|Telugu": {
+      "durations_minutes": 0.133,
+      "durations_seconds": 8.0,
+      "generators": {},
+      "labels": {
+        "genuine": 2
+      },
+      "speakers": 4,
+      "windows": 2
+    },
+    "svarah|Urdu": {
+      "durations_minutes": 0.067,
+      "durations_seconds": 4.0,
+      "generators": {},
+      "labels": {
+        "genuine": 1
+      },
+      "speakers": 2,
+      "windows": 1
+    }
+  },
+  "fallback_by_split_label": {
+    "dev|genuine": {
+      "durations_minutes": 0.329,
+      "durations_seconds": 19.715,
+      "generators": {},
+      "labels": {
+        "genuine": 5
+      },
+      "speakers": 5,
+      "windows": 5
+    },
+    "dev|spoof": {
+      "durations_minutes": 0.237,
+      "durations_seconds": 14.196,
+      "generators": {},
+      "labels": {
+        "spoof": 5
+      },
+      "speakers": 5,
+      "windows": 5
+    },
+    "train|genuine": {
+      "durations_minutes": 1.032,
+      "durations_seconds": 61.907,
+      "generators": {},
+      "labels": {
+        "genuine": 20
+      },
+      "speakers": 20,
+      "windows": 20
+    },
+    "train|spoof": {
+      "durations_minutes": 1.048,
+      "durations_seconds": 62.86,
+      "generators": {},
+      "labels": {
+        "spoof": 20
+      },
+      "speakers": 20,
+      "windows": 20
+    }
+  },
+  "features": {
+    "train": {
+      "by_language": {
+        "Bengali": {
+          "0": 16,
+          "1": 16
+        },
+        "Gujarati": {
+          "0": 16,
+          "1": 16
+        },
+        "Hindi": {
+          "0": 16,
+          "1": 16
+        },
+        "Kannada": {
+          "0": 16,
+          "1": 16
+        },
+        "Malayalam": {
+          "0": 16,
+          "1": 16
+        },
+        "Marathi": {
+          "0": 16,
+          "1": 16
+        },
+        "Odia": {
+          "0": 16,
+          "1": 16
+        },
+        "Punjabi": {
+          "0": 16,
+          "1": 16
+        },
+        "Sanskrit": {
+          "0": 16,
+          "1": 16
+        },
+        "Tamil": {
+          "0": 16,
+          "1": 16
+        },
+        "Telugu": {
+          "0": 16,
+          "1": 16
+        },
+        "Urdu": {
+          "0": 16,
+          "1": 16
+        }
+      },
+      "complete": true,
+      "created": "2026-09-18T07:43:11.831824+00:00",
+      "format": "voxsentinel.embedding_cache.v1",
+      "identity": {
+        "backbone_id": "indicwav2vec-large",
+        "dtype": "float32",
+        "embedding_dim": 1024,
+        "encoder_checkpoint_sha256": "26bb5ada18952fd7355f691d25927b34a0e46d6afda7658bf5c254621831ab59",
+        "frame_hop_ms": 20.0,
+        "implementation": "src.backbones.indic_wav2vec:extract_batch",
+        "label_counts": {
+          "0": 192,
+          "1": 192
+        },
+        "languages": [
+          "Bengali",
+          "Gujarati",
+          "Hindi",
+          "Kannada",
+          "Malayalam",
+          "Marathi",
+          "Odia",
+          "Punjabi",
+          "Sanskrit",
+          "Tamil",
+          "Telugu",
+          "Urdu"
+        ],
+        "manifest_file_sha256": "1b361e14cb60cb739b6bbd55692529b94e8a7b37efc8530f4b03cb2ed2253ad4",
+        "manifest_items": 384,
+        "manifest_sha256": "78b1ace26de1dec09de0f70eeb3d3af94a0a7f834b0fabbee6b268ac54739b38",
+        "output_layer": null,
+        "preprocessing_version": "voxsentinel-prep-2",
+        "runtime": {
+          "fairseq": "0.12.1",
+          "numpy": "1.23.5",
+          "platform": "macOS-26.5.2-arm64-arm-64bit",
+          "python": "3.10.18",
+          "torch": "2.2.2",
+          "torchaudio": "2.2.2"
+        }
+      },
+      "items": 384,
+      "label_counts": {
+        "0": 192,
+        "1": 192
+      },
+      "manifest": "artifacts/datasets/manifests/windows.core_train.jsonl",
+      "manifest_file_sha256": "1b361e14cb60cb739b6bbd55692529b94e8a7b37efc8530f4b03cb2ed2253ad4",
+      "manifest_sha256": "78b1ace26de1dec09de0f70eeb3d3af94a0a7f834b0fabbee6b268ac54739b38",
+      "status": "built"
+    },
+    "val": {
+      "by_language": {
+        "Bengali": {
+          "0": 4,
+          "1": 4
+        },
+        "Gujarati": {
+          "0": 4,
+          "1": 4
+        },
+        "Hindi": {
+          "0": 4,
+          "1": 4
+        },
+        "Kannada": {
+          "0": 4,
+          "1": 4
+        },
+        "Malayalam": {
+          "0": 4,
+          "1": 4
+        },
+        "Marathi": {
+          "0": 4,
+          "1": 4
+        },
+        "Odia": {
+          "0": 4,
+          "1": 4
+        },
+        "Punjabi": {
+          "0": 4,
+          "1": 4
+        },
+        "Sanskrit": {
+          "0": 4,
+          "1": 4
+        },
+        "Tamil": {
+          "0": 4,
+          "1": 4
+        },
+        "Telugu": {
+          "0": 4,
+          "1": 4
+        },
+        "Urdu": {
+          "0": 4,
+          "1": 4
+        }
+      },
+      "complete": true,
+      "created": "2026-09-18T07:43:38.360176+00:00",
+      "format": "voxsentinel.embedding_cache.v1",
+      "identity": {
+        "backbone_id": "indicwav2vec-large",
+        "dtype": "float32",
+        "embedding_dim": 1024,
+        "encoder_checkpoint_sha256": "26bb5ada18952fd7355f691d25927b34a0e46d6afda7658bf5c254621831ab59",
+        "frame_hop_ms": 20.0,
+        "implementation": "src.backbones.indic_wav2vec:extract_batch",
+        "label_counts": {
+          "0": 48,
+          "1": 48
+        },
+        "languages": [
+          "Bengali",
+          "Gujarati",
+          "Hindi",
+          "Kannada",
+          "Malayalam",
+          "Marathi",
+          "Odia",
+          "Punjabi",
+          "Sanskrit",
+          "Tamil",
+          "Telugu",
+          "Urdu"
+        ],
+        "manifest_file_sha256": "a23acb1cdbe86a940c984bd9fb206abbd3dd6612733fa88b4de755b980e13342",
+        "manifest_items": 96,
+        "manifest_sha256": "6fe19ac906e5ef4865342d92892f82f5747b81075392403ef40d2200c67206ae",
+        "output_layer": null,
+        "preprocessing_version": "voxsentinel-prep-2",
+        "runtime": {
+          "fairseq": "0.12.1",
+          "numpy": "1.23.5",
+          "platform": "macOS-26.5.2-arm64-arm-64bit",
+          "python": "3.10.18",
+          "torch": "2.2.2",
+          "torchaudio": "2.2.2"
+        }
+      },
+      "items": 96,
+      "label_counts": {
+        "0": 48,
+        "1": 48
+      },
+      "manifest": "artifacts/datasets/manifests/windows.core_val.jsonl",
+      "manifest_file_sha256": "a23acb1cdbe86a940c984bd9fb206abbd3dd6612733fa88b4de755b980e13342",
+      "manifest_sha256": "6fe19ac906e5ef4865342d92892f82f5747b81075392403ef40d2200c67206ae",
+      "status": "built"
+    }
+  },
+  "features_validation": {
+    "checks": [
+      {
+        "check": "bundle_file",
+        "detail": "artifacts/datasets/features/train.pt",
+        "ok": true,
+        "split": "train"
+      },
+      {
+        "check": "meta_file",
+        "detail": "artifacts/datasets/features/train.meta.json",
+        "ok": true,
+        "split": "train"
+      },
+      {
+        "check": "complete_marker",
+        "detail": "built",
+        "ok": true,
+        "split": "train"
+      },
+      {
+        "check": "manifest_current",
+        "detail": "manifest=artifacts/datasets/manifests/windows.core_train.jsonl",
+        "ok": true,
+        "split": "train"
+      },
+      {
+        "check": "item_count",
+        "detail": "384 (expected 384)",
+        "ok": true,
+        "split": "train"
+      },
+      {
+        "check": "dual_class",
+        "detail": {
+          "0": 192,
+          "1": 192
+        },
+        "ok": true,
+        "split": "train"
+      },
+      {
+        "check": "per_language_dual_class",
+        "detail": {
+          "Bengali": {
+            "0": 16,
+            "1": 16
+          },
+          "Gujarati": {
+            "0": 16,
+            "1": 16
+          },
+          "Hindi": {
+            "0": 16,
+            "1": 16
+          }
+        },
+        "ok": true,
+        "split": "train"
+      },
+      {
+        "check": "deep_identity",
+        "detail": "skipped: PyTorch unavailable",
+        "ok": null,
+        "split": "train"
+      },
+      {
+        "check": "bundle_file",
+        "detail": "artifacts/datasets/features/val.pt",
+        "ok": true,
+        "split": "val"
+      },
+      {
+        "check": "meta_file",
+        "detail": "artifacts/datasets/features/val.meta.json",
+        "ok": true,
+        "split": "val"
+      },
+      {
+        "check": "complete_marker",
+        "detail": "built",
+        "ok": true,
+        "split": "val"
+      },
+      {
+        "check": "manifest_current",
+        "detail": "manifest=artifacts/datasets/manifests/windows.core_val.jsonl",
+        "ok": true,
+        "split": "val"
+      },
+      {
+        "check": "item_count",
+        "detail": "96 (expected 96)",
+        "ok": true,
+        "split": "val"
+      },
+      {
+        "check": "dual_class",
+        "detail": {
+          "0": 48,
+          "1": 48
+        },
+        "ok": true,
+        "split": "val"
+      },
+      {
+        "check": "per_language_dual_class",
+        "detail": {
+          "Bengali": {
+            "0": 4,
+            "1": 4
+          },
+          "Gujarati": {
+            "0": 4,
+            "1": 4
+          },
+          "Hindi": {
+            "0": 4,
+            "1": 4
+          }
+        },
+        "ok": true,
+        "split": "val"
+      },
+      {
+        "check": "deep_identity",
+        "detail": "skipped: PyTorch unavailable",
+        "ok": null,
+        "split": "val"
+      }
+    ],
+    "failures": [],
+    "ready": true,
+    "skipped": [
+      "train:deep_identity",
+      "val:deep_identity"
+    ],
+    "torch_available": false
+  },
+  "gaps": [
+    {
+      "class": "genuine",
+      "dataset_id": "spire_sies",
+      "gap_id": "spire_sies-genuine",
+      "intended_pool": "supplementary",
+      "intended_windows": null,
+      "reason": "SPIRE portal is request-based; the user reported the archive as unavailable for this session.",
+      "spoken_language": null,
+      "status": "awaiting_user_links",
+      "user_action": "Provide a local SPIRE-SIES archive path in a follow-up run (portal: https://spiredatasets.ee.iisc.ac.in/)."
+    },
+    {
+      "class": "genuine",
+      "dataset_id": "indic_timit",
+      "gap_id": "indic_timit-genuine",
+      "intended_pool": "supplementary",
+      "intended_windows": null,
+      "reason": "SPIRE portal is request-based; the user reported the archive as unavailable for this session.",
+      "spoken_language": null,
+      "status": "awaiting_user_links",
+      "user_action": "Provide a local Indic TIMIT release path in a follow-up run (portal: https://spiredatasets.ee.iisc.ac.in/indictimitcorpus)."
+    },
+    {
+      "class": "genuine",
+      "dataset_id": "indicvoices",
+      "gap_id": "indicvoices-genuine",
+      "intended_pool": "external_eval",
+      "intended_windows": null,
+      "reason": "The HF gate was accepted during this run and file reads succeed, but the bounded scope selected Svarah for new external-evaluation material.",
+      "spoken_language": null,
+      "status": "accessible_not_processed",
+      "user_action": "Optional: extend the external evaluation pool with IndicVoices shards in a follow-up run."
+    },
+    {
+      "class": "spoof",
+      "dataset_id": "synthetic_english",
+      "gap_id": "synthetic_english-spoof",
+      "intended_pool": "core",
+      "intended_windows": null,
+      "reason": "No traceable synthetic Indian-English source exists and no user assets were supplied.",
+      "spoken_language": null,
+      "status": "missing_source",
+      "user_action": "Provide user-authorized synthetic assets following configs/synthetic_english_template.json."
+    }
+  ],
+  "generated_at": "2026-09-18T07:44:49.557467+00:00",
+  "lineage_resolution": {
+    "evidence_methods": {
+      "full_train_shard_scan": 236,
+      "none": 114,
+      "scanned_inventory": 130
+    },
+    "meaning": {
+      "not_applicable_tts": "no voice-conversion source step exists for TTS rows",
+      "not_found": "absent from every train row group that could contain it (excluded)",
+      "parsed_only": "pattern-valid only (should be empty for a frozen core)",
+      "upstream_eval_parent": "parent lives in the upstream valid/test partition (excluded)",
+      "verified_train": "recording confirmed inside the upstream train shards (full scan evidence)"
+    },
+    "reference_exclusions_by_reason": {
+      "lineage_replacement_required": 12,
+      "reference_unresolvable_precheck": 72
+    },
+    "replacement_rows": {},
+    "status_counts": {
+      "not_applicable_tts": 114,
+      "verified_train": 366
+    },
+    "windows": 240
+  },
+  "notes": [
+    "Malayalam: scanned=1000 candidates=28 kept=20 new=20",
+    "Malayalam: scanned=1000 candidates=28 kept=20 new=20",
+    "Malayalam: scanned=1000 candidates=28 kept=20 new=4",
+    "Bengali: scanned=1000 candidates=28 kept=20 new=20",
+    "Gujarati: scanned=1000 candidates=28 kept=20 new=20",
+    "Hindi: scanned=1000 candidates=28 kept=20 new=20",
+    "Kannada: scanned=1000 candidates=28 kept=20 new=20",
+    "Marathi: scanned=1000 candidates=28 kept=20 new=20",
+    "Odia: scanned=1000 candidates=28 kept=20 new=20",
+    "Punjabi: scanned=1000 candidates=28 kept=20 new=20",
+    "Sanskrit: scanned=1000 candidates=28 kept=20 new=20",
+    "Tamil: scanned=1000 candidates=28 kept=20 new=20",
+    "Telugu: scanned=1000 candidates=28 kept=17 new=17",
+    "Urdu: scanned=1000 candidates=28 kept=20 new=20",
+    "Telugu: scanned=1000 candidates=36 kept=20 new=20",
+    "Hindi: archive stream stopped: invalid header",
+    "Hindi: quota not fully met (train=0/6, val=0/2)",
+    "Hindi: windows train=0 val=0 (speakers 0+0), parts=1, bytes=99614720",
+    "Kannada: archive stream stopped: invalid header",
+    "Kannada: quota not fully met (train=0/6, val=0/2)",
+    "Kannada: windows train=0 val=0 (speakers 0+0), parts=1, bytes=99614720",
+    "Malayalam: archive stream stopped: invalid header",
+    "Malayalam: quota not fully met (train=0/6, val=0/2)",
+    "Malayalam: windows train=0 val=0 (speakers 0+0), parts=1, bytes=99614720",
+    "Tamil: archive stream stopped: invalid header",
+    "Tamil: quota not fully met (train=0/6, val=0/2)",
+    "Tamil: windows train=0 val=0 (speakers 0+0), parts=1, bytes=99614720",
+    "Telugu: archive stream stopped: invalid header",
+    "Telugu: quota not fully met (train=0/6, val=0/2)",
+    "Telugu: windows train=0 val=0 (speakers 0+0), parts=1, bytes=99614720",
+    "Hindi: windows train=6 val=2 (speakers 3+2), parts=2, bytes=99614720",
+    "Kannada: windows train=6 val=2 (speakers 3+2), parts=3, bytes=199229440",
+    "Malayalam: windows train=6 val=2 (speakers 3+2), parts=2, bytes=99614720",
+    "Tamil: windows train=6 val=2 (speakers 3+2), parts=3, bytes=199229440",
+    "Telugu: windows train=6 val=2 (speakers 3+2), parts=3, bytes=199229440",
+    "train: protocol rows=25380 selected genuine=20 spoof=20",
+    "dev: protocol rows=24844 selected genuine=5 spoof=5",
+    "pure-set archive at nptel-pure-set.tar.gz: 188815224 new bytes",
+    "accepted 10/10 chunks; lecturer identity UNRESOLVED (inventory-only)",
+    "no user-supplied synthetic Indian-English assets were provided (quotas.synthetic_english.import_dir is empty); coverage remains missing_source",
+    "selected 20/20 windows; speakers=20 states=10 row_groups_read=10 bytes_read=142472502 revision=ebbf7777fe77",
+    "Sanskrit: kathbath audio fetch failed: audio byte cap reached for sanskrit: 261283549 > 250000000"
+  ],
+  "pools": {
+    "core_train": 384,
+    "core_val": 96,
+    "external_eval": 20,
+    "fallback_baseline": 50,
+    "supplementary": 10,
+    "unpaired_candidate": 40
+  },
+  "preprocessing": {
+    "activity_policy": "30 ms non-overlapping frame RMS > 0.0025 in at least 20% of frames; below that a window is excluded as insufficient_speech_activity",
+    "channel_policy": "mean of channels (documented minimal adapter; no A2 path exists in this checkout)",
+    "config_version": "voxsentinel-prep-2",
+    "decoders": "libsndfile (primary); ffmpeg pcm_f32le (fallback for M4A/AAC containers, decoded at the original rate)",
+    "overflow_policy": "bounded attenuation ONLY when resampling leaves amplitudes above 1.0: gain = 1/peak (<=0 dB, never clip, never upscale); gain, peak-before-gain and affected counts recorded per window",
+    "prepared_format": "WAV",
+    "prepared_subtype": "FLOAT",
+    "resampler": "soxr",
+    "target_sample_rate": 16000
+  },
+  "preprocessing_audit": {
+    "active_fraction_mean": 0.9175,
+    "active_fraction_min": 0.358491,
+    "by_class": {
+      "genuine": {
+        "windows": 335
+      },
+      "spoof": {
+        "windows": 265
+      }
+    },
+    "decoders": {
+      "libsndfile": 600
+    },
+    "overflow_gain_adjusted": {
+      "genuine": 6,
+      "spoof": 51
+    },
+    "windows_at_full_cap": 540,
+    "windows_shorter_than_cap": 60
+  },
+  "readiness": {
+    "core_indic_training_ready": {
+      "languages": 12,
+      "ready": true,
+      "train_labels": {
+        "genuine": 192,
+        "spoof": 192
+      },
+      "train_windows": 384,
+      "val_labels": {
+        "genuine": 48,
+        "spoof": 48
+      },
+      "val_windows": 96
+    },
+    "external_audio_ready": {
+      "ready": true,
+      "sources": [
+        "svarah"
+      ],
+      "windows": 20
+    },
+    "indian_english_training_ready": {
+      "ready": false,
+      "reason": "No traceable synthetic Indian-English source exists and no user assets were supplied.",
+      "user_action": "Provide user-authorized synthetic assets following configs/synthetic_english_template.json."
+    }
+  },
+  "recordings_total": 600,
+  "repo": {
+    "branch": "feature/indicVac2Wav",
+    "commit": "c250bbd0ac3b2af1ae345ce48960fcc63d200557",
+    "uncommitted_changes": [
+      "M .gitignore",
+      " M README.md",
+      " M docs/b1-setup.md",
+      " M scripts/setup_encoder_env.sh",
+      "?? configs/datasets.yaml",
+      "?? configs/synthetic_english_template.json",
+      "?? docs/dataset-preparation-pilot.md",
+      "?? docs/encoder-gru-smoke.md",
+      "?? requirements-dev.txt",
+      "?? scripts/prepare_datasets.py",
+      "?? scripts/refresh_prepared_windows.py",
+      "?? scripts/resolve_lineage.py",
+      "?? scripts/train_gru_from_cache.py",
+      "?? scripts/verify_encoder_gru.py",
+      "?? src/audio/__init__.py",
+      "?? src/audio/prepare.py",
+      "?? src/dataset_prep/"
+    ]
+  },
+  "run_scope_note": "No tests, detector training or evaluation were run.",
+  "seed": 42,
+  "sources": [
+    {
+      "license": "CC BY-NC 4.0 (dataset card); non-commercial research use",
+      "name": "IndicSynth synthetic Indic speech",
+      "notes": [
+        "Per-language configs; only the upstream `train` partition is used.",
+        "Rows are selected via the Hugging Face datasets-server metadata API; only selected rows' audio assets are downloaded.",
+        "CC BY-NC 4.0 forbids commercial use; downstream checkpoints inherit this restriction for this data portion."
+      ],
+      "official_url": "https://huggingface.co/datasets/vdivyasharma/IndicSynth",
+      "role": "core synthetic windows (12 Indic languages)",
+      "source_id": "indicsynth",
+      "status": "accessible",
+      "user_action": null
+    },
+    {
+      "license": "CC BY 4.0 (repository README)",
+      "name": "NISP Indian-accented English speech",
+      "notes": [
+        "English recordings of the Hindi/Kannada/Malayalam/Tamil/Telugu native-language folders.",
+        "Multipart tar.gz archives are streamed in exact part order with a per-language byte budget; only official train speakers are used, official test speakers are excluded."
+      ],
+      "official_url": "https://github.com/iiscleap/NISP-Dataset",
+      "role": "genuine Indian-English candidate windows (unpaired without synthetic English)",
+      "source_id": "nisp",
+      "status": "accessible",
+      "user_action": null
+    },
+    {
+      "license": "ASVspoof 2019 challenge data terms (see DataShare item and asvspoof.org)",
+      "name": "ASVspoof 2019 LA",
+      "notes": [
+        "The full LA.zip archive is 7.64 GB and is never downloaded whole; selected FLAC members and protocol files are fetched with HTTP range requests over the remote ZIP.",
+        "Official train/dev membership and protocol labels are preserved; this pool is kept separate from the Indic pilot and is not routed through the Indic encoder automatically."
+      ],
+      "official_url": "https://datashare.ed.ac.uk/handle/10283/3336",
+      "role": "separate fallback/baseline pool (20+20 train, 5+5 dev)",
+      "source_id": "asvspoof2019",
+      "status": "accessible_selective",
+      "user_action": null
+    },
+    {
+      "license": "CC BY (see repository); YouTube NPTEL content under Creative Commons",
+      "name": "NPTEL2020 Indian-English speech (published pure set)",
+      "notes": [
+        "Only the official 189 MB `nptel-pure-set.tar.gz` release asset is used; the full corpus is about 1.1 TB and is not downloaded.",
+        "If lecturer identities cannot be resolved, these clips stay supplementary/inventory-only and are not claimed to be speaker-disjoint."
+      ],
+      "official_url": "https://github.com/AI4Bharat/NPTEL2020-Indian-English-Speech-Dataset",
+      "role": "supplementary genuine English windows (lecturer identity unresolved)",
+      "source_id": "nptel",
+      "status": "accessible_bounded",
+      "user_action": null
+    },
+    {
+      "license": "CC BY 4.0 (dataset card)",
+      "name": "Kathbath genuine Indic speech (IndicSUPERB)",
+      "notes": [
+        "Gated access was granted to the user's Hub account (auto terms); reads succeed.",
+        "Per-language revision SHA resolved at acquisition; recorded in every manifest row.",
+        "Only selected recordings are fetched, row group by row group; a per-language byte cap bounds the ledger.",
+        "These recordings provide the genuine side of the paired core; synthetic rows referencing held-out shard recordings are excluded."
+      ],
+      "official_url": "https://huggingface.co/datasets/ai4bharat/Kathbath",
+      "role": "core genuine windows (12 Indic languages) - PROCESSED",
+      "source_id": "kathbath",
+      "status": "accessible",
+      "user_action": null
+    },
+    {
+      "license": "CC BY 4.0 (dataset card)",
+      "name": "Svarah genuine English evaluation",
+      "notes": [
+        "Gated access was granted to the user's Hub account (auto terms); reads succeed.",
+        "Revision SHA and per-row audio path/speaker/state metadata stored in every parent_refs block.",
+        "Selected windows stay outside training, validation, threshold tuning and synthetic generation."
+      ],
+      "official_url": "https://huggingface.co/datasets/ai4bharat/Svarah",
+      "role": "external evaluation only (20 genuine English windows PROCESSED)",
+      "source_id": "svarah",
+      "status": "accessible",
+      "user_action": null
+    },
+    {
+      "license": "CC BY 4.0 (dataset card)",
+      "name": "IndicVoices genuine Indic evaluation",
+      "notes": [
+        "Access changed during this run: the gate was accepted and file reads now succeed (verified by reading a Hindi shard footer: train-00000-of-00082.parquet, 5,429 rows).",
+        "Not processed in this bounded run; the documented scope selected Svarah for new external evaluation material.",
+        "Even upstream `valid` recordings would be reserved for external evaluation, not training."
+      ],
+      "official_url": "https://huggingface.co/datasets/ai4bharat/IndicVoices",
+      "role": "external evaluation only (genuine Indic languages)",
+      "source_id": "indicvoices",
+      "status": "accessible_not_processed",
+      "user_action": "Optional follow-up: extend the external evaluation pool with IndicVoices recordings; the parquet/row-group access pattern is already proven by the Svarah stage."
+    },
+    {
+      "license": "See SPIRE portal Terms & Conditions (not assumed from the paper license)",
+      "name": "SPIRE-SIES Indian-accented English",
+      "notes": [
+        "The portal exposes a Download tab per dataset; access is request-based.",
+        "No audio was fetched; no workaround is attempted in this run."
+      ],
+      "official_url": "https://spiredatasets.ee.iisc.ac.in/",
+      "role": "supplementary genuine English",
+      "source_id": "spire_sies",
+      "status": "awaiting_user_links",
+      "user_action": "The user reported the portal archive as unavailable for this session; provide a local SPIRE-SIES archive path in a follow-up run to import it."
+    },
+    {
+      "license": "See SPIRE portal Terms & Conditions",
+      "name": "Indic TIMIT read English",
+      "notes": [
+        "80 voice artists, ~240 h read English; unmatched access/terms recorded as a shortfall."
+      ],
+      "official_url": "https://spiredatasets.ee.iisc.ac.in/indictimitcorpus",
+      "role": "supplementary genuine English",
+      "source_id": "indic_timit",
+      "status": "awaiting_user_links",
+      "user_action": "The user reported the portal archive as unavailable for this session; provide a local Indic TIMIT release path in a follow-up run to import it."
+    },
+    {
+      "license": "n/a - no traceable source selected",
+      "name": "Synthetic Indian-English coverage",
+      "notes": [
+        "No traceable, documented synthetic Indian-English dataset was found; undocumented third-party TTS dumps without generation provenance or license were rejected on purpose.",
+        "The importer stays schema-compatible; NISP genuine windows are delivered as `unpaired_candidate` and are excluded from the default balanced training manifest.",
+        "Accent verification of any future synthetic source is unreviewed until actually reviewed; an `en` TTS setting alone does not establish an Indian accent."
+      ],
+      "official_url": "https://huggingface.co/datasets?search=synthetic+speech+indic",
+      "role": "required pairing for NISP genuine English - NOT PREPARED",
+      "source_id": "synthetic_english",
+      "status": "missing_source",
+      "user_action": "Provide user-authorized synthetic assets (generator + reference material whose terms permit generation) or point the importer at a documented dataset; see configs/synthetic_english_template.json and `fetch --source synthetic_english --import-dir ...`."
+    }
+  ],
+  "supplementary_summary": {
+    "nptel": {
+      "durations_minutes": 0.667,
+      "durations_seconds": 40.0,
+      "generators": {},
+      "labels": {
+        "genuine": 10
+      },
+      "speakers": 0,
+      "windows": 10
+    }
+  },
+  "unpaired_by_group_split": {
+    "nisp|Hindi|train": {
+      "durations_minutes": 0.4,
+      "durations_seconds": 24.0,
+      "generators": {},
+      "labels": {
+        "genuine": 6
+      },
+      "speakers": 3,
+      "windows": 6
+    },
+    "nisp|Hindi|val": {
+      "durations_minutes": 0.133,
+      "durations_seconds": 8.0,
+      "generators": {},
+      "labels": {
+        "genuine": 2
+      },
+      "speakers": 2,
+      "windows": 2
+    },
+    "nisp|Kannada|train": {
+      "durations_minutes": 0.4,
+      "durations_seconds": 24.0,
+      "generators": {},
+      "labels": {
+        "genuine": 6
+      },
+      "speakers": 3,
+      "windows": 6
+    },
+    "nisp|Kannada|val": {
+      "durations_minutes": 0.133,
+      "durations_seconds": 8.0,
+      "generators": {},
+      "labels": {
+        "genuine": 2
+      },
+      "speakers": 2,
+      "windows": 2
+    },
+    "nisp|Malayalam|train": {
+      "durations_minutes": 0.4,
+      "durations_seconds": 24.0,
+      "generators": {},
+      "labels": {
+        "genuine": 6
+      },
+      "speakers": 3,
+      "windows": 6
+    },
+    "nisp|Malayalam|val": {
+      "durations_minutes": 0.133,
+      "durations_seconds": 8.0,
+      "generators": {},
+      "labels": {
+        "genuine": 2
+      },
+      "speakers": 2,
+      "windows": 2
+    },
+    "nisp|Tamil|train": {
+      "durations_minutes": 0.4,
+      "durations_seconds": 24.0,
+      "generators": {},
+      "labels": {
+        "genuine": 6
+      },
+      "speakers": 3,
+      "windows": 6
+    },
+    "nisp|Tamil|val": {
+      "durations_minutes": 0.133,
+      "durations_seconds": 8.0,
+      "generators": {},
+      "labels": {
+        "genuine": 2
+      },
+      "speakers": 2,
+      "windows": 2
+    },
+    "nisp|Telugu|train": {
+      "durations_minutes": 0.382,
+      "durations_seconds": 22.938,
+      "generators": {},
+      "labels": {
+        "genuine": 6
+      },
+      "speakers": 3,
+      "windows": 6
+    },
+    "nisp|Telugu|val": {
+      "durations_minutes": 0.133,
+      "durations_seconds": 8.0,
+      "generators": {},
+      "labels": {
+        "genuine": 2
+      },
+      "speakers": 2,
+      "windows": 2
+    }
+  },
+  "window_policy": {
+    "activity_frame_ms": 30.0,
+    "activity_rms_threshold": 0.0025,
+    "max_seconds": 4.0,
+    "min_active_fraction": 0.2,
+    "min_seconds": 1.0,
+    "scan_hop_seconds": 0.25,
+    "silence_rms_threshold": 0.00316
+  }
+}

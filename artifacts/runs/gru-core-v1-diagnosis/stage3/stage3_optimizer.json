@@ -1,0 +1,94 @@
+{
+  "generated": "2026-09-18T14:04:28.328667+00:00",
+  "coverage": {
+    "trainable_param_tensors": 10,
+    "optimizer_param_tensors": 10,
+    "all_trainable_in_optimizer_once": true,
+    "param_counts": {
+      "model.input_norm.weight": 1024,
+      "model.input_norm.bias": 1024,
+      "model.projection.weight": 262144,
+      "model.projection.bias": 256,
+      "model.gru.weight_ih_l0": 196608,
+      "model.gru.weight_hh_l0": 196608,
+      "model.gru.bias_ih_l0": 768,
+      "model.gru.bias_hh_l0": 768,
+      "model.classifier.weight": 512,
+      "model.classifier.bias": 2
+    }
+  },
+  "step_history": [
+    {
+      "parameter": "model.input_norm.weight",
+      "update_norm_l2": 0.06219227612018585,
+      "param_norm_l2": 31.96245002746582
+    },
+    {
+      "parameter": "model.input_norm.bias",
+      "update_norm_l2": 0.062011830508708954,
+      "param_norm_l2": 0.062011830508708954
+    },
+    {
+      "parameter": "model.projection.weight",
+      "update_norm_l2": 0.7831510305404663,
+      "param_norm_l2": 9.271267890930176
+    },
+    {
+      "parameter": "model.projection.bias",
+      "update_norm_l2": 0.02418581396341324,
+      "param_norm_l2": 0.2916651964187622
+    },
+    {
+      "parameter": "model.gru.weight_ih_l0",
+      "update_norm_l2": 0.9152702689170837,
+      "param_norm_l2": 16.022218704223633
+    },
+    {
+      "parameter": "model.gru.weight_hh_l0",
+      "update_norm_l2": 0.9369195103645325,
+      "param_norm_l2": 16.00754165649414
+    },
+    {
+      "parameter": "model.gru.bias_ih_l0",
+      "update_norm_l2": 0.04668392986059189,
+      "param_norm_l2": 1.004656434059143
+    },
+    {
+      "parameter": "model.gru.bias_hh_l0",
+      "update_norm_l2": 0.04690706729888916,
+      "param_norm_l2": 1.0023273229599
+    },
+    {
+      "parameter": "model.classifier.weight",
+      "update_norm_l2": 0.044388700276613235,
+      "param_norm_l2": 0.8180971741676331
+    },
+    {
+      "parameter": "model.classifier.bias",
+      "update_norm_l2": 0.0005817957571707666,
+      "param_norm_l2": 0.051587626338005066
+    }
+  ],
+  "epoch_loss_first_call": 0.8234444111585617,
+  "epoch_steps": 4,
+  "epoch_loss_second_call": 0.6106124222278595,
+  "all_parameters_changed_first_epoch": true,
+  "logits_after_two_toy_epochs": {
+    "count": 32,
+    "min": 1.0388575792312622,
+    "max": 1.047218680381775,
+    "mean": 1.0424791239202023,
+    "median": 1.0421081185340881,
+    "std": 0.002454432608784678,
+    "q0": 1.0388575792312622,
+    "q5": 1.039193433523178,
+    "q10": 1.0395538330078125,
+    "q25": 1.040194183588028,
+    "q50": 1.0421081185340881,
+    "q75": 1.0446285605430603,
+    "q90": 1.045677161216736,
+    "q95": 1.0467216312885284,
+    "q100": 1.047218680381775
+  },
+  "note": "disposable fresh copy, seed 0, first four shuffled batches of epoch 1, AdamW lr 1e-3 wd 0; the saved original checkpoints are never loaded into a training graph"
+}

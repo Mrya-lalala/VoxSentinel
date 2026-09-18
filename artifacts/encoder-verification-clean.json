@@ -1,0 +1,199 @@
+{
+  "checkpoint_sha256": "26bb5ada18952fd7355f691d25927b34a0e46d6afda7658bf5c254621831ab59",
+  "checkpoint_bytes": 3808863698,
+  "python": "3.10.18",
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "architecture": "arm64",
+  "torch": "2.2.2",
+  "numpy": "1.23.5",
+  "device": "cpu",
+  "threads": 4,
+  "fixtures": [
+    {
+      "filename": "1272-128104-0000.flac",
+      "sha256": "4e25e22555cd16e90edb0a3b49fdcf1fe652b2a1250ab643634db33895c75b41",
+      "sample_rate": 16000,
+      "samples": 93680
+    },
+    {
+      "filename": "1272-128104-0001.flac",
+      "sha256": "46a9d58622b4675b29564da2d9ba73e702241c5fa969f12c387cad4aa984276a",
+      "sample_rate": 16000,
+      "samples": 77040
+    }
+  ],
+  "load_seconds_including_hash": 7.7842492499621585,
+  "embedding_dim": 1024,
+  "normalize": true,
+  "num_layers": 24,
+  "conv_geometry_kernel_stride": [
+    [
+      10,
+      5
+    ],
+    [
+      3,
+      2
+    ],
+    [
+      3,
+      2
+    ],
+    [
+      3,
+      2
+    ],
+    [
+      3,
+      2
+    ],
+    [
+      2,
+      2
+    ],
+    [
+      2,
+      2
+    ]
+  ],
+  "min_samples": 400,
+  "frame_hop_ms": 20.0,
+  "parameter_count": 317390592,
+  "extractor_mode": "layer_norm",
+  "layer_norm_first": true,
+  "checks": {
+    "batch_padding": {
+      "shape": [
+        3,
+        199,
+        1024
+      ],
+      "valid_lengths": [
+        199,
+        149,
+        199
+      ],
+      "single_max_abs_errors": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "padding_invariance_exact": true
+    },
+    "all_layers_direct_upstream_max_abs_error": {
+      "None": 0.0,
+      "0": 0.0,
+      "1": 0.0,
+      "2": 0.0,
+      "3": 0.0,
+      "4": 0.0,
+      "5": 0.0,
+      "6": 0.0,
+      "7": 0.0,
+      "8": 0.0,
+      "9": 0.0,
+      "10": 0.0,
+      "11": 0.0,
+      "12": 0.0,
+      "13": 0.0,
+      "14": 0.0,
+      "15": 0.0,
+      "16": 0.0,
+      "17": 0.0,
+      "18": 0.0,
+      "19": 0.0,
+      "20": 0.0,
+      "21": 0.0,
+      "22": 0.0,
+      "23": 0.0
+    },
+    "frozen_downstream_gradient": {
+      "head_updated": true,
+      "encoder_state_unchanged": true,
+      "encoder_gradients_none": true,
+      "input_gradient_none": true,
+      "repeatability_exact": true,
+      "works_under_outer_inference_mode_and_autocast": true
+    },
+    "invalid_inputs_rejected": 12,
+    "minimum_length_silence_and_router_bridge": true
+  },
+  "benchmarks": [
+    {
+      "input_samples": [
+        48000
+      ],
+      "warmup_runs": 1,
+      "repeats": 5,
+      "seconds": [
+        0.18743475002702326,
+        0.18678054201882333,
+        0.18725945800542831,
+        0.18506379204336554,
+        0.18993412505369633
+      ],
+      "median_seconds": 0.18725945800542831,
+      "min_seconds": 0.18506379204336554,
+      "max_seconds": 0.18993412505369633,
+      "rtf_total_audio_median": 0.06241981933514277
+    },
+    {
+      "input_samples": [
+        64000
+      ],
+      "warmup_runs": 1,
+      "repeats": 5,
+      "seconds": [
+        0.242171167046763,
+        0.24611616705078632,
+        0.24667254206724465,
+        0.24852058303076774,
+        0.24308320798445493
+      ],
+      "median_seconds": 0.24611616705078632,
+      "min_seconds": 0.242171167046763,
+      "max_seconds": 0.24852058303076774,
+      "rtf_total_audio_median": 0.06152904176269658
+    },
+    {
+      "input_samples": [
+        64000,
+        48000
+      ],
+      "warmup_runs": 1,
+      "repeats": 5,
+      "seconds": [
+        0.43321491696406156,
+        0.43809100007638335,
+        0.4391145829576999,
+        0.44511554203927517,
+        0.4413032919401303
+      ],
+      "median_seconds": 0.4391145829576999,
+      "min_seconds": 0.43321491696406156,
+      "max_seconds": 0.44511554203927517,
+      "rtf_total_audio_median": 0.06273065470824284
+    },
+    {
+      "input_samples": [
+        64000,
+        64000
+      ],
+      "warmup_runs": 1,
+      "repeats": 5,
+      "seconds": [
+        0.4685137920314446,
+        0.4726127499016002,
+        0.4748219170141965,
+        0.47865925007499754,
+        0.4795767910545692
+      ],
+      "median_seconds": 0.4748219170141965,
+      "min_seconds": 0.4685137920314446,
+      "max_seconds": 0.4795767910545692,
+      "rtf_total_audio_median": 0.059352739626774564
+    }
+  ],
+  "peak_process_rss_bytes": 2702393344,
+  "status": "passed"
+}

@@ -1,0 +1,26 @@
+{
+  "stage": 6,
+  "bugs_found": [],
+  "bug_scan": {
+    "label_alignment_collator": "correct (self-check passed; labels ride with examples; shuffled pairing verified)",
+    "loss_targets_reduction": "correct (CE over two raw logits, integer targets, example-weighted mean)",
+    "optimizer_coverage": "correct (all trainable tensors in AdamW exactly once; all updated in probe)",
+    "train_eval_switching": "correct (train() per epoch, eval() during validation; head outputs not detached)",
+    "checkpoint_save_restore": "correct (bit-exact regeneration of saved val predictions; max abs diff 0.0)",
+    "masking_pooling": "correct (batch-size invariance 3.6e-07; masked extra padding ignored exactly, diff 0.0)",
+    "score_direction_class_mapping": "correct (class-axis softmax; margin ordering identical; 0 discordant ranks)",
+    "data_leakage": "none found (0 speaker/reference/audio-hash overlaps; 0 duplicate or near-duplicate feature tensors)"
+  },
+  "corrected_full_core_rerun": "not performed (no demonstrated bug; prompt section 6 condition not met)",
+  "root_cause_class": "optimization/convergence failure on near-constant, badly conditioned inputs; not an implementation defect",
+  "recommended_next_experiment": "same GRU head, same seed/budget/selection/metrics, features per-dim standardized (mean/std fitted on train only, scaler saved) before the head; single controlled run",
+  "secondary_options": [
+    "larger step budget at the same lr (slow-start evidence)",
+    "record per-epoch margins alongside EER (selection stability)"
+  ],
+  "not_recommended_now": [
+    "data expansion (linear ceiling already far above GRU result)",
+    "encoder fine-tuning (out of scope)",
+    "architecture replacement (no capacity defect: 24-subset fit succeeded)"
+  ]
+}

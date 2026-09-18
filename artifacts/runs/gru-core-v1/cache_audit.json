@@ -1,0 +1,160 @@
+{
+  "ready": true,
+  "torch_available": true,
+  "checks": [
+    {
+      "split": "train",
+      "check": "bundle_file",
+      "ok": true,
+      "detail": "artifacts/datasets/features/train.pt"
+    },
+    {
+      "split": "train",
+      "check": "meta_file",
+      "ok": true,
+      "detail": "artifacts/datasets/features/train.meta.json"
+    },
+    {
+      "split": "train",
+      "check": "complete_marker",
+      "ok": true,
+      "detail": "built"
+    },
+    {
+      "split": "train",
+      "check": "manifest_current",
+      "ok": true,
+      "detail": "manifest=artifacts/datasets/manifests/windows.core_train.jsonl"
+    },
+    {
+      "split": "train",
+      "check": "item_count",
+      "ok": true,
+      "detail": "384 (expected 384)"
+    },
+    {
+      "split": "train",
+      "check": "dual_class",
+      "ok": true,
+      "detail": {
+        "0": 192,
+        "1": 192
+      }
+    },
+    {
+      "split": "train",
+      "check": "languages",
+      "ok": true,
+      "detail": "12 languages"
+    },
+    {
+      "split": "train",
+      "check": "per_language_dual_class",
+      "ok": true,
+      "detail": {
+        "Bengali": {
+          "0": 16,
+          "1": 16
+        },
+        "Gujarati": {
+          "0": 16,
+          "1": 16
+        },
+        "Hindi": {
+          "0": 16,
+          "1": 16
+        }
+      }
+    },
+    {
+      "split": "train",
+      "check": "deep_identity",
+      "ok": true,
+      "detail": "bundle identity matches sidecar"
+    },
+    {
+      "split": "train",
+      "check": "deep_items",
+      "ok": true,
+      "detail": "384 items in bundle"
+    },
+    {
+      "split": "val",
+      "check": "bundle_file",
+      "ok": true,
+      "detail": "artifacts/datasets/features/val.pt"
+    },
+    {
+      "split": "val",
+      "check": "meta_file",
+      "ok": true,
+      "detail": "artifacts/datasets/features/val.meta.json"
+    },
+    {
+      "split": "val",
+      "check": "complete_marker",
+      "ok": true,
+      "detail": "built"
+    },
+    {
+      "split": "val",
+      "check": "manifest_current",
+      "ok": true,
+      "detail": "manifest=artifacts/datasets/manifests/windows.core_val.jsonl"
+    },
+    {
+      "split": "val",
+      "check": "item_count",
+      "ok": true,
+      "detail": "96 (expected 96)"
+    },
+    {
+      "split": "val",
+      "check": "dual_class",
+      "ok": true,
+      "detail": {
+        "0": 48,
+        "1": 48
+      }
+    },
+    {
+      "split": "val",
+      "check": "languages",
+      "ok": true,
+      "detail": "12 languages"
+    },
+    {
+      "split": "val",
+      "check": "per_language_dual_class",
+      "ok": true,
+      "detail": {
+        "Bengali": {
+          "0": 4,
+          "1": 4
+        },
+        "Gujarati": {
+          "0": 4,
+          "1": 4
+        },
+        "Hindi": {
+          "0": 4,
+          "1": 4
+        }
+      }
+    },
+    {
+      "split": "val",
+      "check": "deep_identity",
+      "ok": true,
+      "detail": "bundle identity matches sidecar"
+    },
+    {
+      "split": "val",
+      "check": "deep_items",
+      "ok": true,
+      "detail": "96 items in bundle"
+    }
+  ],
+  "failures": [],
+  "skipped": []
+}

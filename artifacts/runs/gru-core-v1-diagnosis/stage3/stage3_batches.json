@@ -1,0 +1,172 @@
+{
+  "generated": "2026-09-18T13:57:39.486958+00:00",
+  "label_alignment_selfcheck": {
+    "collate_labels_follow_examples": true,
+    "shuffled_pairing_ok": true
+  },
+  "total_train_examples": 384,
+  "class_totals": {
+    "genuine": 192,
+    "synthetic": 192
+  },
+  "epochs": [
+    {
+      "epoch": 1,
+      "seed": 1,
+      "batches": 48,
+      "composition_counts": {
+        "0gen/8syn": 1,
+        "1gen/7syn": 3,
+        "2gen/6syn": 3,
+        "3gen/5syn": 7,
+        "4gen/4syn": 19,
+        "5gen/3syn": 6,
+        "6gen/2syn": 7,
+        "7gen/1syn": 2
+      },
+      "single_class_batches": 1
+    },
+    {
+      "epoch": 2,
+      "seed": 2,
+      "batches": 48,
+      "composition_counts": {
+        "1gen/7syn": 3,
+        "2gen/6syn": 5,
+        "3gen/5syn": 9,
+        "4gen/4syn": 11,
+        "5gen/3syn": 15,
+        "6gen/2syn": 3,
+        "7gen/1syn": 1,
+        "8gen/0syn": 1
+      },
+      "single_class_batches": 1
+    },
+    {
+      "epoch": 3,
+      "seed": 3,
+      "batches": 48,
+      "composition_counts": {
+        "1gen/7syn": 1,
+        "2gen/6syn": 6,
+        "3gen/5syn": 8,
+        "4gen/4syn": 16,
+        "5gen/3syn": 12,
+        "6gen/2syn": 4,
+        "7gen/1syn": 1
+      },
+      "single_class_batches": 0
+    },
+    {
+      "epoch": 4,
+      "seed": 4,
+      "batches": 48,
+      "composition_counts": {
+        "1gen/7syn": 2,
+        "2gen/6syn": 5,
+        "3gen/5syn": 12,
+        "4gen/4syn": 13,
+        "5gen/3syn": 7,
+        "6gen/2syn": 6,
+        "7gen/1syn": 3
+      },
+      "single_class_batches": 0
+    },
+    {
+      "epoch": 5,
+      "seed": 5,
+      "batches": 48,
+      "composition_counts": {
+        "1gen/7syn": 2,
+        "2gen/6syn": 6,
+        "3gen/5syn": 10,
+        "4gen/4syn": 13,
+        "5gen/3syn": 8,
+        "6gen/2syn": 7,
+        "7gen/1syn": 2
+      },
+      "single_class_batches": 0
+    },
+    {
+      "epoch": 6,
+      "seed": 6,
+      "batches": 48,
+      "composition_counts": {
+        "0gen/8syn": 1,
+        "1gen/7syn": 1,
+        "2gen/6syn": 1,
+        "3gen/5syn": 14,
+        "4gen/4syn": 16,
+        "5gen/3syn": 10,
+        "6gen/2syn": 2,
+        "7gen/1syn": 3
+      },
+      "single_class_batches": 1
+    },
+    {
+      "epoch": 7,
+      "seed": 7,
+      "batches": 48,
+      "composition_counts": {
+        "1gen/7syn": 1,
+        "2gen/6syn": 8,
+        "3gen/5syn": 7,
+        "4gen/4syn": 16,
+        "5gen/3syn": 8,
+        "6gen/2syn": 6,
+        "7gen/1syn": 2
+      },
+      "single_class_batches": 0
+    },
+    {
+      "epoch": 8,
+      "seed": 8,
+      "batches": 48,
+      "composition_counts": {
+        "1gen/7syn": 1,
+        "2gen/6syn": 8,
+        "3gen/5syn": 10,
+        "4gen/4syn": 10,
+        "5gen/3syn": 10,
+        "6gen/2syn": 8,
+        "7gen/1syn": 1
+      },
+      "single_class_batches": 0
+    },
+    {
+      "epoch": 9,
+      "seed": 9,
+      "batches": 48,
+      "composition_counts": {
+        "1gen/7syn": 2,
+        "2gen/6syn": 6,
+        "3gen/5syn": 10,
+        "4gen/4syn": 11,
+        "5gen/3syn": 12,
+        "6gen/2syn": 5,
+        "7gen/1syn": 2
+      },
+      "single_class_batches": 0
+    },
+    {
+      "epoch": 10,
+      "seed": 10,
+      "batches": 48,
+      "composition_counts": {
+        "2gen/6syn": 3,
+        "3gen/5syn": 14,
+        "4gen/4syn": 13,
+        "5gen/3syn": 16,
+        "6gen/2syn": 2
+      },
+      "single_class_batches": 0
+    }
+  ],
+  "epochs_with_single_class_batch": [
+    1,
+    2,
+    6
+  ],
+  "overall_single_class_batch_share": 0.00625,
+  "note": "batch order recomputed with torch.randperm(seed=0+epoch) exactly as scripts/train_gru_from_cache.py did; labels ride along with their examples so shuffling cannot misalign them"
+}
