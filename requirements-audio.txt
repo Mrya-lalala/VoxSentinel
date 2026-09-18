@@ -1,0 +1,10 @@
+# A2 audio preprocessing: real polyphase resampler + file decoding.
+#
+# numpy, soundfile and PyYAML are already pinned in requirements.txt for the
+# B1 runtime; this file declares the additional A2 dependency.  The audio
+# subsystem does not require torch/torchaudio: resampling uses scipy's real
+# Kaiser-windowed polyphase resampler.
+#
+# Install for the pinned Python 3.10.18 environment after requirements.txt:
+#   python -m pip install -r requirements-audio.txt
+scipy==1.11.4

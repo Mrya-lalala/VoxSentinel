@@ -1,0 +1,10 @@
+# A2 audio preprocessing defaults.  These are effective runtime settings;
+# the complete preprocessing identity is derived from them at runtime.
+audio:
+  target_sample_rate: 16000
+  window_seconds: 4.0
+  hop_seconds: 4.0          # contiguous non-overlapping windows for this milestone
+  min_valid_samples: 400    # frozen IndicWav2Vec Large convolution minimum
+  resampling_method: scipy_polyphase
+  overshoot_tolerance: 0.001   # clamp resampler ringing within this bound; reject beyond
+  input_range_tolerance: 0.000001  # absorbs float representation error only
