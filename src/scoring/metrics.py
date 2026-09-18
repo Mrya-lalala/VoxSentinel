@@ -26,6 +26,7 @@ class BinaryMetrics:
     recall: float
     f1: float
     eer: float | None
+    auroc: float | None
     threshold: float | None = None
     true_negative: int | None = None
     false_positive: int | None = None
@@ -110,6 +111,56 @@ def _eer(values: Tensor, targets: Tensor) -> float:
         return float(far[index - 1]) + weight * (float(far[index]) - float(far[index - 1]))
     return 0.0
 
+def auroc(scores: Tensor, labels: Tensor) -> float | None:
+    """Return AUROC using average ranks for tied scores.
+
+    Class 0 = genuine, class 1 = spoof.
+    Returns None when only one class is present.
+    """
+    values = _validate_scores(scores)
+    targets = validate_label_tensor(labels).flatten().cpu()
+
+    if values.numel() != targets.numel():
+        raise ValueError("scores and labels must have the same number of elements.")
+
+    genuine_count = int((targets == GENUINE).sum())
+    spoof_count = int((targets == SPOOF).sum())
+
+    if not genuine_count or not spoof_count:
+        return None
+
+    # Sort scores in ascending order.
+    order = torch.argsort(values)
+    sorted_scores = values[order]
+
+    # Assign average ranks to tied scores.
+    ranks = torch.arange(
+        1,
+        sorted_scores.numel() + 1,
+        dtype=torch.float64,
+    )
+
+    _, counts = torch.unique_consecutive(
+        sorted_scores,
+        return_counts=True,
+    )
+
+    start = 0
+    for count in counts.tolist():
+        end = start + count
+        ranks[start:end] = ranks[start:end].mean()
+        start = end
+
+    sorted_labels = targets[order]
+    spoof_rank_sum = ranks[sorted_labels == SPOOF].sum()
+
+    return float(
+        (
+            spoof_rank_sum
+            - spoof_count * (spoof_count + 1) / 2
+        )
+        / (spoof_count * genuine_count)
+    )
 
 def binary_metrics(scores: Tensor, labels: Tensor, threshold: float = 0.5) -> BinaryMetrics:
     """Classification metrics at ``threshold`` plus the ranking EER.
@@ -138,6 +189,7 @@ def binary_metrics(scores: Tensor, labels: Tensor, threshold: float = 0.5) -> Bi
     recall = true_positive / (true_positive + false_negative) if true_positive + false_negative else 0.0
     genuine_count, spoof_count = int(genuine.sum()), int(spoof.sum())
     eer = _eer(values, targets) if genuine_count and spoof_count else None
+    auc = auroc(values, targets)
 
     return BinaryMetrics(
         accuracy=(predicted_spoof == spoof).float().mean().item(),
@@ -145,6 +197,7 @@ def binary_metrics(scores: Tensor, labels: Tensor, threshold: float = 0.5) -> Bi
         recall=recall,
         f1=2 * precision * recall / (precision + recall) if precision + recall else 0.0,
         eer=eer,
+        auroc=auc,
         threshold=float(threshold),
         true_negative=true_negative,
         false_positive=false_positive,

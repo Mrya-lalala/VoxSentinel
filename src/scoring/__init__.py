@@ -6,13 +6,14 @@ in place rather than creating a parallel copy.
 """
 
 from .evaluation import EvaluationResult, evaluate
-from .metrics import BinaryMetrics, binary_metrics, error_rates
+from .metrics import BinaryMetrics, auroc, binary_metrics, error_rates
 from .thresholds import ThresholdSelection, select_threshold
 
 __all__ = [
     "BinaryMetrics",
     "EvaluationResult",
     "ThresholdSelection",
+    "auroc",
     "binary_metrics",
     "error_rates",
     "evaluate",
