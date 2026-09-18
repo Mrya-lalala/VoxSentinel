@@ -6,6 +6,7 @@ __pycache__/
 
 # Virtual environments
 .venv/
+.venv-data/
 venv/
 
 # Local model artifacts and environment files

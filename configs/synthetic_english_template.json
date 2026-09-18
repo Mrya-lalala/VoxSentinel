@@ -1,0 +1,14 @@
+{
+  "_comment": "Template for user-supplied synthetic Indian-English assets. One JSON object per line (JSONL). Point quotas.synthetic_english.import_dir at a directory and quotas.synthetic_english.metadata_file at a file using this schema, then run: python -m scripts.prepare_datasets fetch --source synthetic_english. The generator fields are mandatory; never leave them blank.",
+  "file": "relative/path/inside/import_dir/clip_0001.wav",
+  "generator": "e.g. xtts_v2 / vits / freevc24 / other-traceable-tool",
+  "generator_version": "exact version or commit of the generator",
+  "split": "train | val",
+  "spoken_language": "en",
+  "accent": "declared accent label, e.g. indian-english",
+  "accent_verified": false,
+  "reference_speaker_ids": ["non-identifying reference speaker IDs used for generation"],
+  "reference_audio": ["reference recording identifiers whose use is permitted"],
+  "license": "license or terms that cover this generated asset",
+  "notes": "anything the report should preserve; accent verification is unreviewed unless actually reviewed"
+}

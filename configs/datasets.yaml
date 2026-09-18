@@ -1,0 +1,199 @@
+# VoxSentinel bounded dataset-preparation pilot configuration.
+#
+# This file drives `python -m scripts.prepare_datasets ...`.  It is deliberately
+# a *preparation* configuration: it selects small, bounded windows from official
+# sources, preserves provenance, and writes ready-to-load manifests/features.
+# It does not configure detector training (see configs/base.yaml + configs/gru.yaml).
+#
+# All paths are relative to the repository root.  The dataset root may be
+# overridden with --dataset-root on the command line.
+
+dataset_root: artifacts/datasets
+
+# Deterministic selection seed for every bounded scan, window choice and split.
+seed: 42
+
+# Class-independent window policy applied to every source.  No source-specific
+# or class-specific tweaks are allowed here; a prepared window is at most
+# max_seconds of contiguous audio (exactly 64,000 samples at 16 kHz, no
+# grace margin) and at least min_seconds to be usable.
+window:
+  max_seconds: 4.0
+  min_seconds: 1.0
+  # Energy scan hop for the highest-energy contiguous window in longer clips.
+  scan_hop_seconds: 0.25
+  # Windows whose peak RMS is below this are still prepared but flagged.
+  silence_rms_threshold: 0.00316  # about -50 dBFS
+  # Documented short-time activity heuristic (class-independent; used only as
+  # an eligibility check, never to pick WHICH window is used).
+  activity_frame_ms: 30.0
+  activity_rms_threshold: 0.0025
+  min_active_fraction: 0.2
+
+# Global bounded download budget and metadata-scan limits.
+budget:
+  max_download_bytes: 5368709120  # 5 GiB total for all new downloads
+  # Maximum metadata HTTP requests per source per run (requests are also
+  # rate-limited politely between calls).
+  max_metadata_requests_per_source: 400
+  request_timeout_seconds: 60
+
+quotas:
+  # Joint 12-language core pilot: genuine Kathbath + synthetic IndicSynth,
+  # split BEFORE windowing over one relationship graph per language.
+  core:
+    enabled: true
+    languages: [Bengali, Gujarati, Hindi, Kannada, Malayalam, Marathi,
+                Odia, Punjabi, Sanskrit, Tamil, Telugu, Urdu]
+    train_genuine: 16
+    train_synthetic: 16
+    val_genuine: 4
+    val_synthetic: 4
+    # Exposure caps by individual speaker identity within a split/class.
+    max_genuine_windows_per_speaker: 4
+    max_synth_rows_per_source_speaker: 4
+    max_synth_rows_per_target_speaker: 4
+    # Minimum distinct speaker identities that should appear per class/split.
+    min_train_speakers: 3
+    min_val_speakers: 2
+    # Candidate pair budget before component assignment.
+    candidate_pairs: 8
+    max_rows_per_pair: 5
+    # Kathbath inventory scan bounds (per language).
+    kathbath_min_shards: 4
+    kathbath_max_shards: 8
+    kathbath_min_recordings: 30
+    kathbath_min_speakers: 7
+    # Cap on Kathbath parquet bytes read for one language's window audio.
+    kathbath_audio_byte_cap: 250000000
+  indicsynth:
+    enabled: false   # superseded by the joint `core` stage
+    languages: [Bengali, Gujarati, Hindi, Kannada, Malayalam, Marathi,
+                Odia, Punjabi, Sanskrit, Tamil, Telugu, Urdu]
+    windows_per_language: 20
+    # Stratified metadata scan: pages of `page_length` rows sampled across the
+    # full row range of each language; first page of each stratum is used.
+    scan_strata: 12
+    page_length: 100
+    # Candidate rows kept per language before relationship-component splitting.
+    candidates_per_language: 36
+    # Window counts below these split-participant minimums are reported, not hidden.
+    min_train_speakers: 3
+    min_val_speakers: 2
+  kathbath:
+    enabled: true
+    folder_by_language:
+      Bengali: bengali
+      Gujarati: gujarati
+      Hindi: hindi
+      Kannada: kannada
+      Malayalam: malayalam
+      Marathi: marathi
+      Odia: odia
+      Punjabi: punjabi
+      Sanskrit: sanskrit
+      Tamil: tamil
+      Telugu: telugu
+      Urdu: urdu
+  svarah:
+    enabled: true
+    target_windows: 20
+    min_duration_seconds: 1.0
+    max_duration_seconds: 30.0
+    # Cap on Svarah parquet bytes read while scanning the fixed row-group plan.
+    audio_byte_cap: 200000000
+  nisp:
+    enabled: true
+    native_groups: [Hindi, Kannada, Malayalam, Tamil, Telugu]
+    windows_per_group: 8
+    train_speakers_per_group: 3
+    val_speakers_per_group: 2
+    windows_per_train_speaker: 2
+    windows_per_val_speaker: 1
+    # Per-language ceiling on multipart archive bytes streamed from GitHub.
+    max_archive_bytes_per_group: 419430400  # 400 MiB
+  asvspoof2019:
+    enabled: true
+    label_quotas:
+      train: {genuine: 20, spoof: 20}
+      dev: {genuine: 5, spoof: 5}
+  nptel:
+    enabled: true
+    max_windows: 10
+  # Synthetic Indian-English coverage requirement.  No traceable accessible
+  # source was found during reconnaissance; the importer stays ready and the
+  # gap is reported.  See docs/dataset-preparation-pilot.md.
+  synthetic_english:
+    enabled: true
+    import_dir: null          # user-supplied directory, if any
+    metadata_file: null       # user-supplied metadata JSONL following the template
+  # NOTE: ASVspoof 2021 LA/DF is explicitly out of scope for this stage and has
+  # no quota here; it is not tracked as a blocker or user action anywhere.
+
+# Upstream releases pinned by this run (recorded in every manifest row).
+releases:
+  indicsynth:
+    dataset: vdivyasharma/IndicSynth
+    revision: main
+    license: CC BY-NC 4.0
+    source_url: https://huggingface.co/datasets/vdivyasharma/IndicSynth
+  nisp:
+    dataset: iiscleap/NISP-Dataset
+    revision: master
+    license: CC BY 4.0
+    source_url: https://github.com/iiscleap/NISP-Dataset
+  asvspoof2019:
+    dataset: ASVspoof2019 LA (Edinburgh DataShare 10283/3336)
+    revision: as-published
+    license: >-
+      ASVspoof 2019 LA Challenge licence; license text extracted from the
+      archive to raw/asvspoof2019/license/ (LICENSE.txt sha256
+      99a4d3e0db6f9a5cd8871f9737b207af01de333f57c6269a11ce755227c1555d,
+      README.LA.txt sha256
+      c99a875d94d91734c2468eff13a1d3a60991eb308335caa1750be1020c2748fe)
+    source_url: https://datashare.ed.ac.uk/handle/10283/3336
+  nptel:
+    dataset: AI4Bharat NPTEL2020 Indian-English Speech (pure set)
+    revision: v0.1
+    license: CC BY 4.0 (see repository)
+    source_url: https://github.com/AI4Bharat/NPTEL2020-Indian-English-Speech-Dataset
+  kathbath:
+    dataset: ai4bharat/Kathbath (IndicSUPERB)
+    # Resolved to the actual Hub commit SHA at acquisition time (stored in the
+    # acquisition ledger); the literal below is only a placeholder for old rows.
+    revision: resolved_at_acquisition
+    license: CC BY 4.0 (dataset card)
+    source_url: https://huggingface.co/datasets/ai4bharat/Kathbath
+  svarah:
+    dataset: ai4bharat/Svarah
+    revision: resolved_at_acquisition
+    license: CC BY 4.0 (dataset card)
+    source_url: https://huggingface.co/datasets/ai4bharat/Svarah
+  indicvoices:
+    dataset: ai4bharat/IndicVoices
+    revision: main
+    license: CC BY 4.0 (dataset card)
+    source_url: https://huggingface.co/datasets/ai4bharat/IndicVoices
+
+preprocessing:
+  # Recorded implementation identity for decode/mono/resample.
+  # v2 (2026-09-18): strict 4.000 s cap (no grace), activity eligibility,
+  # ffmpeg fallback for M4A/AAC containers, decoder identity recorded.
+  config_version: "voxsentinel-prep-2"
+  target_sample_rate: 16000
+  channel_policy: "mean of channels (documented minimal adapter; no A2 path exists in this checkout)"
+  decoders: "libsndfile (primary); ffmpeg pcm_f32le (fallback for M4A/AAC containers, decoded at the original rate)"
+  resampler: "soxr"
+  overflow_policy: "bounded attenuation ONLY when resampling leaves amplitudes above 1.0: gain = 1/peak (<=0 dB, never clip, never upscale); gain, peak-before-gain and affected counts recorded per window"
+  activity_policy: "30 ms non-overlapping frame RMS > 0.0025 in at least 20% of frames; below that a window is excluded as insufficient_speech_activity"
+  prepared_format: "WAV"
+  prepared_subtype: "FLOAT"
+
+features:
+  # Frozen IndicWav2Vec feature extraction (runs under the encoder environment).
+  batch_size: 8
+  device: cpu
+  output_layer: null
+  dtype: float32
+  # Refuse to write incompatible caches; see src/dataset_prep/features.py.
+  expected_embedding_dim: 1024
