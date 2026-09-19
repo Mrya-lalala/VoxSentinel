@@ -10,6 +10,7 @@ from typing import Any
 import numpy as np
 import torch
 
+from src.detectors.gru import GruDetector
 from src.audio.chunking import chunk_audio, collate_chunks
 from src.audio.preprocessing import preprocess_file
 from src.backbones.indic_wav2vec import (
@@ -298,9 +299,8 @@ def load_detector(
     #
     # Keep this import isolated so the rest of C1 does not depend
     # on checkpoint-loading details.
-    from src.models.detectors.gru import (
-        GruDetector,
-    )
+    from src.detectors.gru import GruDetector
+    
 
     checkpoint = torch.load(
         checkpoint_path,
