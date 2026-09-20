@@ -64,3 +64,20 @@ class PreprocessingIdentity:
             hop_samples=config.hop_samples,
             overshoot_tolerance=config.overshoot_tolerance,
         )
+
+
+# Identity of prepare.decode_mono_16k + dataset_prep.windows.select_window.
+# Legacy PreprocessingIdentity above describes a DIFFERENT array/chunk API.
+TRAINED_PREPROCESSING_VERSION = "voxsentinel-prep-2"
+
+
+def assert_trained_preprocessing(version: object, *, allow_missing: bool = False) -> None:
+    """Reject incompatible model contracts; warn for unidentified legacy heads."""
+    if version is None and allow_missing:
+        import warnings
+        warnings.warn("Checkpoint has no preprocessing_version; compatibility is unverified. "
+                      "Use INFERENCE_RELEASE for verified baseline inference.", RuntimeWarning, stacklevel=2)
+        return
+    if version != TRAINED_PREPROCESSING_VERSION:
+        raise ValueError(f"Checkpoint preprocessing_version {version!r} differs from "
+                         f"service preprocessing {TRAINED_PREPROCESSING_VERSION!r}")

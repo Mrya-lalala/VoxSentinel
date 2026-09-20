@@ -13,6 +13,7 @@ import time
 import torch
 
 from ..audio.prepare import decode_mono_16k
+from ..audio.identity import assert_trained_preprocessing
 from ..backbones.indic_wav2vec import IndicWav2VecConfig, IndicWav2VecExtractor
 from ..config import ModelConfig
 from ..dataset_prep.config import WindowPolicy
@@ -30,6 +31,7 @@ class FilePredictor:
         self.spec = json.loads(self.release_path.read_text())
         if self.spec.get("schema") != "voxsentinel.inference_release.v1":
             raise ValueError("Unsupported prediction release schema")
+        assert_trained_preprocessing(self.spec.get("preprocessing_version"))
         self.head_path = self.release_path.parent / self.spec["head"]["file"]
         if sha256_file(self.head_path) != self.spec["head"]["sha256"]:
             raise ValueError("Detector checkpoint hash mismatch")

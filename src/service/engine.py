@@ -8,12 +8,13 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-import numpy as np
 import torch
 
-from src.detectors.gru import GruDetector
-from src.audio.chunking import chunk_audio, collate_chunks
-from src.audio.preprocessing import preprocess_file
+from src.audio.prepare import AudioDecodeError, decode_mono_16k
+from src.audio.errors import AudioLoadError
+from src.audio.identity import TRAINED_PREPROCESSING_VERSION, assert_trained_preprocessing
+from src.dataset_prep.config import WindowPolicy
+from src.dataset_prep.windows import select_window
 from src.backbones.indic_wav2vec import (
     IndicWav2VecConfig,
     IndicWav2VecExtractor,
@@ -75,8 +76,12 @@ class ServiceEngine:
         device: str | torch.device = "cpu",
         threshold: float = DEFAULT_THRESHOLD,
         threshold_source: str = "default",
+        window_policy: WindowPolicy | None = None,
     ) -> None:
 
+        self.window_policy = window_policy or WindowPolicy()
+        self.preprocessing_version = TRAINED_PREPROCESSING_VERSION
+        self.window_contract = "one-selected-window-v1"
         self.encoder = encoder
         self.detector = detector
 
@@ -84,6 +89,8 @@ class ServiceEngine:
         self.encoder_id = encoder_id
         self.device = torch.device(device)
 
+        if not math.isfinite(threshold) or not 0 <= threshold <= 1:
+            raise ValueError("Threshold must be finite and within [0,1]")
         self.threshold = float(threshold)
         self.threshold_source = threshold_source
 
@@ -129,66 +136,31 @@ class ServiceEngine:
         # 1. A2 preprocessing
         # ---------------------------------------------------------
 
-        # A2 currently exposes preprocess_file(), so C1 writes the
-        # uploaded WAV bytes to a temporary file.
-        with tempfile.NamedTemporaryFile(
-            suffix=".wav",
-            delete=True,
-        ) as temporary_file:
-
+        with tempfile.NamedTemporaryFile(suffix=".wav") as temporary_file:
             temporary_file.write(audio_bytes)
             temporary_file.flush()
+            try:
+                audio = decode_mono_16k(temporary_file.name)
+            except AudioDecodeError as exc:
+                raise AudioLoadError("Uploaded audio could not be decoded") from exc
 
-            audio = preprocess_file(
-                temporary_file.name,
-                source_id=source_id,
-            )
-
-        # ---------------------------------------------------------
-        # 2. A2 chunking
-        # ---------------------------------------------------------
-
-        chunk_result = chunk_audio(audio)
-
-        chunks = chunk_result.chunks
-        chunks_total = len(chunks)
-
-        coverage_notes: list[str] = []
-
-        if chunk_result.message:
-            coverage_notes.append(
-                str(chunk_result.message)
-            )
-
-        if chunk_result.skipped:
-            coverage_notes.extend(
-                str(item)
-                for item in chunk_result.skipped
-            )
-
-        if chunks_total == 0:
+        window = select_window(audio.samples, audio.sample_rate, self.window_policy)
+        coverage_notes = [
+            f"{self.window_contract}: one highest-energy window; not whole-file coverage",
+            f"preprocessing_version={self.preprocessing_version}",
+            f"selected_samples=[{window.start_sample},{window.end_sample}) at 16000 Hz",
+        ]
+        if not window.usable:
             return [], {
-                "chunks_total": 0,
-                "chunks_used": 0,
+                "chunks_total": 0, "chunks_used": 0,
                 "processing_time_ms": self._elapsed_ms(started),
-                "coverage_notes": coverage_notes + [
-                    "No usable speech chunks were produced."
-                ],
+                "coverage_notes": coverage_notes + [str(window.reason)],
             }
-
-        # ---------------------------------------------------------
-        # 3. A2 → tensor batch
-        # ---------------------------------------------------------
-
-        samples, valid_lengths = collate_chunks(chunks)
-
-        waveforms = torch.from_numpy(
-            np.asarray(samples, dtype=np.float32)
-        ).to(self.device)
-
-        valid_lengths_tensor = torch.from_numpy(
-            np.asarray(valid_lengths, dtype=np.int64)
-        ).to(self.device)
+        chunks = [window]
+        chunks_total = 1
+        selected = audio.samples[window.start_sample:window.end_sample].copy()
+        waveforms = torch.from_numpy(selected[None]).to(self.device)
+        valid_lengths_tensor = torch.tensor([selected.size], dtype=torch.int64, device=self.device)
 
         # ---------------------------------------------------------
         # 4. B1 IndicWav2Vec
@@ -342,12 +314,9 @@ def load_detector(
     ``metadata["threshold"]`` (``None`` when the checkpoint stores none), so
     the service can honour the operating point selected during training.
 
-    IMPORTANT:
-    B2 is still producing the final trained checkpoint. Therefore
-    this function is intentionally isolated from the rest of C1.
-
-    When the checkpoint becomes available, only this loader should
-    need adjustment if B2's checkpoint dictionary format differs.
+    Legacy checkpoints without preprocessing identity emit a warning.
+    Explicitly incompatible preprocessing identities fail before loading weights.
+    Prefer INFERENCE_RELEASE to also verify hashes, encoder settings and windows.
     """
 
     checkpoint_path = Path(checkpoint_path)
@@ -375,6 +344,11 @@ def load_detector(
             "Unexpected B2 checkpoint format. "
             "Expected a checkpoint dictionary."
         )
+
+    assert_trained_preprocessing(
+        checkpoint.get("metadata", {}).get("encoder", {}).get("preprocessing_version"),
+        allow_missing=True,
+    )
 
     # -------------------------------------------------------------
     # Locate model configuration

@@ -125,7 +125,7 @@ class ServiceEngineTests(unittest.TestCase):
         buffer = io.BytesIO()
         sf.write(buffer, np.zeros(0, dtype=np.float32), 16000, format="WAV")
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(AudioLoadError):
             engine.predict(buffer.getvalue(), source_id="empty")
 
 

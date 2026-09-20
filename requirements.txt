@@ -32,3 +32,7 @@ tqdm==4.70.1
 typing_extensions==4.16.0
 wheel==0.43.0
 fairseq @ git+https://github.com/AI4Bharat/fairseq-indicwav2vec-v1.git@d11b8fb30a6f0156c2c1152644221ac4031cadcc
+
+# Dataset acquisition imports requests directly.
+requests==2.32.5
+huggingface_hub==0.26.5

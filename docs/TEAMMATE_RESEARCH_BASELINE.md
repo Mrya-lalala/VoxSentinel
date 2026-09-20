@@ -1,11 +1,11 @@
 # Teammate quickstart: Indic GRU research baseline
 
-Use branch `feature/a1-datasets-manifests`. This is a local CPU, single-window research detector. It is not a production fraud service, a streaming detector or a validated Indian-English model.
+Use branch `main`. This is a local CPU, single-window research detector. It is not a production fraud service, a streaming detector or a validated Indian-English model.
 
 ## Get the code and runtime
 
 ```sh
-git clone --branch feature/a1-datasets-manifests https://github.com/Mrya-lalala/VoxSentinel.git
+git clone --branch main https://github.com/Mrya-lalala/VoxSentinel.git
 cd VoxSentinel
 bash scripts/setup_encoder_env.sh
 ```

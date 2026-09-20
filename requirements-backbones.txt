@@ -1,0 +1,2 @@
+# Optional WavLM backbone; install after requirements.txt.
+transformers==4.46.3
