@@ -1,9 +1,8 @@
-"""Minimal decode/mono/resample adapter — the A2 integration gap.
+"""Shared training, file prediction and C1 decode/mono/resample contract.
 
-Checked again on 2026-09-18: the checked-out branch still contains no A2
-decode path (``src/audio/`` holds only this adapter).  This module is the
-smallest compatible adapter that honors the B1 ownership contract, and it is
-the single documented preprocessing contract for prepared data:
+This is the ``voxsentinel-prep-2`` path. The separate legacy A2 array/chunk
+API retains its own ``audio-v1`` identity and must not be substituted for
+this path when scoring the trained research baseline:
 
 * the caller (this module) decodes the container, scales integer PCM to
   floating amplitudes, converts channels to mono and resamples once to

@@ -136,16 +136,30 @@ def create_engine() -> ServiceEngine:
     """
     Construct the C1 inference pipeline.
 
-    B1 is loaded immediately.
-
-    B2 is optional until the trained detector checkpoint becomes
-    available. Once B2 provides the checkpoint, only the environment
-    variable DETECTOR_CHECKPOINT needs to be supplied.
+    INFERENCE_RELEASE loads the verified head, encoder settings and window
+    policy. DETECTOR_CHECKPOINT is the legacy fallback when no release is set.
+    B1 is loaded immediately; missing B2 leaves detection unavailable.
     """
 
     if not ENCODER_CHECKPOINT:
         raise RuntimeError(
             "ENCODER_CHECKPOINT environment variable is not set."
+        )
+
+    release = os.getenv("INFERENCE_RELEASE")
+    if release:
+        from src.scoring.predict import FilePredictor
+        predictor = FilePredictor(release, encoder_path=ENCODER_CHECKPOINT)
+        if DEVICE != "cpu":
+            raise ValueError("The research release is validated on CPU only")
+        predictor.encoder.load()
+        override = configured_threshold()
+        return ServiceEngine(
+            encoder=predictor.encoder, detector=predictor.detector,
+            model_id=predictor.spec["release_id"], encoder_id=ENCODER_ID,
+            threshold=predictor.threshold if override is None else override,
+            threshold_source="release" if override is None else "configured",
+            window_policy=predictor.policy, device=DEVICE,
         )
 
     encoder = load_encoder(
@@ -224,7 +238,7 @@ def health() -> dict:
         }
 
     return {
-        "status": "ok",
+        "status": "ok" if engine.detector_ready else "degraded",
         "model_id": engine.model_id,
         "encoder_id": engine.encoder_id,
         "detector_ready": engine.detector_ready,

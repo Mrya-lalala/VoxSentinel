@@ -5,6 +5,7 @@ The current deliverable is the **v3 Indic research baseline**. It is not product
 | What you need | Read |
 |---|---|
 | Set up the project and run predictions | [Teammate quickstart](TEAMMATE_RESEARCH_BASELINE.md) |
+| Run the HTTP service and understand its contract | [C1 service](C1_SERVICE.md) |
 | Install the encoder runtime and obtain its weights | [Encoder setup](b1-setup.md) |
 | Understand the current data, caches and training commands | [Data and training guide](DATA_AND_TRAINING.md) |
 | Review the trained model and development results | [V3 training results](V3_TRAINING_RESULTS.md) |

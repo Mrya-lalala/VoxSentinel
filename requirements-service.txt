@@ -1,3 +1,4 @@
+-r requirements-inference.txt
 # C1 inference service (src/service): FastAPI app, ASGI server and multipart
 # upload parsing.
 #

@@ -39,16 +39,16 @@ class DetectResponse(BaseModel):
 
     threshold: Optional[float] = Field(
         default=None,
-        description="Validation-selected decision threshold.",
+        description="Operating threshold; the research baseline uses a fixed uncalibrated 0.5.",
     )
 
     threshold_source: Optional[
-        Literal["configured", "checkpoint", "default"]
+        Literal["configured", "release", "checkpoint", "default"]
     ] = Field(
         default=None,
         description=(
             "Where the effective threshold came from: an operator override "
-            "(DETECTION_THRESHOLD), the detector checkpoint metadata, or the "
+            "(DETECTION_THRESHOLD), the release manifest, detector checkpoint metadata, or the "
             "service default."
         ),
     )
