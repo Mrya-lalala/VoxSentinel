@@ -53,3 +53,35 @@ def test_metrics_reject_invalid_inputs():
         binary_metrics(torch.tensor([]), torch.tensor([]))
     with pytest.raises(ValueError, match="threshold"):
         binary_metrics(torch.tensor([0.5]), torch.tensor([0]), threshold=float("inf"))
+
+
+def test_perfect_ranking_has_auroc_one():
+    metrics = binary_metrics(
+        torch.tensor([0.1, 0.2, 0.8, 0.9]),
+        torch.tensor([0, 0, 1, 1]),
+    )
+    assert metrics.auroc == pytest.approx(1.0)
+
+
+def test_reversed_ranking_has_auroc_zero():
+    metrics = binary_metrics(
+        torch.tensor([0.9, 0.8, 0.2, 0.1]),
+        torch.tensor([0, 0, 1, 1]),
+    )
+    assert metrics.auroc == pytest.approx(0.0)
+
+
+def test_all_scores_tied_has_auroc_half():
+    metrics = binary_metrics(
+        torch.tensor([0.5, 0.5, 0.5, 0.5]),
+        torch.tensor([0, 1, 0, 1]),
+    )
+    assert metrics.auroc == pytest.approx(0.5)
+
+
+def test_auroc_is_none_for_a_single_class():
+    metrics = binary_metrics(
+        torch.tensor([0.2, 0.8]),
+        torch.tensor([0, 0]),
+    )
+    assert metrics.auroc is None
