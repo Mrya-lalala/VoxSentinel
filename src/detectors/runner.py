@@ -43,6 +43,10 @@ def run_training(
     torch.manual_seed(config.training.seed)
     detector = create_detector(config.model)
     detector.to(resolved_device)
+    from .standardization import fit_detector_standardizer
+    transform_metadata = fit_detector_standardizer(detector, train_examples)
+    if transform_metadata is not None:
+        metadata = {**dict(metadata or {}), "feature_standardization": transform_metadata}
     optimizer = build_optimizer(detector, config.optimizer)
     loss_fn = build_loss(config.training.loss)
     batch_size = config.training.batch_size

@@ -1,0 +1,2 @@
+# Install after the existing pinned encoder environment; no runtime upgrades.
+soxr==1.1.0

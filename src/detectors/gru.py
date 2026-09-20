@@ -40,6 +40,7 @@ class GruSpoofDetector(nn.Module):
         num_layers: int = 1,
         dropout: float = 0.0,
         num_classes: int = 2,
+        feature_standardization: bool = False,
     ) -> None:
         super().__init__()
         if input_dim <= 0:
@@ -69,6 +70,9 @@ class GruSpoofDetector(nn.Module):
         )
         self.dropout = nn.Dropout(dropout)
         self.classifier = nn.Linear(hidden_size, num_classes)
+        # Buffer construction consumes no randomness and keeps legacy initialization.
+        from .standardization import FrameStandardizer
+        self.standardizer = FrameStandardizer(input_dim) if feature_standardization else None
 
     def _valid_mask(
         self,
@@ -126,6 +130,8 @@ class GruSpoofDetector(nn.Module):
         if bool((lengths == 0).any()):
             raise ValueError("Every sequence must contain at least one valid frame.")
 
+        if self.standardizer is not None:
+            features = self.standardizer(features, valid)
         projected = self.projection(self.input_norm(features))
         packed = pack_padded_sequence(
             projected,

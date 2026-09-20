@@ -188,14 +188,26 @@ def _code_state(run_dir: Path) -> dict[str, Any]:
         path = repo / name
         if path.is_file() and not name.startswith("artifacts/"):
             hashes[name] = _sha256_file(path)
+    import tarfile
+    snapshot_hashes = {}
+    with tarfile.open(run_dir / "source_snapshot.tar.gz", "w:gz") as archive:
+        for pattern in ("src/**/*.py", "scripts/**/*.py", "scripts/*.sh", "configs/*", "docs/*.md", "requirements*.txt", "README.md", ".python-version"):
+            for path in sorted(repo.glob(pattern)):
+                if path.is_file() and "__pycache__" not in path.parts:
+                    name = str(path.relative_to(repo))
+                    archive.add(path, arcname=name)
+                    snapshot_hashes[name] = _sha256_file(path)
     return {
+        "source_snapshot": "source_snapshot.tar.gz",
+        "source_snapshot_sha256": _sha256_file(run_dir / "source_snapshot.tar.gz"),
+        "snapshot_file_sha256": snapshot_hashes,
         "branch": branch,
         "commit": commit,
         "dirty": bool(status),
         "diff_patch": "code_diff.patch",
         "git_status": "git_status.txt",
         "changed_or_untracked_source_hashes": hashes,
-        "note": "commit alone is insufficient for a dirty checkout; diff + hashes reconstruct the run",
+        "note": "Full source contents archived, including untracked files; commit/diff/hashes alone are insufficient.",
     }
 
 
@@ -384,24 +396,13 @@ def _training_report(
     elapsed_seconds: float,
 ) -> None:
     lines: list[str] = []
-    lines.append("# First frozen-IndicWav2Vec → GRU training run")
+    lines.append("# Frozen-IndicWav2Vec → GRU training run")
     lines.append("")
     lines.append(f"Run directory: `{run_dir}`")
     lines.append(f"Generated: {_now()}")
     lines.append("")
-    lines.append("## What was fixed before this run")
-    lines.append("")
-    lines.append("- Removed the stale duplicate preprocessing section (4.25 s allowance) from the docs.")
-    lines.append("- Audited all 480 core prepared files against `voxsentinel-prep-2` (mono/16 kHz/finite/≤1.0 peak/")
-    lines.append("  1–4 s contiguous spans/no padding; every prepared SHA-256 matched its manifest).")
-    lines.append("- Resolved `parsed_only` reference lineage with an evidence-based full train-shard scan")
-    lines.append("  (footer `fname` statistics + targeted column reads).")
-    lines.append(f"  Status counts: {json.dumps(verification['verification_status_counts'])}")
-    lines.append(f"  Evidence methods: {json.dumps(verification['verification_evidence_methods'])}")
-    if verification["rows_replaced_by_language"]:
-        lines.append(f"  Rows replaced for verified alternatives: {json.dumps(verification['rows_replaced_by_language'])}")
-    lines.append("- Raw upstream row metadata is preserved per record (`parent_refs.upstream`) and TTS")
-    lines.append("  conditioning/reference recordings remain in the relationship graph and split checks.")
+    lines.append("Dataset preparation and lineage repairs predate this run; see the original manager report.")
+    lines.append("This run reuses the frozen caches. Optional frame standardization is recorded in settings and checkpoint state.")
     lines.append("")
     lines.append("## Readiness")
     lines.append("")
@@ -502,9 +503,15 @@ def main() -> int:
     parser.add_argument("--check-only", action="store_true", help="audit the cache without training")
     parser.add_argument("--device", default=None, help="override the configured device (default: config value)")
     parser.add_argument("--threads", type=int, default=None, help="torch CPU thread override")
+    parser.add_argument("--reference-run", type=Path, default=None, help="required original comparator for the controlled standardized experiment")
+    parser.add_argument("--split-version", type=Path, help="verify v2 train/dev match existing audited cache manifests; never load test")
     args = parser.parse_args()
 
     root = Path(args.dataset_root)
+    split_contract = None
+    if args.split_version is not None:
+        from scripts.training_split_contract import verify_split_contract
+        split_contract = verify_split_contract(args.split_version, root)
     train_path = root / "features" / "train.pt"
     val_path = root / "features" / "val.pt"
 
@@ -540,12 +547,36 @@ def main() -> int:
         torch.set_num_threads(int(args.threads))
     device = torch.device(args.device or config.training.device)
 
+    recovery_readiness = None
+    standardized = bool(config.model.parameters.get("feature_standardization", False))
+    if standardized:
+        if args.reference_run is None:
+            raise ValueError("Standardized experiment requires --reference-run")
+        if device.type != "cpu" or torch.get_num_threads() != 4:
+            raise ValueError("Controlled experiment requires CPU and --threads 4")
+        from scripts.gru_recovery import readiness
+        recovery_readiness = readiness(root, args.reference_run)
+        if not recovery_readiness["ready"]:
+            raise ValueError(f"Recovery readiness failed: {recovery_readiness['failures']}")
+        expected = json.loads((args.reference_run / "settings.json").read_text())["resolved"]
+        actual = _resolved_settings(config, args.detector_config)["resolved"]
+        import copy
+        comparable = copy.deepcopy(actual)
+        comparable["model"]["parameters"].pop("feature_standardization")
+        if comparable != expected:
+            raise ValueError("Controlled settings must match original except feature_standardization")
+
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
     run_dir = _unique_run_dir(Path(args.run_dir) if args.run_dir else Path("artifacts/runs") / f"gru-core-{stamp}")
     print(f"run directory: {run_dir}")
+    if recovery_readiness is not None:
+        (run_dir / "readiness.json").write_text(json.dumps(recovery_readiness, indent=2) + "\n")
 
     settings = _resolved_settings(config, args.detector_config)
     dataset = _dataset_identity(root)
+    if split_contract is not None:
+        dataset["split_contract"] = split_contract
+        (run_dir / "split_contract.json").write_text(json.dumps(split_contract, indent=2) + "\n")
     verification = _verification_summary(root)
     environment = _environment_block(config)
     code_state = _code_state(run_dir)
@@ -576,6 +607,14 @@ def main() -> int:
 
     detector = create_detector(config.model)
     detector.to(device)
+    from src.detectors.standardization import fit_detector_standardizer
+    rng_before = torch.random.get_rng_state().clone()
+    transform_metadata = fit_detector_standardizer(detector, train_examples, cache_signature=dataset["train"]["bundle_sha256"])
+    if not torch.equal(rng_before, torch.random.get_rng_state()):
+        raise AssertionError("Fitting the standardizer changed the RNG state")
+    if transform_metadata is not None:
+        torch.save(detector.model.standardizer.state_dict(), run_dir / "standardizer.pt")
+        (run_dir / "standardizer.json").write_text(json.dumps(transform_metadata, indent=2) + "\n")
     optimizer = build_optimizer(detector, config.optimizer)
     loss_fn = build_loss(config.training.loss)
     batch_size = int(config.training.batch_size)
@@ -598,7 +637,29 @@ def main() -> int:
         "seed": seed,
         "device": str(device),
     }
+    if split_contract is not None:
+        metadata["split_contract"] = split_contract
+    if transform_metadata is not None:
+        metadata["feature_standardization"] = transform_metadata
     best_path = run_dir / "gru_best.pt"
+    eval_history = []
+    final_live_logits = None
+
+    def record_epoch(model, summary):
+        nonlocal final_live_logits
+        from scripts.gru_recovery import evaluate_model
+        # Read-only eval; save RNG and buffer identity to enforce no training effect.
+        state = torch.random.get_rng_state().clone()
+        train_eval, _, _ = evaluate_model(model, train_examples)
+        val_eval, final_live_logits, _ = evaluate_model(model, val_examples)
+        if not torch.equal(state, torch.random.get_rng_state()):
+            raise AssertionError("Evaluation callback consumed RNG")
+        eval_history.append({"epoch": summary.epoch, "online_train_loss": summary.train_loss,
+                             "train_eval": train_eval, "val_eval": val_eval,
+                             "val_logits_sha256": hashlib.sha256(final_live_logits.tobytes()).hexdigest()})
+        (run_dir / "eval_history.json").write_text(json.dumps(eval_history, indent=2) + "\n")
+        print(f"epoch {summary.epoch}: online CE {summary.train_loss:.5f}; train eval CE {train_eval['cross_entropy']:.5f}; dev CE {val_eval['cross_entropy']:.5f}; dev EER {summary.metrics.eer:.5f}", flush=True)
+
 
     start = _now()
     started = time.perf_counter()
@@ -618,6 +679,7 @@ def main() -> int:
             mode=config.checkpoint.best_mode,
             threshold=float(config.evaluation.threshold),
             metadata=metadata,
+            epoch_callback=record_epoch if standardized else None,
         )
     except BaseException as error:  # mark the failed attempt before re-raising
         (run_dir / "run_status.json").write_text(
@@ -645,12 +707,30 @@ def main() -> int:
         metadata=metadata,
     )
 
+    if standardized:
+        from scripts.gru_recovery import evaluate_run, rebuild
+        recovery_results = evaluate_run(run_dir, run_dir / "evaluation")
+        restored_final, _ = rebuild(run_dir / "gru_final.pt")
+        restored_logits, _ = _predict(restored_final, val_examples, device=device, batch_size=batch_size)
+        parity = float(np.abs(restored_logits - final_live_logits).max())
+        if parity != 0:
+            raise AssertionError(f"Live final/reload parity failed: {parity}")
+        recovery_results["checks"]["live_final_reload_max_logit_error"] = parity
+        (run_dir / "evaluation" / "evaluation.json").write_text(json.dumps(recovery_results, indent=2) + "\n")
+
     # Predictions come from the *selected* best checkpoint, which also verifies
     # that the saved checkpoint reconstructs the model.
     best_detector = create_detector(config.model)
     restore_checkpoint(best_path, best_detector, model_name=config.model.name)
     best_detector.to(device)
     logits, scores = _predict(best_detector, val_examples, device=device, batch_size=batch_size)
+
+    if standardized:
+        expected_hash = eval_history[result.best_epoch - 1]["val_logits_sha256"]
+        if hashlib.sha256(logits.tobytes()).hexdigest() != expected_hash:
+            raise AssertionError("Best checkpoint does not match live selected-epoch predictions")
+        recovery_results["checks"]["live_best_reload_exact"] = True
+        (run_dir / "evaluation" / "evaluation.json").write_text(json.dumps(recovery_results, indent=2) + "\n")
 
     manifest_rows = {
         json.loads(line)["window_id"]: json.loads(line)
@@ -744,11 +824,13 @@ def main() -> int:
         "started": start,
         "finished": _now(),
         "head_training_seconds": elapsed,
+        "timing_note": "fit wall time includes checkpoint writes and, for standardized runs, full train/dev epoch evaluation",
         "feature_regeneration_seconds": 0,
         "device": str(device),
         "selected_epoch": result.best_epoch,
         "selected_metric": {"name": result.monitor, "value": result.best_metric, "mode": result.mode},
         "checkpoint_reload_verified": True,
+        "controlled_frame_standardization": standardized,
         "resumed": False,
         "note": "features were reused from the frozen cache; no encoder forward pass during training",
     }

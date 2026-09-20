@@ -1,5 +1,7 @@
 # GRU Diagnostic Manager Report — `gru-core-v1` failure analysis
 
+> **Superseded findings — 2026-09-18:** See [the recovery manager report](ASTRA_GRU_RECOVERY_MANAGER_REPORT.md) for corrected diagnostics and the matched standardization experiment. This document is retained as a historical report. Its “confirmed root cause” claim, leakage-refuted conclusion, zero-clamp count, unscaled-predictor description, whitening terminology, linear-separability inference, and uncertainty claims are not supported as written. The original linear probability exports also used the wrong logit scaling; corrected outputs preserve the fitted model and its 0.5 decisions. Historical artifact files remain unchanged.
+
 Date: 2026-09-18
 Author: implementation agent (autonomous diagnostic run authorized by the diagnosis master prompt)
 Scope: diagnose why the first frozen-IndicWav2Vec → GRU run (`artifacts/runs/gru-core-v1/`) barely learned and classified every validation window as synthetic at threshold 0.5; deliver evidence-backed findings, the bounded experiments (tiny-subset overfit, pooled linear baseline), and one recommended next step.

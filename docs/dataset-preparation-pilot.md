@@ -331,13 +331,10 @@ frozen-embedding GRU experiment was executed:
   predictions with IDs/languages/generators, metrics, per-language/generator
   breakdown, training report): `artifacts/runs/gru-core-v1/`.
 
-**Follow-up (2026-09-18): the failure mode above was diagnosed.** See
-`docs/GRU_DIAGNOSTIC_MANAGER_REPORT.md` and
-`artifacts/runs/gru-core-v1-diagnosis/`. In brief: the near-constant scores are
-a training-dynamics/convergence failure on weak, ill-conditioned inputs — not
-a code, metric, checkpoint or data defect (all reproduced/refuted with
-bit-exact evidence). On the same frozen features a pooled linear probe reaches
-validation EER 4.2 % / AUC 0.988, and the same GRU head memorizes a 24-window
-subset to zero loss, so the evidenced next step is one controlled
-whitened-input rerun (per-dim standardization fitted on train only) rather
-than data expansion.
+**Follow-up (2026-09-18):** The historical diagnostic report's root-cause and
+leakage claims were overstated. See [the controlled recovery report](ASTRA_GRU_RECOVERY_MANAGER_REPORT.md)
+for corrected linear score exports, a canonical Kathbath–IndicSynth identity audit,
+and the one matched frame-standardized GRU experiment. Selected epoch 5 reached
+94.79% development accuracy and 4.17% EER. This supports the standardization
+intervention on this frozen seed/split; independent generalization remains unmeasured.
+The frozen preparation data and historical run artifacts were preserved.

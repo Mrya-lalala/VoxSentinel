@@ -1,5 +1,11 @@
 # VoxSentinel
-SIH26104 — AI-powered real-time, language-agnostic voice-cloning and impersonation detection.
+SIH26104 — voice-cloning and impersonation detection research.
+
+**Current deliverable: Indic research baseline, not production validated.**
+Start with the [teammate quickstart](docs/TEAMMATE_RESEARCH_BASELINE.md).
+V3 development: 97.04% accuracy / 2.30% EER on 135 examples. The v3 model
+has not been evaluated on the existing benchmark; English and streaming
+performance remain unvalidated.
 
 - [Frozen encoder setup and interface](docs/b1-setup.md)
 - [Real speech encoder → GRU smoke test and measured results](docs/encoder-gru-smoke.md)
@@ -16,5 +22,19 @@ SIH26104 — AI-powered real-time, language-agnostic voice-cloning and impersona
   — independent metric re-derivation, checkpoint-reload parity, feature/batching/optimizer
   audits, the 24-example overfit diagnostic, and a pooled linear baseline on the same frozen
   features (val EER 4.2 % / AUC 0.988) — evidence `artifacts/runs/gru-core-v1-diagnosis/`.
-  Verdict: training-dynamics/convergence failure on weak, ill-conditioned inputs; one
-  controlled whitened-input rerun recommended.
+  Historical conclusions are superseded by the recovery report below.
+- [Controlled GRU recovery report](docs/ASTRA_GRU_RECOVERY_MANAGER_REPORT.md)
+  — corrected linear score export and cross-class identity audit; one training-only
+  frame-standardized GRU run selected epoch 5 (development accuracy 94.79%, EER 4.17%).
+  These are pilot development results, not independent test or deployment evidence.
+- [Dataset decisions, prediction tests and baseline release readiness](docs/BASELINE_DATASET_AND_PREDICTION_REPORT.md)
+  — Kathbath + IndicSynth for Indic speech; IndieFake selected pending access for
+  Indian English; balanced coverage and an untouched test remain required.
+- [Run a local audio-file prediction](docs/prediction-path.md)
+  — hash-pinned pilot package, real encoder/GRU inference and raw-audio parity checks.
+- [Training reproduction with the v2 split contract](docs/V2_SPLIT_TRAINING_REPRODUCTION.md)
+  — ten-epoch run exactly reproduced the standardized baseline; test data remains unused.
+- [First fixed-checkpoint v2 test results](docs/V2_FROZEN_TEST_RESULTS.md)
+  — 79.17% test accuracy; substantial male genuine false alarms; research baseline only.
+- [V3 expanded-coverage training results](docs/V3_TRAINING_RESULTS.md)
+  — selected epoch 3, development accuracy 97.04%, EER 2.30%; benchmark not rescored.

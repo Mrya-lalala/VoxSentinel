@@ -75,8 +75,8 @@ def fit_logreg(X_train: torch.Tensor, y_train: torch.Tensor) -> dict:
     def closure():
         counters["closure_calls"] += 1
         optimizer.zero_grad()
-        margin = X_train @ weight + bias
-        logits = torch.stack([-margin, margin], dim=1)
+        raw_response = X_train @ weight + bias
+        logits = torch.stack([-raw_response, raw_response], dim=1)
         objective = torch.nn.functional.cross_entropy(logits, y_train) + L2_PENALTY * (weight * weight).sum()
         objective.backward()
         return objective
@@ -86,29 +86,85 @@ def fit_logreg(X_train: torch.Tensor, y_train: torch.Tensor) -> dict:
     final_objective = float(closure().detach())
     n_iter = int(state.get("n_iter")) if state.get("n_iter") is not None else None
     with torch.no_grad():
-        margins_train = (X_train @ weight + bias).numpy()
+        raw_responses_train = (X_train @ weight + bias).numpy()
     return {
         "weight": weight.detach(), "bias": bias.detach().numpy(),
         "final_objective": final_objective,
         "iterations_reported": n_iter,
         "closure_calls": counters["closure_calls"],
         "objective_definition": f"cross_entropy(logits, y) + {L2_PENALTY:g} * sum(w^2), bias unpenalized",
-        "margins_train": margins_train,
+        "raw_responses_train": raw_responses_train,
     }
 
 
 def evaluate(model: dict, X: torch.Tensor, y: torch.Tensor) -> dict:
     with torch.no_grad():
-        margins = (X @ model["weight"] + model["bias"][0]).numpy()
-        logits = np.stack([-margins, margins], axis=1)
-        ce = float(torch.nn.functional.cross_entropy(torch.from_numpy(logits), y))
-        scores = 1.0 / (1.0 + np.exp(-margins))  # softmax over 2 logits == sigmoid(margin)
+        raw_response = X @ model["weight"] + float(model["bias"][0])
+        logits = torch.stack([-raw_response, raw_response], dim=1)
+        margins = (logits[:, 1] - logits[:, 0]).numpy()
+        scores = torch.softmax(logits, dim=1)[:, 1].numpy()
+        ce = float(torch.nn.functional.cross_entropy(logits, y))
+    from scripts.diagnose_gru import auc_rank, eer_independent
+    # Ranking on the actual logit difference avoids probability-saturation ties.
+    result = independent_metrics(scores, y.numpy())
+    result["probability_auc"] = result["auc"]
+    result["probability_eer"] = result["eer"]
+    result["auc"] = auc_rank(margins, y.numpy())
+    result["eer"] = eer_independent(margins, y.numpy())["eer"]
+    result["ranking_basis"] = "logit_synthetic - logit_genuine"
+    result["unique_probabilities"] = int(len(np.unique(scores)))
+    result["unique_margins"] = int(len(np.unique(margins)))
     return {"cross_entropy": ce, "scores": scores, "margins": margins,
-            **independent_metrics(scores, y.numpy()),
-            "production": production_metrics(scores, y.numpy())}
+            **result, "production": production_metrics(scores, y.numpy())}
+
+
+def reevaluate_saved(model_path: Path, out: Path) -> int:
+    """Correct exports using the saved fitted weights AND scaler; never optimize."""
+    import csv
+    import hashlib
+    from scripts.diagnose_gru import distribution_stats
+    if out.exists() and any(out.iterdir()):
+        raise FileExistsError(f"Refusing to overwrite {out}")
+    out.mkdir(parents=True, exist_ok=True)
+    before = hashlib.sha256(model_path.read_bytes()).hexdigest()
+    torch.set_num_threads(4)
+    model = torch.load(model_path, map_location="cpu", weights_only=False)
+    report = {"model_path": str(model_path), "model_sha256": before, "refitted": False,
+              "score_definition": "softmax([-raw_response, raw_response])[1] = sigmoid(2*raw_response)",
+              "scaler_definition": "saved training-window-mean scaler, sample std (ddof=1); NOT frame scaler",
+              "splits": {}}
+    for split in ("train", "val"):
+        x, y, ids = load_pooled(split)
+        result = evaluate(model, (x-model["scaler_mean"])/model["scaler_std"], y)
+        scores, margins = result.pop("scores"), result.pop("margins")
+        result["score_stats"] = distribution_stats(scores)
+        result["margin_stats"] = distribution_stats(margins)
+        result["by_class"] = {str(c): {"scores": distribution_stats(scores[y.numpy()==c]),
+                                             "margins": distribution_stats(margins[y.numpy()==c])} for c in (0,1)}
+        old_scores = torch.sigmoid(torch.from_numpy(margins)/2).numpy()
+        result["old_vs_corrected_decisions_changed"] = int(((old_scores>=.5)!=(scores>=.5)).sum())
+        result["example"] = {"window_id":ids[0], "old_score":float(old_scores[0]),
+                             "corrected_score":float(scores[0]), "logit_margin":float(margins[0])}
+        report["splits"][split] = result
+        with (out/f"predictions_{split}.csv").open("w",newline="") as f:
+            writer=csv.writer(f);writer.writerow(["window_id","label","raw_response","logit_margin","score"])
+            writer.writerows((wid,int(label),float(m)/2,float(m),float(s)) for wid,label,m,s in zip(ids,y,margins,scores))
+    report["model_unchanged"] = before == hashlib.sha256(model_path.read_bytes()).hexdigest()
+    (out/"summary.json").write_text(json.dumps(report,indent=2)+"\n")
+    print(json.dumps(report,indent=2))
+    return 0
 
 
 def main() -> int:
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--reevaluate-saved", type=Path)
+    parser.add_argument("--out-dir", type=Path, default=REPO / "artifacts/runs/gru-core-v1-diagnosis-corrected/linear")
+    args = parser.parse_args()
+    if args.reevaluate_saved:
+        return reevaluate_saved(args.reevaluate_saved, args.out_dir)
+    if OUT.exists() and any(OUT.iterdir()):
+        raise FileExistsError("Historical baseline directory exists; use --reevaluate-saved and a new --out-dir")
     OUT.mkdir(parents=True, exist_ok=True)
     torch.set_num_threads(4)
     torch.manual_seed(0)
@@ -174,7 +230,7 @@ def main() -> int:
             ):
                 with (OUT / f"predictions_{split}.csv").open("w", newline="", encoding="utf-8") as handle:
                     writer = csv.writer(handle)
-                    writer.writerow(["window_id", "label", "margin", "score"])
+                    writer.writerow(["window_id", "label", "logit_margin", "score"])
                     for wid, label, margin, score in zip(ids, labels, margins, scores):
                         writer.writerow([wid, int(label), f"{margin:.7f}", f"{score:.7f}"])
         if name == "unscaled":

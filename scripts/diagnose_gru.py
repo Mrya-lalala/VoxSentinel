@@ -2,7 +2,8 @@
 
 Read-only with respect to the frozen dataset, the original run directory and
 its checkpoints.  Every command writes its evidence under
-``artifacts/runs/gru-core-v1-diagnosis/``.
+``artifacts/runs/gru-core-v1-diagnosis-corrected/`` by default.
+Historical outputs are preserved; --out-dir selects a different evidence location.
 
 Subcommands:
 
@@ -38,7 +39,7 @@ import torch
 
 REPO = Path(__file__).resolve().parents[1]
 RUN_DIR = REPO / "artifacts" / "runs" / "gru-core-v1"
-OUT_DIR = REPO / "artifacts" / "runs" / "gru-core-v1-diagnosis"
+OUT_DIR = REPO / "artifacts" / "runs" / "gru-core-v1-diagnosis-corrected"
 DATASET_ROOT = REPO / "artifacts" / "datasets"
 CORE_LANGUAGES = [
     "Bengali", "Gujarati", "Hindi", "Kannada", "Malayalam", "Marathi",
@@ -833,91 +834,11 @@ def command_identity(_: argparse.Namespace) -> int:
     stage = OUT_DIR / "stage3"
     stage.mkdir(parents=True, exist_ok=True)
 
-    train = _load_manifest("train")
-    val = _load_manifest("val")
-
-    def speaker_keys(rows, role):
-        keys = set()
-        for row in rows:
-            speaker = (row.get("speaker_ids") or {}).get(role)
-            if speaker is not None:
-                keys.add((row["dataset_id"], row["spoken_language"], str(speaker)))
-        return keys
-
-    intersections = {}
-    for role in ("source", "target"):
-        for other_role in ("source", "target"):
-            train_keys = speaker_keys(train, role)
-            val_keys = speaker_keys(val, other_role)
-            overlap = train_keys & val_keys
-            intersections[f"train_{role}_vs_val_{other_role}"] = {
-                "count": len(overlap),
-                "examples": sorted(f"{d}/{l}/{s}" for d, l, s in list(overlap)[:10]),
-            }
-
-    def reference_keys(rows, role):
-        keys = set()
-        for row in rows:
-            ref = (row.get("parent_refs") or {}).get(f"{role}_reference")
-            if ref:
-                keys.add((row["dataset_id"], str(ref)))
-        return keys
-
-    reference_overlaps = {}
-    for role in ("source", "target"):
-        overlap = reference_keys(train, role) & reference_keys(val, role)
-        reference_overlaps[f"train_{role}_vs_val_{role}"] = {
-            "count": len(overlap),
-            "examples": sorted(ref for _, ref in list(overlap)[:10]),
-        }
-
-    # numeric speaker-id collisions across datasets (flag only: ids are dataset-scoped)
-    numeric: dict[str, set] = defaultdict(set)
-    for rows, split in ((train, "train"), (val, "val")):
-        for row in rows:
-            for role in ("source", "target"):
-                speaker = (row.get("speaker_ids") or {}).get(role)
-                if speaker is not None and str(speaker).isdigit():
-                    numeric[str(speaker)].add(row["dataset_id"])
-    collisions = {sid: sorted(ds) for sid, ds in numeric.items() if len(ds) > 1}
-
-    prepared_hashes: dict[str, list[str]] = defaultdict(list)
-    for rows, split in ((train, "train"), (val, "val")):
-        for row in rows:
-            sha = (row.get("prepared_audio") or {}).get("sha256")
-            if sha:
-                prepared_hashes[sha].append(f"{split}:{row['window_id']}")
-    cross_split_audio_dupes = {sha: ids for sha, ids in prepared_hashes.items() if len(ids) > 1}
-
-    generator_counts = Counter(
-        (row.get("generator") or "genuine") for row in val
-    )
-
-    report = {
-        "generated": datetime.now(timezone.utc).isoformat(),
-        "counts": {"train": len(train), "val": len(val)},
-        "speaker_key_intersections": intersections,
-        "reference_recording_intersections": reference_overlaps,
-        "numeric_speaker_id_collisions_across_datasets": {
-            "count": len(collisions), "examples": dict(list(collisions.items())[:10]),
-            "note": "numeric ids are dataset-scoped namespaces; collisions are flagged, not treated as leakage",
-        },
-        "prepared_audio_sha256_duplicates": cross_split_audio_dupes,
-        "prepared_audio_duplicate_count": len(cross_split_audio_dupes),
-        "val_generator_counts": dict(sorted(generator_counts.items())),
-        "identity_limits": [
-            "speaker identity is only resolvable within a dataset namespace; cross-dataset identity",
-            "resolution is limited to the reference lineage recorded at preparation time",
-        ],
-    }
+    from scripts.gru_identity_audit import audit_identity
+    report = audit_identity(_load_manifest("train"), _load_manifest("val"))
     (stage / "stage3_identity.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
-    print(json.dumps({
-        "speaker_intersections": {k: v["count"] for k, v in intersections.items()},
-        "reference_overlaps": {k: v["count"] for k, v in reference_overlaps.items()},
-        "numeric_collisions": len(collisions),
-        "audio_dupes": len(cross_split_audio_dupes),
-    }, indent=2))
-    return 0
+    print(json.dumps({k: report[k] for k in ("ready", "speaker_keys", "unresolved_required_count", "expected_absent_source_count")}, indent=2))
+    return 0 if report["ready"] else 1
 
 
 # --------------------------------------------------------------------------- #
@@ -935,9 +856,12 @@ ALL_ORDER = ["scores", "reload", "features", "batches", "optimizer", "activation
 
 
 def main() -> int:
+    global OUT_DIR
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("command", choices=[*COMMANDS, "all"])
+    parser.add_argument("--out-dir", type=Path, default=OUT_DIR)
     args = parser.parse_args()
+    OUT_DIR = args.out_dir
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     environment = {
         "python": sys.version.split()[0],

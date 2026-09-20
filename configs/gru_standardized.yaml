@@ -1,0 +1,4 @@
+# Controlled intervention: all other settings come from base.yaml + gru.yaml.
+model:
+  parameters:
+    feature_standardization: true

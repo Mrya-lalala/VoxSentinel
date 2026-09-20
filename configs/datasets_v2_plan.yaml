@@ -1,0 +1,45 @@
+# Planning contract only; not accepted by the v1 acquisition CLI.
+schema: voxsentinel.dataset_plan.v2
+status: indic_split_preparation_pending_english_access
+output_root: artifacts/datasets-v2
+budget_ledger: artifacts/datasets/manifests/downloads.json
+preserve_v1: true
+sources:
+  kathbath: {role: indic_genuine_train_dev_test, revision: 5b9e92849222026d9141acba4e8434fe816396bf}
+  indicsynth: {role: indic_synthetic_train_dev_test, revision: c0a10386b723717aff682f757bd67f72983f269f}
+  indiefake: {role: indian_english_both_classes_train_dev_test, access: user_request_pending, revision: null}
+  svarah: {role: external_indian_english_genuine_false_alarm_only}
+  asvspoof2019: {role: separate_general_english_baseline_only}
+  nisp: {role: deferred_supplementary_genuine}
+  nptel: {role: excluded_pending_lecturer_identity}
+indic_controlled_pilot_targets:
+  languages: [Bengali, Gujarati, Hindi, Kannada, Malayalam, Marathi, Odia, Punjabi, Sanskrit, Tamil, Telugu, Urdu]
+  per_language_per_class: {train: 16, dev: 4, test: 4}
+  gender_target: improve_documented_coverage_without_discarding_existing_data
+  preserve_acquired_audio: true
+  exact_gender_balance_required: false
+  shortage_policy: stop_and_report_never_duplicate_or_relax_identity
+  note: Advisory diagnostic counts only, not caps or production sufficiency; retain existing eligible data. English quotas await release audit.
+split_policy:
+  unit: connected_component_of_genuine_source_target_speaker_recording_and_augmentation_lineage
+  test_excludes: all_previous_train_and_development_exposures_and_related_identities
+  seed: 42
+  near_duplicate_audit_required: true
+  cross_language_identity_review_required: true
+  preserve_upstream_test: true
+  unknown_required_identity: quarantine
+training:
+  encoder: frozen_indicwav2vec_final_layer
+  head: unchanged_standardized_gru
+  standardizer_fit: new_training_valid_frames_only
+  selection: development_only
+  test: once_after_model_and_threshold_freeze
+release_gates:
+  - verified_access_terms_and_exact_revisions
+  - documented_coverage_limitations_and_zero_cross_split_relationship_overlap
+  - explicit_generator_and_channel_coverage_report
+  - frozen_untouched_test_with_no_previous_exposure
+  - raw_audio_prediction_parity_and_invalid_input_tests
+  - indian_english_encoder_suitability_and_per_language_metrics
+  - agreed_false_alarm_and_miss_rate_requirements_met
+  - reproducible_weight_distribution_and_teammate_setup
