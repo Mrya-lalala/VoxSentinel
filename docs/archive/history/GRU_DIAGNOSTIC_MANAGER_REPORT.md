@@ -1,3 +1,5 @@
+> Archived historical document. Instructions and status may be superseded. Start with the [current documentation](../../README.md).
+
 # GRU Diagnostic Manager Report — `gru-core-v1` failure analysis
 
 > **Superseded findings — 2026-09-18:** See [the recovery manager report](ASTRA_GRU_RECOVERY_MANAGER_REPORT.md) for corrected diagnostics and the matched standardization experiment. This document is retained as a historical report. Its “confirmed root cause” claim, leakage-refuted conclusion, zero-clamp count, unscaled-predictor description, whitening terminology, linear-separability inference, and uncertainty claims are not supported as written. The original linear probability exports also used the wrong logit scaling; corrected outputs preserve the fitted model and its 0.5 decisions. Historical artifact files remain unchanged.
@@ -37,7 +39,7 @@ Constraints honored: no dataset expansion, no encoder fine-tuning, no architectu
 ### 2.1 Code and configuration actually used by the run
 - Original run harness: `scripts/train_gru_from_cache.py` (sha256 matches run snapshot `e24ccdc1…`), training loop `src/detectors/training.py`, head `src/detectors/gru.py` (LayerNorm → Linear 1024→256 → 1-layer GRU(256) → masked mean pooling → Dropout(0) → Linear(256→2)), collator `src/data/batch.py`, metrics `src/scoring/metrics.py`, evaluation `src/scoring/evaluation.py`, checkpoints `src/detectors/checkpoints.py`, label contract `src/data/labels.py`.
 - Resolved settings (from `artifacts/runs/gru-core-v1/settings.json`): AdamW lr 1e-3, wd 0, batch 8, 10 epochs, seed 0, CPU float32, no scheduler, no clipping, no class weights; selection = lowest val EER (earliest tie); threshold 0.5; label 1 = synthetic positive class.
-- **Original vs current source:** the run snapshot hashed 39 files. 37/39 still match byte-for-byte; the only differences are two post-run *documentation* edits (`README.md`, `docs/dataset-preparation-pilot.md`). All training-path code is identical, so all diagnoses below are about the same code that produced the run.
+- **Original vs current source:** the run snapshot hashed 39 files. 37/39 still match byte-for-byte; the only differences are two post-run *documentation* edits (`README.md`, `docs/archive/history/dataset-preparation-pilot.md`). All training-path code is identical, so all diagnoses below are about the same code that produced the run.
 
 ### 2.2 Environment and dataset identities
 - Python 3.10.18; torch 2.2.2; torchaudio 2.2.2; fairseq 0.12.1; numpy 1.23.5; CPU (macOS arm64); no matplotlib/pandas/scipy/sklearn available (no analytics stack was installed; exact tables/CSV used instead of plots).

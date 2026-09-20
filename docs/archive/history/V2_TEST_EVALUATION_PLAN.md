@@ -1,3 +1,5 @@
+> Archived historical document. Instructions and status may be superseded. Start with the [current documentation](../../README.md).
+
 # Fixed v2 test evaluation
 
 The executable pre-inference plan is `artifacts/evaluations/gru-v2-test-epoch5/plan.json`. It was written before constructing the predictor or generating any test scores; it pins the checkpoint, manifest and data audit hashes. The source snapshot is stored with the evaluation.

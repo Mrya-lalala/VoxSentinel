@@ -1,3 +1,5 @@
+> Archived historical document. Instructions and status may be superseded. Start with the [current documentation](../../README.md).
+
 # VoxSentinel: implement v3 feature caching and training support
 
 Work in `/Users/mouryabs/VoxSentinel`. Implement and verify feature caching and dataset-aware training support for the newly expanded v3 train/development manifests. Generate the required caches. **Stop before actual model training**; the primary agent will review the implementation, train, analyze and handle branch publication.
@@ -6,10 +8,10 @@ Work in `/Users/mouryabs/VoxSentinel`. Implement and verify feature caching and 
 
 Read applicable AGENTS.md and:
 
-- `docs/GENUINE_COVERAGE_ACQUISITION_HANDOFF.md`
-- `docs/GENUINE_COVERAGE_ACQUISITION_REVIEW.md`
-- `docs/V2_SPLIT_TRAINING_REPRODUCTION.md`
-- `docs/V2_FROZEN_TEST_RESULTS.md`
+- `docs/archive/history/GENUINE_COVERAGE_ACQUISITION_HANDOFF.md`
+- `docs/archive/history/GENUINE_COVERAGE_ACQUISITION_REVIEW.md`
+- `docs/archive/history/V2_SPLIT_TRAINING_REPRODUCTION.md`
+- `docs/archive/history/V2_FROZEN_TEST_RESULTS.md`
 - `artifacts/datasets-v3-coverage/manifests/dataset-version.v3.json`
 - `src/dataset_prep/features.py`, `src/data/batch.py`
 - `scripts/train_gru_from_cache.py`, `scripts/training_split_contract.py`, `scripts/gru_recovery.py`
@@ -128,7 +130,7 @@ Produce:
 - Dataset-aware cache builder/resolver and training-support changes.
 - Complete validated v3 train/dev feature bundles and sidecars.
 - Check-only validation evidence, focused test results, encoder parity evidence and preservation hashes under a new v3 cache-report directory.
-- `docs/V3_CACHE_AND_TRAINING_SUPPORT_HANDOFF.md` describing exact inputs, feature counts/shapes/frame counts, reused versus extracted examples, hashes/runtime, code changes, limitations and commands.
+- `docs/archive/history/V3_CACHE_AND_TRAINING_SUPPORT_HANDOFF.md` describing exact inputs, feature counts/shapes/frame counts, reused versus extracted examples, hashes/runtime, code changes, limitations and commands.
 - One exact command for future training and one safe check-only command. Explain explicitly that no model has yet been trained on v3 and the evaluated benchmark has not been rescored.
 
 If a reliability check fails, resolve it within this scope or provide the precise blocker. Never bypass a readiness guard to produce a green report. Preserve failed-attempt evidence and avoid claiming checks were run when they were only inspected.

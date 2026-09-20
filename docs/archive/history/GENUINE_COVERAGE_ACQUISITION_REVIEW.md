@@ -1,3 +1,5 @@
+> Archived historical document. Instructions and status may be superseded. Start with the [current documentation](../../README.md).
+
 # Independent review of genuine-coverage additions
 
 Verdict: **Accept the materialized v3 dataset for feature-cache preparation**, under the documented `speaker_recording_disjoint_v2` protocol and coverage limitations. No blocking defect was found in the delivered rows in this review. This is not a model-performance or production approval.

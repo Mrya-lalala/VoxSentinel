@@ -1,9 +1,11 @@
+> Archived historical document. Instructions and status may be superseded. Start with the [current documentation](../../README.md).
+
 # Manager report — reference-lineage resolution, dataset freeze and first GRU run
 
 Prepared for: managing agent / reviewer
 Prepared: 2026-09-18 (Asia/Kolkata)
 Branch: `feature/indicVac2Wav` @ `c250bbd0ac3b2af1ae345ce48960fcc63d200557` (17 dirty items preserved; **nothing committed**)
-Companion documents: `docs/dataset-preparation-pilot.md` (§10 = run record), `artifacts/runs/gru-core-v1/training_report.md`, `artifacts/datasets/reports/preparation-report.{json,md}`
+Companion documents: `docs/archive/history/dataset-preparation-pilot.md` (§10 = run record), `artifacts/runs/gru-core-v1/training_report.md`, `artifacts/datasets/reports/preparation-report.{json,md}`
 
 ---
 

@@ -1,3 +1,5 @@
+> Archived historical document. Instructions and status may be superseded. Start with the [current documentation](../../README.md).
+
 # Astra GRU recovery manager report
 
 Prepared 2026-09-18. Local repository `/Users/mouryabs/VoxSentinel`.
@@ -14,7 +16,7 @@ This supports this intervention under seed 0 and the specified configuration. It
 
 Startup branch `feature/a1-datasets-manifests`, HEAD `884fcd7381b8409307c3b239fe9db5a22bc4798d`, clean working tree. It exactly matched the handoff's reviewed commit. The earlier report in the conversation inspected an older local state; its single-class-cache conclusion does not describe this frozen pilot.
 
-The original run recorded `feature/indicVac2Wav` / `c250bbd0ac3b2af1ae345ce48960fcc63d200557` plus uncommitted code. Comparing all 39 recorded original-run file hashes to the reviewed commit found three differences: `.gitignore`, `README.md`, and `docs/dataset-preparation-pilot.md`. None changes model training. This corrects the prior diagnostic report's count of two differences. All actual repairs are local and uncommitted; unrelated A1 placeholders, audio, routing, streaming and services remain untouched.
+The original run recorded `feature/indicVac2Wav` / `c250bbd0ac3b2af1ae345ce48960fcc63d200557` plus uncommitted code. Comparing all 39 recorded original-run file hashes to the reviewed commit found three differences: `.gitignore`, `README.md`, and `docs/archive/history/dataset-preparation-pilot.md`. None changes model training. This corrects the prior diagnostic report's count of two differences. All actual repairs are local and uncommitted; unrelated A1 placeholders, audio, routing, streaming and services remain untouched.
 
 Environment: Python 3.10.18, PyTorch 2.2.2, torchaudio 2.2.2, NumPy 1.23.5, Fairseq 0.12.1; macOS-26.5.2-arm64-arm-64bit; CPU FP32, four torch threads. Existing environment reused without installation. Encoder checkpoint identity: `26bb5ada18952fd7355f691d25927b34a0e46d6afda7658bf5c254621831ab59`; final `output_layer=None`, 1024 dimensions, 20 ms hop. `None` is not block 23. No encoder was loaded during recovery.
 
@@ -229,7 +231,7 @@ model.eval()
 
 Main outputs:
 
-- `docs/ASTRA_GRU_RECOVERY_MANAGER_REPORT.md` — this report.
+- `docs/archive/history/ASTRA_GRU_RECOVERY_MANAGER_REPORT.md` — this report.
 - `artifacts/runs/gru-core-v1-diagnosis-corrected/` — readiness, canonical audit, bounded check evidence, corrected linear predictions/metrics, re-evaluated original GRU, gender inventory evidence, preservation hashes and machine-readable recovery summary.
 - `artifacts/runs/gru-core-v2-standardized/` — best/final checkpoints, transform, resolved settings, dataset/cache identities, environment, histories, selected-checkpoint predictions, complete best/final train/dev evaluation CSVs, status and log.
 - New run `source_snapshot.tar.gz` — complete pre-run source/config/documentation and dependency-file contents, including untracked additions. `code_state.json` has per-file hashes and archive hash; `code_diff.patch`/`git_status.txt` preserve the dirty-tree context. `final-evidence/source_snapshot.tar.gz` additionally includes the report generator and final reporting changes; its own `code_state.json` records file/archive hashes. Hashes alone are not claimed to reconstruct missing uncommitted content.
@@ -247,9 +249,9 @@ Changed files (no unrelated code changes):
 
 - `README.md`
 - `configs/gru_standardized.yaml`
-- `docs/ASTRA_GRU_RECOVERY_MANAGER_REPORT.md`
-- `docs/GRU_DIAGNOSTIC_MANAGER_REPORT.md`
-- `docs/dataset-preparation-pilot.md`
+- `docs/archive/history/ASTRA_GRU_RECOVERY_MANAGER_REPORT.md`
+- `docs/archive/history/GRU_DIAGNOSTIC_MANAGER_REPORT.md`
+- `docs/archive/history/dataset-preparation-pilot.md`
 - `scripts/diagnose_gru.py`
 - `scripts/gru_identity_audit.py`
 - `scripts/gru_recovery.py`

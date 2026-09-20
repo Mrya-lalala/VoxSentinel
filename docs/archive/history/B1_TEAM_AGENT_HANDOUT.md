@@ -1,3 +1,5 @@
+> Archived historical document. Instructions and status may be superseded. Start with the [current documentation](../../README.md).
+
 # VoxSentinel — IndicWav2Vec encoder handout for teammate agents
 
 Use this document to integrate your team's components with the verified B1
@@ -16,7 +18,7 @@ to `feature/indicVac2Wav` in https://github.com/Mrya-lalala/VoxSentinel.git.
 Baseline HEAD was `8328fa290e9b9d0fc7104b2ce975a114add4a4b0`; it does not identify
 the implementation commit. Fetch and check out the feature branch, then confirm
 that your checkout contains the implementation. Use
-`git log -1 -- docs/B1_TEAM_AGENT_HANDOUT.md` to identify the handout's commit.
+`git log -1 -- docs/archive/history/B1_TEAM_AGENT_HANDOUT.md` to identify the handout's commit.
 Main is not updated by this branch handoff. Model weights and generated artifacts
 are excluded from Git.
 

@@ -1,3 +1,5 @@
+> Archived historical document. Instructions and status may be superseded. Start with the [current documentation](../../README.md).
+
 # Independent review: v3 cache and training support
 
 Verdict: **accept the current feature caches; fix the training-runner integration/evidence gaps before starting the controlled run.** No model training or benchmark evaluation was performed in this review.

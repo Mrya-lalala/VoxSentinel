@@ -1,3 +1,5 @@
+> Archived historical document. Instructions and status may be superseded. Start with the [current documentation](../../README.md).
+
 # Independent review of the v2 split handoff
 
 The path supplied for review, `BASELINE_DATASET_AND_PREDICTION_REPORT.md`, is the earlier baseline report. The new outputs are `DATASET_V2_SPLIT_HANDOFF.md` and `artifacts/datasets-v2/reports/report.md`.

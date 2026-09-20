@@ -191,7 +191,7 @@ def _code_state(run_dir: Path) -> dict[str, Any]:
     import tarfile
     snapshot_hashes = {}
     with tarfile.open(run_dir / "source_snapshot.tar.gz", "w:gz") as archive:
-        for pattern in ("src/**/*.py", "scripts/**/*.py", "scripts/*.sh", "configs/*", "docs/*.md", "requirements*.txt", "README.md", ".python-version"):
+        for pattern in ("src/**/*.py", "scripts/**/*.py", "scripts/*.sh", "configs/*", "docs/**/*.md", "requirements*.txt", "README.md", ".python-version"):
             for path in sorted(repo.glob(pattern)):
                 if path.is_file() and "__pycache__" not in path.parts:
                     name = str(path.relative_to(repo))

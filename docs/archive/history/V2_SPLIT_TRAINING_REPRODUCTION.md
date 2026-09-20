@@ -1,3 +1,5 @@
+> Archived historical document. Instructions and status may be superseded. Start with the [current documentation](../../README.md).
+
 # Training reproduction with the v2 split contract
 
 Completed 19 September 2026. This is a fresh ten-epoch training run from the original seed, not a resumed run or a new-data improvement experiment.

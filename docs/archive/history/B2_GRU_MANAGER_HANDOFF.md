@@ -1,3 +1,5 @@
+> Archived historical document. Instructions and status may be superseded. Start with the [current documentation](../../README.md).
+
 # VoxSentinel B2 - GRU detector and training pipeline handoff
 
 Prepared for the manager agent from the current repository state (2026-09-15).

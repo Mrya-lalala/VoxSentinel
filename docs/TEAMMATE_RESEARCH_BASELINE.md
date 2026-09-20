@@ -45,7 +45,7 @@ Use a trusted local recording. `--language` is metadata, not automatic language 
 
 V3 training: 458 examples, development: 135. Epoch three was selected by development EER. Development accuracy 97.04%, EER 2.30%; false alarms 0/87, missed spoofs 4/48. Development was used for selection and is not independent-test evidence. The earlier v2 model scored 79.17% on the evaluated benchmark; that result is NOT the v3 model's score. V3 has not rescored that benchmark.
 
-Read [training results](V3_TRAINING_RESULTS.md) and [prior benchmark results](V2_FROZEN_TEST_RESULTS.md). Malayalam/Odia/Bengali male coverage remains limited. Cross-language identities, strict conversion-family isolation, Indian English, production channels and streaming are unvalidated.
+Read [training results](V3_TRAINING_RESULTS.md) and [prior benchmark results](archive/history/V2_FROZEN_TEST_RESULTS.md). Malayalam/Odia/Bengali male coverage remains limited. Cross-language identities, strict conversion-family isolation, Indian English, production channels and streaming are unvalidated.
 
 This handoff is supplied for **noncommercial research use only**. Retain attribution to the source datasets and encoder and review their applicable terms before any redistribution or broader use. Recorded training provenance includes Kathbath and IndicSynth; IndicSynth's dataset card declares CC BY-NC 4.0. This handoff does not grant commercial rights or override third-party terms. Source references: [IndicSynth](https://huggingface.co/datasets/vdivyasharma/IndicSynth), [Kathbath](https://github.com/AI4Bharat/IndicSUPERB), [IndicWav2Vec](https://github.com/AI4Bharat/IndicWav2Vec). No dataset audio is redistributed in the model bundle.
 
@@ -55,4 +55,4 @@ This handoff is supplied for **noncommercial research use only**. Retain attribu
 .venv/bin/python -m pytest tests -q
 ```
 
-Tests requiring gitignored local datasets skip in a fresh source checkout. To reproduce training, obtain the separately documented datasets/caches and follow [v3 cache handoff](V3_CACHE_AND_TRAINING_SUPPORT_HANDOFF.md). They are not needed for inference. Do not run acquisition casually: it consumes the shared capped ledger. Historical reports and agent prompts describe previous phases; this page and the final result reports describe the current teammate deliverable.
+Tests requiring gitignored local datasets skip in a fresh source checkout. To reproduce training, obtain the separately documented datasets/caches and follow [v3 cache handoff](archive/history/V3_CACHE_AND_TRAINING_SUPPORT_HANDOFF.md). They are not needed for inference. Do not run acquisition casually: it consumes the shared capped ledger. Historical reports and agent prompts describe previous phases; this page and the final result reports describe the current teammate deliverable.

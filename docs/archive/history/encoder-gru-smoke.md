@@ -1,3 +1,5 @@
+> Archived historical document. Instructions and status may be superseded. Start with the [current documentation](../../README.md).
+
 # Real speech encoder → GRU integration check
 
 Verified locally on 2026-09-17, following the GRU merge at `c250bbd`.
@@ -15,7 +17,7 @@ From the repository root, with the Python 3.10 encoder environment installed:
 .venv/bin/python -m scripts.verify_encoder_gru
 ```
 
-New checkouts should first follow [encoder setup](b1-setup.md), including the
+New checkouts should first follow [encoder setup](../../b1-setup.md), including the
 checkpoint download and **Verification fixtures and commands** section. The
 smoke script requires these local, Git-ignored files and downloads nothing:
 

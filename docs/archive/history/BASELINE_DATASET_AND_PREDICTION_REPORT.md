@@ -1,3 +1,5 @@
+> Archived historical document. Instructions and status may be superseded. Start with the [current documentation](../../README.md).
+
 # Dataset decision and prediction-path report
 
 Status: 19 September 2026. Local research pilot, not a final production release.

@@ -1,3 +1,5 @@
+> Archived historical document. Instructions and status may be superseded. Start with the [current documentation](../../README.md).
+
 # VoxSentinel dataset preparation — complete paired core, audits and handoff
 
 Bounded preparation of real data for the frozen **IndicWav2Vec → GRU** pipeline,

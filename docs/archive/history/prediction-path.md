@@ -1,6 +1,8 @@
+> Archived historical document. Instructions and status may be superseded. Start with the [current documentation](../../README.md).
+
 # Local audio prediction (research pilot)
 
-Run from the repository root with the Python 3.10 encoder environment described in [encoder setup](b1-setup.md). Install the extra pinned resampler:
+Run from the repository root with the Python 3.10 encoder environment described in [encoder setup](../../b1-setup.md). Install the extra pinned resampler:
 
 ```sh
 .venv/bin/python -m pip install -r requirements-inference.txt

@@ -1,6 +1,6 @@
 """V3 male-genuine coverage acquisition (pinned Kathbath genuine source only).
 
-Scope (per docs/MALE_GENUINE_ACQUISITION_AGENT_PROMPT.md):
+Scope (per docs/archive/prompts/MALE_GENUINE_ACQUISITION_AGENT_PROMPT.md):
 - acquire additional documented male genuine speech for train/development,
   preferably 8 train + 4 dev windows per language (soft targets),
   from >= 4 train speakers and >= 2 dev speakers, <= 2 additions per speaker per split;

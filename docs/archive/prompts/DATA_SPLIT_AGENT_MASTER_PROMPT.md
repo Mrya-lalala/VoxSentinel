@@ -1,3 +1,5 @@
+> Archived historical document. Instructions and status may be superseded. Start with the [current documentation](../../README.md).
+
 # VoxSentinel: master handoff prompt — dataset split preparation only
 
 You are taking over a local VoxSentinel repository. Implement and verify the next dataset split. Stop after preparing auditable manifests and the referenced, validated audio. Do not train, extract model features, evaluate a detector, tune thresholds, package a model, commit, push, or merge.
@@ -10,8 +12,8 @@ Repository: `/Users/mouryabs/VoxSentinel`. Last observed branch: `feature/a1-dat
 
 Read these before edits:
 
-- `docs/ASTRA_GRU_RECOVERY_MANAGER_REPORT.md` — authoritative corrected historical model diagnosis.
-- `docs/BASELINE_DATASET_AND_PREDICTION_REPORT.md` — latest phase report, with a subsequent-user-decision notice at the top.
+- `docs/archive/history/ASTRA_GRU_RECOVERY_MANAGER_REPORT.md` — authoritative corrected historical model diagnosis.
+- `docs/archive/history/BASELINE_DATASET_AND_PREDICTION_REPORT.md` — latest phase report, with a subsequent-user-decision notice at the top.
 - `configs/datasets.yaml` — existing preparation implementation and parameters.
 - `configs/datasets_v2_plan.yaml` — updated planning contract, NOT a runnable v1 acquisition config.
 - `src/dataset_prep/joint_core.py`, `splitting.py`, `adapters/kathbath.py`, `windows.py`, and `src/audio/prepare.py` — inspect actual interfaces before reuse.

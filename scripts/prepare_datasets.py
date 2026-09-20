@@ -10,7 +10,7 @@ Run from the repository root, e.g.:
 
 Download/inventory/materialization stages need the data environment
 (``.venv-data``); the ``features`` stage needs the pinned encoder environment
-(``.venv``).  See ``docs/dataset-preparation-pilot.md``.
+(``.venv``).  See ``docs/archive/history/dataset-preparation-pilot.md``.
 """
 
 from __future__ import annotations

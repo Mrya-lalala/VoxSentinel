@@ -1,3 +1,5 @@
+> Archived historical document. Instructions and status may be superseded. Start with the [current documentation](../../README.md).
+
 # Frozen baseline: first v2 test evaluation
 
 Completed 19 September 2026. **Research baseline only; these results do not support production promotion.**

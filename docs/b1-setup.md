@@ -2,8 +2,9 @@
 
 Implementation and verification completed on 2026-09-12 for the official
 multilingual **pretrained Large acoustic checkpoint**. No ASR decoder is invoked.
-Routing and the existing single-chunk interface remain in place. No fallback
-encoder is installed by this setup. No detector is implemented.
+This page describes the encoder component. The current trained detector and
+inference instructions are in the [teammate quickstart](TEAMMATE_RESEARCH_BASELINE.md).
+No fallback encoder is installed by this setup.
 
 ## Reproduce the environment
 
@@ -21,7 +22,7 @@ the complete encoder and B2 suite with pytest (58 tests as of 2026-09-17).
 The earlier B1-only setup was also run successfully into a fresh
 `/private/tmp/voxsentinel-clean-env` environment; that environment passed the
 full real-checkpoint verification below. For the subsequent real encoder/GRU
-integration check, see [the smoke-test report](encoder-gru-smoke.md).
+integration check, see [the smoke-test report](archive/history/encoder-gru-smoke.md).
 
 Core pins: PyTorch/torchaudio 2.2.2, NumPy 1.23.5, Hydra 1.0.7, OmegaConf 2.0.6,
 SoundFile 0.12.1, pip 24.0, setuptools 69.5.1, wheel 0.43.0, Cython 0.29.37.

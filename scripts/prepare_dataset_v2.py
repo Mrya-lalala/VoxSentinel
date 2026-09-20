@@ -1,4 +1,4 @@
-"""CLI for v2 Indic split preparation (``docs/DATA_SPLIT_AGENT_MASTER_PROMPT.md``).
+"""CLI for v2 Indic split preparation (``docs/archive/prompts/DATA_SPLIT_AGENT_MASTER_PROMPT.md``).
 
 Commands are resumable and bounded; every network read is revision-pinned and
 ledger-charged.  Nothing here trains, extracts features or evaluates models.

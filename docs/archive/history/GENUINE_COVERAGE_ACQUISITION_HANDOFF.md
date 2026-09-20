@@ -1,3 +1,5 @@
+> Archived historical document. Instructions and status may be superseded. Start with the [current documentation](../../README.md).
+
 # Genuine Coverage Acquisition Handoff (v3 male-genuine additions)
 
 Status: **acquisition, manifest addition, audio preparation and data-integrity

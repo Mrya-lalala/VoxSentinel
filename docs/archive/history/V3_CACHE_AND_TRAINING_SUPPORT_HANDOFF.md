@@ -1,3 +1,5 @@
+> Archived historical document. Instructions and status may be superseded. Start with the [current documentation](../../README.md).
+
 # V3 Cache and Training Support Handoff
 
 Status: **feature caching and verified training support complete — STOPPED

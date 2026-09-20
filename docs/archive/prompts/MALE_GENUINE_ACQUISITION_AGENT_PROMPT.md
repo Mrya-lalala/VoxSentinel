@@ -1,3 +1,5 @@
+> Archived historical document. Instructions and status may be superseded. Start with the [current documentation](../../README.md).
+
 # VoxSentinel handoff: acquire and add genuine training/development coverage only
 
 Work in `/Users/mouryabs/VoxSentinel`. Your task is to acquire additional documented male genuine speech and prepare a new version of the Indic training/development manifests. Preserve existing useful data and frozen artifacts. Stop after materialization and data-integrity validation. Another agent will train, analyze and prepare the branch handoff afterward.
@@ -6,10 +8,10 @@ Work in `/Users/mouryabs/VoxSentinel`. Your task is to acquire additional docume
 
 Read applicable AGENTS.md instructions, then:
 
-- `docs/V2_FROZEN_TEST_RESULTS.md`
-- `docs/V2_SPLIT_TRAINING_REPRODUCTION.md`
-- `docs/DATASET_V2_SPLIT_HANDOFF.md` (especially its final scope/budget correction)
-- `docs/DATASET_V2_REVIEW.md` (including targeted completion)
+- `docs/archive/history/V2_FROZEN_TEST_RESULTS.md`
+- `docs/archive/history/V2_SPLIT_TRAINING_REPRODUCTION.md`
+- `docs/archive/history/DATASET_V2_SPLIT_HANDOFF.md` (especially its final scope/budget correction)
+- `docs/archive/history/DATASET_V2_REVIEW.md` (including targeted completion)
 - `src/dataset_prep/split_v2.py`, `bounded_reader.py`, `budget.py`
 - `scripts/validate_dataset_v2.py`, `scripts/training_split_contract.py`
 - `artifacts/datasets-v2/manifests/dataset-version.v2.json`
@@ -102,7 +104,7 @@ Deliver:
 - Dataset-version metadata with source revisions, manifest/config hashes, explicit path resolution and frozen benchmark reference.
 - Exposure-exclusion and component evidence; full disposition/shortfall accounting.
 - Machine-readable validation and budget/preservation reports.
-- `docs/GENUINE_COVERAGE_ACQUISITION_HANDOFF.md` with actual per-language/class/gender window counts, independent speaker counts, durations, recording conditions, additions, retained data, limitations, and exact commands.
+- `docs/archive/history/GENUINE_COVERAGE_ACQUISITION_HANDOFF.md` with actual per-language/class/gender window counts, independent speaker counts, durations, recording conditions, additions, retained data, limitations, and exact commands.
 
 Separate statuses for split integrity, achieved coverage and unresolved shortages. Partial coverage can be a valid provisional dataset if its limitations are explicit; integrity failures cannot be promoted as ready. Do not claim the model improved: no model has been trained on these additions.
 

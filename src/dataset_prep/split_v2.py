@@ -1,6 +1,6 @@
 """VoxSentinel v2 Indic split preparation: discovery, exposure closure, assignment.
 
-Scope (per ``docs/DATA_SPLIT_AGENT_MASTER_PROMPT.md``): prepare an audit-ready
+Scope (per ``docs/archive/prompts/DATA_SPLIT_AGENT_MASTER_PROMPT.md``): prepare an audit-ready
 Indic-only v2 split (Kathbath genuine + IndicSynth synthetic) whose new test
 components are disjoint from all recorded prior exposure.  This module only
 reads upstream metadata/acquisition with revision-pinned, ledger-charged,

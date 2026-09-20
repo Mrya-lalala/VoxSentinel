@@ -1,3 +1,5 @@
+> Archived historical document. Instructions and status may be superseded. Start with the [current documentation](../../README.md).
+
 # VoxSentinel v2 Indic split — handoff document
 
 Status date: 2026-09-19. Branch context: `feature/a1-datasets-manifests` (nothing about
