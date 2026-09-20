@@ -1,0 +1,52 @@
+{
+  "generated": "2026-09-18T13:57:54.085129+00:00",
+  "counts": {
+    "train": 384,
+    "val": 96
+  },
+  "speaker_key_intersections": {
+    "train_source_vs_val_source": {
+      "count": 0,
+      "examples": []
+    },
+    "train_source_vs_val_target": {
+      "count": 0,
+      "examples": []
+    },
+    "train_target_vs_val_source": {
+      "count": 0,
+      "examples": []
+    },
+    "train_target_vs_val_target": {
+      "count": 0,
+      "examples": []
+    }
+  },
+  "reference_recording_intersections": {
+    "train_source_vs_val_source": {
+      "count": 0,
+      "examples": []
+    },
+    "train_target_vs_val_target": {
+      "count": 0,
+      "examples": []
+    }
+  },
+  "numeric_speaker_id_collisions_across_datasets": {
+    "count": 0,
+    "examples": {},
+    "note": "numeric ids are dataset-scoped namespaces; collisions are flagged, not treated as leakage"
+  },
+  "prepared_audio_sha256_duplicates": {},
+  "prepared_audio_duplicate_count": 0,
+  "val_generator_counts": {
+    "freevc24": 25,
+    "genuine": 48,
+    "vits": 2,
+    "xtts_v2": 21
+  },
+  "identity_limits": [
+    "speaker identity is only resolvable within a dataset namespace; cross-dataset identity",
+    "resolution is limited to the reference lineage recorded at preparation time"
+  ]
+}

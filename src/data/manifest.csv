@@ -1,0 +1,7 @@
+sample_id,path,label,language,dataset_version
+kathbath_hi_000001,data/kathbath/processed/hi/hi_0001.wav,0,hindi,kathbath-v1.0-pilot
+indicsynth_hi_000001,data/indicsynth/processed/hi/hi_0001_synth.wav,1,hindi,indicsynth-v1.0-pilot
+kathbath_bn_000002,data/kathbath/processed/bn/bn_0002.wav,0,bengali,kathbath-v1.0-pilot
+indicsynth_bn_000002,data/indicsynth/processed/bn/bn_0002_synth.wav,1,bengali,indicsynth-v1.0-pilot
+kathbath_mr_000003,data/kathbath/processed/mr/mr_0003.wav,0,marathi,kathbath-v1.0-pilot
+indicsynth_mr_000003,data/indicsynth/processed/mr/mr_0003_synth.wav,1,marathi,indicsynth-v1.0-pilot

@@ -1,3 +1,5 @@
+> Archived historical document. Instructions and status may be superseded. Start with the [current documentation](../../README.md).
+
 # VoxSentinel B2 - status and worklog report
 
 Generated 2026-09-15 from the live repository state. Audience: manager agent
@@ -56,7 +58,7 @@ state:
 - Root-level `tests/test_*.py` for the B2 pipeline.
 - `pyproject.toml` (a B2-added packaging/pytest file).
 - Fixed `.gitignore` (merge markers removed, caches/venvs/env ignored).
-- `docs/B2_GRU_MANAGER_HANDOFF.md` (first version).
+- `docs/archive/history/B2_GRU_MANAGER_HANDOFF.md` (first version).
 
 ### 2.2 What the uncommitted working tree contains
 
@@ -65,7 +67,7 @@ The master-prompt migration plus hardening, not yet committed:
 - Deleted: `pyproject.toml`, all of `src/voxsentinel/**`, all B2 root
   `tests/test_*.py`.
 - Modified: `tests/conftest.py`, `tests/test_config.py`,
-  `docs/B2_GRU_MANAGER_HANDOFF.md`.
+  `docs/archive/history/B2_GRU_MANAGER_HANDOFF.md`.
 - Untracked new source: `src/config.py`, `src/data/{__init__,batch,labels,
   synthetic}.py`, `src/detectors/{__init__,base,checkpoints,gru,registry,
   runner,training}.py`, `src/scoring/{__init__,evaluation,metrics,
@@ -149,9 +151,9 @@ exist but need the Fairseq runtime and were not run here.
 
 ### 3.5 Docs
 
-- `docs/B2_GRU_MANAGER_HANDOFF.md` - corrected B2 handoff (current layout,
+- `docs/archive/history/B2_GRU_MANAGER_HANDOFF.md` - corrected B2 handoff (current layout,
   contracts, evidence, blockers, next steps).
-- `docs/B2_STATUS_AND_WORKLOG_REPORT.md` - this report.
+- `docs/archive/history/B2_STATUS_AND_WORKLOG_REPORT.md` - this report.
 - `docs/B1_*` and `docs/b1-setup.md` - B1 documents (pre-existing).
 
 ---

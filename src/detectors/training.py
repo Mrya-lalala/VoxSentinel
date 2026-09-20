@@ -181,6 +181,7 @@ def fit(
     mode: str = "min",
     threshold: float = 0.5,
     metadata: Mapping[str, Any] | None = None,
+    epoch_callback: Callable[[Detector, EpochSummary], None] | None = None,
 ) -> TrainingResult:
     """Train for ``epochs`` and keep the best-validation checkpoint.
 
@@ -241,6 +242,9 @@ def fit(
                     metrics=_metrics_dict(metrics),
                     metadata=dict(metadata) if metadata is not None else None,
                 )
+
+        if epoch_callback is not None:
+            epoch_callback(detector, history[-1])
 
     return TrainingResult(
         epochs=tuple(history),

@@ -1,0 +1,60 @@
+diff --git a/.gitignore b/.gitignore
+index dfdc654..e196351 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -6,6 +6,7 @@ __pycache__/
+ 
+ # Virtual environments
+ .venv/
++.venv-data/
+ venv/
+ 
+ # Local model artifacts and environment files
+diff --git a/README.md b/README.md
+index d1ff334..253d076 100644
+--- a/README.md
++++ b/README.md
+@@ -1,2 +1,11 @@
+ # VoxSentinel
+ SIH26104 — AI-powered real-time, language-agnostic voice-cloning and impersonation detection.
++
++- [Frozen encoder setup and interface](docs/b1-setup.md)
++- [Real speech encoder → GRU smoke test and measured results](docs/encoder-gru-smoke.md)
++- [Dataset preparation: paired core, audits and handoff](docs/dataset-preparation-pilot.md)
++  — complete 12-language paired core (384 train / 96 val windows), Svarah external
++  evaluation pool, feature caches with a training-readiness gate. Reports:
++  `artifacts/datasets/reports/preparation-report.{json,md}`
++  (`python -m scripts.prepare_datasets report`).
++  No tests, detector training or evaluation were run during preparation.
+diff --git a/docs/b1-setup.md b/docs/b1-setup.md
+index 99811ff..c4a8801 100644
+--- a/docs/b1-setup.md
++++ b/docs/b1-setup.md
+@@ -16,9 +16,12 @@ source .venv/bin/activate
+ ```
+ 
+ The script installs `requirements-bootstrap.txt`, then `requirements.txt` with
+-`--no-build-isolation`, runs `pip check`, and runs the 14 unit tests. It was also
+-run successfully into a fresh `/private/tmp/voxsentinel-clean-env` environment;
+-that environment passed the full real-checkpoint verification below.
++`--no-build-isolation`, then `requirements-dev.txt`, runs `pip check`, and runs
++the complete encoder and B2 suite with pytest (58 tests as of 2026-09-17).
++The earlier B1-only setup was also run successfully into a fresh
++`/private/tmp/voxsentinel-clean-env` environment; that environment passed the
++full real-checkpoint verification below. For the subsequent real encoder/GRU
++integration check, see [the smoke-test report](encoder-gru-smoke.md).
+ 
+ Core pins: PyTorch/torchaudio 2.2.2, NumPy 1.23.5, Hydra 1.0.7, OmegaConf 2.0.6,
+ SoundFile 0.12.1, pip 24.0, setuptools 69.5.1, wheel 0.43.0, Cython 0.29.37.
+diff --git a/scripts/setup_encoder_env.sh b/scripts/setup_encoder_env.sh
+index 267923e..2611c96 100644
+--- a/scripts/setup_encoder_env.sh
++++ b/scripts/setup_encoder_env.sh
+@@ -6,5 +6,6 @@ python3.10 -m venv "$encoder_env"
+ "$encoder_env/bin/python" -c 'import sys; assert sys.version_info[:2] == (3, 10), "Python 3.10 required"'
+ "$encoder_env/bin/python" -m pip install --no-cache-dir -r requirements-bootstrap.txt
+ "$encoder_env/bin/python" -m pip install --no-cache-dir --no-build-isolation -r requirements.txt
++"$encoder_env/bin/python" -m pip install --no-cache-dir -r requirements-dev.txt
+ "$encoder_env/bin/python" -m pip check
+-"$encoder_env/bin/python" -m unittest discover -s tests -v
++"$encoder_env/bin/python" -m pytest tests -q

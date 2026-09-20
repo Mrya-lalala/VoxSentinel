@@ -81,6 +81,10 @@ def restore_checkpoint(
     model_name: str | None = None,
 ) -> dict[str, Any]:
     payload = load_checkpoint(path, map_location=map_location, model_name=model_name)
+    requires_transform = bool(payload["model_config"].get("feature_standardization", False))
+    has_transform = getattr(getattr(model, "model", model), "standardizer", None) is not None
+    if requires_transform != has_transform:
+        raise ValueError("Checkpoint and detector disagree about required feature standardization")
     model.load_state_dict(payload["model_state_dict"], strict=strict)
     if optimizer is not None and "optimizer_state_dict" in payload:
         optimizer.load_state_dict(payload["optimizer_state_dict"])

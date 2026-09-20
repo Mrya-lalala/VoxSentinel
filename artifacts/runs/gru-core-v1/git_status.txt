@@ -1,0 +1,17 @@
+M .gitignore
+ M README.md
+ M docs/b1-setup.md
+ M scripts/setup_encoder_env.sh
+?? configs/datasets.yaml
+?? configs/synthetic_english_template.json
+?? docs/dataset-preparation-pilot.md
+?? docs/encoder-gru-smoke.md
+?? requirements-dev.txt
+?? scripts/prepare_datasets.py
+?? scripts/refresh_prepared_windows.py
+?? scripts/resolve_lineage.py
+?? scripts/train_gru_from_cache.py
+?? scripts/verify_encoder_gru.py
+?? src/audio/__init__.py
+?? src/audio/prepare.py
+?? src/dataset_prep/

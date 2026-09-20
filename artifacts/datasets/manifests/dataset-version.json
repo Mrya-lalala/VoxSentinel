@@ -1,0 +1,157 @@
+{
+  "created": "2026-09-18T07:44:49.764556+00:00",
+  "feature_caches": {
+    "train": {
+      "bundle_sha256": "a893b5038cfc2375e027d7f2bc335aa48dd1f215af488c297eada13a4ea1b56b",
+      "identity": {
+        "backbone_id": "indicwav2vec-large",
+        "dtype": "float32",
+        "embedding_dim": 1024,
+        "encoder_checkpoint_sha256": "26bb5ada18952fd7355f691d25927b34a0e46d6afda7658bf5c254621831ab59",
+        "frame_hop_ms": 20.0,
+        "implementation": "src.backbones.indic_wav2vec:extract_batch",
+        "label_counts": {
+          "0": 192,
+          "1": 192
+        },
+        "languages": [
+          "Bengali",
+          "Gujarati",
+          "Hindi",
+          "Kannada",
+          "Malayalam",
+          "Marathi",
+          "Odia",
+          "Punjabi",
+          "Sanskrit",
+          "Tamil",
+          "Telugu",
+          "Urdu"
+        ],
+        "manifest_file_sha256": "1b361e14cb60cb739b6bbd55692529b94e8a7b37efc8530f4b03cb2ed2253ad4",
+        "manifest_items": 384,
+        "manifest_sha256": "78b1ace26de1dec09de0f70eeb3d3af94a0a7f834b0fabbee6b268ac54739b38",
+        "output_layer": null,
+        "preprocessing_version": "voxsentinel-prep-2",
+        "runtime": {
+          "fairseq": "0.12.1",
+          "numpy": "1.23.5",
+          "platform": "macOS-26.5.2-arm64-arm-64bit",
+          "python": "3.10.18",
+          "torch": "2.2.2",
+          "torchaudio": "2.2.2"
+        }
+      },
+      "items": 384,
+      "label_counts": {
+        "0": 192,
+        "1": 192
+      }
+    },
+    "val": {
+      "bundle_sha256": "069b3b78e2c4f767146966a1a4f2c1596b569eaa26663aecd6835df35ad03360",
+      "identity": {
+        "backbone_id": "indicwav2vec-large",
+        "dtype": "float32",
+        "embedding_dim": 1024,
+        "encoder_checkpoint_sha256": "26bb5ada18952fd7355f691d25927b34a0e46d6afda7658bf5c254621831ab59",
+        "frame_hop_ms": 20.0,
+        "implementation": "src.backbones.indic_wav2vec:extract_batch",
+        "label_counts": {
+          "0": 48,
+          "1": 48
+        },
+        "languages": [
+          "Bengali",
+          "Gujarati",
+          "Hindi",
+          "Kannada",
+          "Malayalam",
+          "Marathi",
+          "Odia",
+          "Punjabi",
+          "Sanskrit",
+          "Tamil",
+          "Telugu",
+          "Urdu"
+        ],
+        "manifest_file_sha256": "a23acb1cdbe86a940c984bd9fb206abbd3dd6612733fa88b4de755b980e13342",
+        "manifest_items": 96,
+        "manifest_sha256": "6fe19ac906e5ef4865342d92892f82f5747b81075392403ef40d2200c67206ae",
+        "output_layer": null,
+        "preprocessing_version": "voxsentinel-prep-2",
+        "runtime": {
+          "fairseq": "0.12.1",
+          "numpy": "1.23.5",
+          "platform": "macOS-26.5.2-arm64-arm-64bit",
+          "python": "3.10.18",
+          "torch": "2.2.2",
+          "torchaudio": "2.2.2"
+        }
+      },
+      "items": 96,
+      "label_counts": {
+        "0": 48,
+        "1": 48
+      }
+    }
+  },
+  "lineage_status_counts": {
+    "not_applicable_tts": 114,
+    "verified_train": 366
+  },
+  "manifest_hashes": {
+    "source_windows.asvspoof2019.jsonl": "6414fd4f6c54e3745d44707fb2e22a5e78d2278732fc22842f64823c4472cc96",
+    "source_windows.indicsynth.jsonl": "23bae4229d7e236abe44f14fab9e37c938390dda3838d7b9be1fd1198f81ddd6",
+    "source_windows.kathbath.jsonl": "84740317d6ac519556ab98b38ae359d051d497da6d1e3b85c7b787747d8482f2",
+    "source_windows.nisp.jsonl": "70669e06c05d70fa59636d6c12c9348935439e3b2b6ceb9d359c176d5d8edac0",
+    "source_windows.nptel.jsonl": "df5349bdf6a7014fe58cc157dcbfd19b06fa48bb8b5b0a410edacb9b52fd1a7a",
+    "source_windows.svarah.jsonl": "ebb037615232e4529086ae72479b40d0b1d79d49d118d56aa080a58497708645",
+    "windows.core_train.jsonl": "1b361e14cb60cb739b6bbd55692529b94e8a7b37efc8530f4b03cb2ed2253ad4",
+    "windows.core_val.jsonl": "a23acb1cdbe86a940c984bd9fb206abbd3dd6612733fa88b4de755b980e13342",
+    "windows.excluded.jsonl": "16f89875921fab3356c79514bdea6395e7708fc991c1dc40bfd73375b948f02c",
+    "windows.external_eval.jsonl": "6e1c23be012d565692064277114b97d50e77808e94cd2ef9eca89a30d19b6a27",
+    "windows.fallback_baseline.jsonl": "b0cf742ea387b373c73e894d6487ee7d7c01830ad1eb8c50986bfa20bae70a84",
+    "windows.missing_coverage.jsonl": "5c220ea35dce7fe2e7dcc884e06b24169ff2e77edbb08a488de11bf54411fbd9",
+    "windows.supplementary.jsonl": "df5349bdf6a7014fe58cc157dcbfd19b06fa48bb8b5b0a410edacb9b52fd1a7a",
+    "windows.unpaired_candidate.jsonl": "15628344ab1aff8020cd21f337e46940124daeeebb6362ea2f58d4eea222f5ca"
+  },
+  "pools": {
+    "core_train": 384,
+    "core_val": 96,
+    "external_eval": 20,
+    "fallback_baseline": 50,
+    "supplementary": 10,
+    "unpaired_candidate": 40
+  },
+  "preprocessing_version": "voxsentinel-prep-2",
+  "readiness": {
+    "core_indic_training_ready": {
+      "languages": 12,
+      "ready": true,
+      "train_labels": {
+        "genuine": 192,
+        "spoof": 192
+      },
+      "train_windows": 384,
+      "val_labels": {
+        "genuine": 48,
+        "spoof": 48
+      },
+      "val_windows": 96
+    },
+    "external_audio_ready": {
+      "ready": true,
+      "sources": [
+        "svarah"
+      ],
+      "windows": 20
+    },
+    "indian_english_training_ready": {
+      "ready": false,
+      "reason": "No traceable synthetic Indian-English source exists and no user assets were supplied.",
+      "user_action": "Provide user-authorized synthetic assets following configs/synthetic_english_template.json."
+    }
+  },
+  "seed": 42
+}

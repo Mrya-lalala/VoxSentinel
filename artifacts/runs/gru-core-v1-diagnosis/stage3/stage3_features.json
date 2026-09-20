@@ -1,0 +1,55 @@
+{
+  "generated": "2026-09-18T13:57:37.785512+00:00",
+  "splits": {
+    "train": {
+      "n": 384,
+      "frames": {
+        "199": 380,
+        "192": 1,
+        "193": 3
+      },
+      "element_mean": -0.013777573413487213,
+      "element_std": 0.3169263785239309,
+      "per_frame_norm_mean": 10.15103683869044,
+      "per_frame_norm_min": 10.072938919067383,
+      "per_frame_norm_max": 10.210430145263672,
+      "temporal_std_mean": 0.010029920105201503,
+      "temporal_std_min": 0.007788560353219509,
+      "temporal_std_max": 0.011813487857580185,
+      "time_mean_template_std_across_dims": 0.31596818566322327,
+      "cross_window_std_per_dim_mean": 0.0021640907507389784,
+      "cross_window_std_per_dim_median": 0.00011447835277067497,
+      "frame_to_frame_corr_mean": 0.9981888398528099,
+      "relative_temporal_variation": 0.0009880685357157506,
+      "relative_cross_window_variation": 0.019409971311688423,
+      "all_finite": true
+    },
+    "val": {
+      "n": 96,
+      "frames": {
+        "199": 95,
+        "187": 1
+      },
+      "element_mean": -0.013773451326414943,
+      "element_std": 0.3168388068055113,
+      "per_frame_norm_mean": 10.148232946793238,
+      "per_frame_norm_min": 10.088431358337402,
+      "per_frame_norm_max": 10.191539764404297,
+      "temporal_std_mean": 0.009932369624342149,
+      "temporal_std_min": 0.008432337082922459,
+      "temporal_std_max": 0.011494079604744911,
+      "time_mean_template_std_across_dims": 0.3159130811691284,
+      "cross_window_std_per_dim_mean": 0.002156070899218321,
+      "cross_window_std_per_dim_median": 0.00011058198288083076,
+      "frame_to_frame_corr_mean": 0.9982002034783364,
+      "relative_temporal_variation": 0.000978728974434973,
+      "relative_cross_window_variation": 0.019342003390192986,
+      "all_finite": true
+    }
+  },
+  "exact_duplicate_feature_tensors": {},
+  "exact_duplicate_count": 0,
+  "near_duplicate_pairs_sketch_corr_gt_0.9999": [],
+  "near_duplicate_count": 0,
+  "sketch_note": "sketch = [time-mean | time-std | first frame | last frame] of the 1024-dim sequence, so this catches near-identical sequences, not merely similar means"
+}

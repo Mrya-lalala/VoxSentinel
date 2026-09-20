@@ -1,0 +1,14 @@
+{
+  "cap_bytes": 5368709120,
+  "events": 2332,
+  "per_source_bytes": {
+    "asvspoof2019": 16272703,
+    "indicsynth": 283402380,
+    "kathbath": 3099849745,
+    "nisp": 1294991360,
+    "nptel": 188815224,
+    "svarah": 142472502
+  },
+  "remaining_bytes": 342905206,
+  "total_bytes": 5025803914
+}

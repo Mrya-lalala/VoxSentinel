@@ -1,0 +1,194 @@
+{
+  "844424930590986": {
+    "evidence": {
+      "fname": "844424930590986-1050-f.m4a",
+      "method": "full_train_shard_scan",
+      "row_group": 23,
+      "row_index": 2337,
+      "shard": "gujarati/train-00019-of-00028.parquet"
+    },
+    "status": "verified_train"
+  },
+  "844424930885043": {
+    "evidence": {
+      "fname": "844424930885043-369-f.m4a",
+      "method": "full_train_shard_scan",
+      "row_group": 19,
+      "row_index": 1911,
+      "shard": "gujarati/train-00015-of-00028.parquet"
+    },
+    "status": "verified_train"
+  },
+  "844424930889946": {
+    "evidence": {
+      "fname": "844424930889946-754-f.m4a",
+      "method": "full_train_shard_scan",
+      "row_group": 2,
+      "row_index": 201,
+      "shard": "gujarati/train-00015-of-00028.parquet"
+    },
+    "status": "verified_train"
+  },
+  "844424930981268": {
+    "evidence": {
+      "fname": "844424930981268-754-f.m4a",
+      "method": "full_train_shard_scan",
+      "row_group": 5,
+      "row_index": 585,
+      "shard": "gujarati/train-00016-of-00028.parquet"
+    },
+    "status": "verified_train"
+  },
+  "844424931157980": {
+    "evidence": {
+      "fname": "844424931157980-856-f.m4a",
+      "method": "full_train_shard_scan",
+      "row_group": 12,
+      "row_index": 1293,
+      "shard": "gujarati/train-00020-of-00028.parquet"
+    },
+    "status": "verified_train"
+  },
+  "844424931232276": {
+    "evidence": {
+      "fname": "844424931232276-916-f.m4a",
+      "method": "full_train_shard_scan",
+      "row_group": 6,
+      "row_index": 665,
+      "shard": "gujarati/train-00020-of-00028.parquet"
+    },
+    "status": "verified_train"
+  },
+  "844424931466024": {
+    "evidence": {
+      "fname": "844424931466024-1110-f.m4a",
+      "method": "full_train_shard_scan",
+      "row_group": 6,
+      "row_index": 686,
+      "shard": "gujarati/train-00015-of-00028.parquet"
+    },
+    "status": "verified_train"
+  },
+  "844424932311741": {
+    "evidence": {
+      "fname": "844424932311741-1135-f.m4a",
+      "method": "full_train_shard_scan",
+      "row_group": 19,
+      "row_index": 1960,
+      "shard": "gujarati/train-00013-of-00028.parquet"
+    },
+    "status": "verified_train"
+  },
+  "844424932313778": {
+    "evidence": {
+      "fname": "844424932313778-1135-f.m4a",
+      "method": "full_train_shard_scan",
+      "row_group": 14,
+      "row_index": 1464,
+      "shard": "gujarati/train-00012-of-00028.parquet"
+    },
+    "status": "verified_train"
+  },
+  "844424933013126": {
+    "evidence": {
+      "fname": "844424933013126-1135-f.m4a",
+      "method": "full_train_shard_scan",
+      "row_group": 19,
+      "row_index": 1939,
+      "shard": "gujarati/train-00018-of-00028.parquet"
+    },
+    "status": "verified_train"
+  },
+  "844424933187275": {
+    "evidence": {
+      "fname": "844424933187275-942-m.m4a",
+      "method": "full_train_shard_scan",
+      "row_group": 19,
+      "row_index": 1966,
+      "shard": "gujarati/train-00022-of-00028.parquet"
+    },
+    "status": "verified_train"
+  },
+  "844424933187674": {
+    "evidence": {
+      "fname": "844424933187674-942-m.m4a",
+      "method": "full_train_shard_scan",
+      "row_group": 4,
+      "row_index": 442,
+      "shard": "gujarati/train-00022-of-00028.parquet"
+    },
+    "status": "verified_train"
+  },
+  "844424933344200": {
+    "evidence": {
+      "fname": "844424933344200-465-m.m4a",
+      "method": "full_train_shard_scan",
+      "row_group": 12,
+      "row_index": 1283,
+      "shard": "gujarati/train-00027-of-00028.parquet"
+    },
+    "status": "verified_train"
+  },
+  "844424933519194": {
+    "evidence": {
+      "method": "full_train_shard_scan"
+    },
+    "status": "not_found"
+  },
+  "844424933519195": {
+    "evidence": {
+      "fname": "844424933519195-626-m.m4a",
+      "method": "full_train_shard_scan",
+      "row_group": 15,
+      "row_index": 1591,
+      "shard": "gujarati/train-00026-of-00028.parquet"
+    },
+    "status": "verified_train"
+  },
+  "844424933519197": {
+    "evidence": {
+      "fname": "844424933519197-626-m.m4a",
+      "method": "full_train_shard_scan",
+      "row_group": 5,
+      "row_index": 597,
+      "shard": "gujarati/train-00026-of-00028.parquet"
+    },
+    "status": "verified_train"
+  },
+  "844424933519199": {
+    "evidence": {
+      "fname": "844424933519199-626-m.m4a",
+      "method": "full_train_shard_scan",
+      "row_group": 14,
+      "row_index": 1484,
+      "shard": "gujarati/train-00027-of-00028.parquet"
+    },
+    "status": "verified_train"
+  },
+  "844424933519202": {
+    "evidence": {
+      "method": "full_train_shard_scan"
+    },
+    "status": "not_found"
+  },
+  "844424933590016": {
+    "evidence": {
+      "fname": "844424933590016-1066-m.m4a",
+      "method": "full_train_shard_scan",
+      "row_group": 22,
+      "row_index": 2299,
+      "shard": "gujarati/train-00027-of-00028.parquet"
+    },
+    "status": "verified_train"
+  },
+  "844424933593228": {
+    "evidence": {
+      "fname": "844424933593228-1066-m.m4a",
+      "method": "full_train_shard_scan",
+      "row_group": 0,
+      "row_index": 63,
+      "shard": "gujarati/train-00027-of-00028.parquet"
+    },
+    "status": "verified_train"
+  }
+}

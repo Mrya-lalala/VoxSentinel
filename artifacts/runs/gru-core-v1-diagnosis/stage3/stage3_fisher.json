@@ -1,0 +1,57 @@
+{
+  "generated": "2026-09-18T14:04:55.253260+00:00",
+  "stages": {
+    "train": {
+      "raw_feature_time_mean": {
+        "d_prime_isotropic": 9.203957908515259,
+        "between_mean_l2": 0.06458444148302078,
+        "within_std_avg": 0.004961788937511203,
+        "mean_scalar_std_across_dims": 0.3158138394355774
+      },
+      "projection_time_mean_fresh_init": {
+        "d_prime_isotropic": 4.486679782310873,
+        "between_mean_l2": 0.058632999658584595,
+        "within_std_avg": 0.009240639776289038,
+        "mean_scalar_std_across_dims": 0.5790937542915344
+      },
+      "pooled_gru_fresh_init": {
+        "d_prime_isotropic": 4.56892750339978,
+        "between_mean_l2": 0.032289475202560425,
+        "within_std_avg": 0.004997257421943284,
+        "mean_scalar_std_across_dims": 0.3077300488948822
+      },
+      "pooled_gru_trained_best": {
+        "d_prime_isotropic": 6.61051432736346,
+        "between_mean_l2": 0.03934586048126221,
+        "within_std_avg": 0.004208708033920369,
+        "mean_scalar_std_across_dims": 0.45741528272628784
+      }
+    },
+    "val": {
+      "raw_feature_time_mean": {
+        "d_prime_isotropic": 8.466141155188858,
+        "between_mean_l2": 0.05894829332828522,
+        "within_std_avg": 0.004923463616745515,
+        "mean_scalar_std_across_dims": 0.3157587945461273
+      },
+      "projection_time_mean_fresh_init": {
+        "d_prime_isotropic": 4.1009043576439765,
+        "between_mean_l2": 0.056301772594451904,
+        "within_std_avg": 0.009707947740881238,
+        "mean_scalar_std_across_dims": 0.578887939453125
+      },
+      "pooled_gru_fresh_init": {
+        "d_prime_isotropic": 4.40380381493905,
+        "between_mean_l2": 0.031133927404880524,
+        "within_std_avg": 0.004999089904568195,
+        "mean_scalar_std_across_dims": 0.30760934948921204
+      },
+      "pooled_gru_trained_best": {
+        "d_prime_isotropic": 5.3535852521539695,
+        "between_mean_l2": 0.03177473321557045,
+        "within_std_avg": 0.004196837870113946,
+        "mean_scalar_std_across_dims": 0.4573502540588379
+      }
+    }
+  }
+}

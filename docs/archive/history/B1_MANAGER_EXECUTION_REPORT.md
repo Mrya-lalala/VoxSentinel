@@ -1,3 +1,5 @@
+> Archived historical document. Instructions and status may be superseded. Start with the [current documentation](../../README.md).
+
 # VoxSentinel B1 — frozen IndicWav2Vec execution report
 
 Prepared for the manager agent from the local execution record dated 2026-09-12.
@@ -45,7 +47,7 @@ actual parent detector's training lifecycle has not been integrated/tested.
 - Baseline before this update: `8328fa290e9b9d0fc7104b2ce975a114add4a4b0`.
 - This report accompanies the encoder implementation in the feature-branch
   update authorized for commit and push by the user. The baseline above is not
-  the implementation commit; use `git log -1 -- docs/B1_MANAGER_EXECUTION_REPORT.md`
+  the implementation commit; use `git log -1 -- docs/archive/history/B1_MANAGER_EXECUTION_REPORT.md`
   to identify the commit containing this report in your checkout.
 - No PR, merge to main, or message to teammates is part of this update.
 - Another machine/agent must fetch and check out `feature/indicVac2Wav` and verify
@@ -82,7 +84,7 @@ Paths are relative to the repository root.
 | `.python-version` | Records Python 3.10.18 |
 | `.gitignore` | Excludes local environments, models, artifacts, Python caches and secrets |
 | `docs/b1-setup.md` | Setup, API semantics, reproduction commands and measured results |
-| `docs/B1_TEAM_AGENT_HANDOUT.md` | Self-contained consumer instructions for teammate agents |
+| `docs/archive/history/B1_TEAM_AGENT_HANDOUT.md` | Self-contained consumer instructions for teammate agents |
 
 Local evidence files:
 

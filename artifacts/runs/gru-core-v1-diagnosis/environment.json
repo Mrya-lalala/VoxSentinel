@@ -1,0 +1,8 @@
+{
+  "python": "3.10.18",
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "torch": "2.2.2",
+  "numpy": "1.23.5",
+  "torch_threads": 8,
+  "generated": "2026-09-18T14:10:17.019992+00:00"
+}

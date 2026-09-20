@@ -1,0 +1,158 @@
+{
+  "status": "passed",
+  "purpose": "Integration mechanics only; not spoof detection evaluation",
+  "python": "3.10.18",
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "dependencies": {
+    "torch": "2.2.2",
+    "fairseq": "0.12.1",
+    "numpy": "1.23.5",
+    "soundfile": "0.12.1",
+    "pytest": "8.3.5"
+  },
+  "device": "cpu",
+  "threads": 4,
+  "seed": 42,
+  "encoder_config": {
+    "checkpoint_path": "models/indicwav2vec_large.pt",
+    "device": "cpu",
+    "output_layer": null,
+    "backbone_id": "indicwav2vec-large",
+    "checkpoint_version": "indicw2v_large_pretrained",
+    "checkpoint_sha256": "26bb5ada18952fd7355f691d25927b34a0e46d6afda7658bf5c254621831ab59",
+    "expected_embedding_dim": 1024
+  },
+  "detector_config": {
+    "model": {
+      "name": "gru",
+      "parameters": {
+        "input_dim": 1024,
+        "hidden_size": 256,
+        "num_layers": 1,
+        "dropout": 0.0,
+        "num_classes": 2
+      }
+    },
+    "optimizer": {
+      "name": "adamw",
+      "learning_rate": 0.001,
+      "weight_decay": 0.0
+    },
+    "training": {
+      "batch_size": 8,
+      "epochs": 10,
+      "device": "cpu",
+      "use_amp": false,
+      "shuffle": true,
+      "seed": 0,
+      "loss": "cross_entropy"
+    },
+    "evaluation": {
+      "threshold": 0.5
+    },
+    "checkpoint": {
+      "format_version": 1,
+      "strict_load": true,
+      "directory": "artifacts/gru",
+      "best_metric": "eer",
+      "best_mode": "min"
+    }
+  },
+  "effective_smoke_training": {
+    "epochs": 1,
+    "batch_size": 2,
+    "steps": 1,
+    "seed": 42,
+    "use_amp": false,
+    "loss": "cross_entropy"
+  },
+  "checkpoint_sha256": "26bb5ada18952fd7355f691d25927b34a0e46d6afda7658bf5c254621831ab59",
+  "fixtures": [
+    {
+      "path": "artifacts/speech/1272-128104-0000.flac",
+      "sha256": "4e25e22555cd16e90edb0a3b49fdcf1fe652b2a1250ab643634db33895c75b41",
+      "source_samples": 93680,
+      "used_samples": 48000,
+      "sample_rate": 16000,
+      "label": 0
+    },
+    {
+      "path": "artifacts/speech/1272-128104-0001.flac",
+      "sha256": "46a9d58622b4675b29564da2d9ba73e702241c5fa969f12c387cad4aa984276a",
+      "source_samples": 77040,
+      "used_samples": 64000,
+      "sample_rate": 16000,
+      "label": 0
+    }
+  ],
+  "features_shape": [
+    2,
+    199,
+    1024
+  ],
+  "valid_lengths": [
+    149,
+    199
+  ],
+  "padding_mask_semantics": "True = ignored right-padding; lengths are embedding frames",
+  "logits_shape": [
+    2,
+    2
+  ],
+  "loss_before_update": 0.6779804229736328,
+  "gradient_l2": {
+    "model.input_norm.weight": 0.13143274188041687,
+    "model.input_norm.bias": 0.12849171459674835,
+    "model.projection.weight": 7.1696014404296875,
+    "model.projection.bias": 0.2248135358095169,
+    "model.gru.weight_ih_l0": 3.87445068359375,
+    "model.gru.weight_hh_l0": 1.0468426942825317,
+    "model.gru.bias_ih_l0": 0.38822340965270996,
+    "model.gru.bias_hh_l0": 0.19714301824569702,
+    "model.classifier.weight": 3.719273805618286,
+    "model.classifier.bias": 0.6962999105453491
+  },
+  "updated_head_parameters": [
+    "model.input_norm.weight",
+    "model.input_norm.bias",
+    "model.projection.weight",
+    "model.projection.bias",
+    "model.gru.weight_ih_l0",
+    "model.gru.weight_hh_l0",
+    "model.gru.bias_ih_l0",
+    "model.gru.bias_hh_l0",
+    "model.classifier.weight",
+    "model.classifier.bias"
+  ],
+  "encoder_state_sha256_before": "ae22fe8ef41bf58d98c67356d9d9f716aed68328d1c2834de9ae5bbaf7f99b3c",
+  "encoder_state_sha256_after": "ae22fe8ef41bf58d98c67356d9d9f716aed68328d1c2834de9ae5bbaf7f99b3c",
+  "checks": {
+    "encoder_state_unchanged": true,
+    "encoder_gradients_none": true,
+    "encoder_eval_mode": true,
+    "waveform_gradient_none": true,
+    "b1_b2_collation_exact": true,
+    "waveform_padding_invariance_exact": true,
+    "feature_padding_invariance_exact": true,
+    "single_vs_batch_feature_max_abs_errors": [
+      0.0,
+      0.0
+    ],
+    "single_vs_batch_logit_max_abs_errors": [
+      5.960464477539063e-08,
+      8.940696716308594e-08
+    ]
+  },
+  "timings_seconds": {
+    "encoder_load_including_checkpoint_hash": 6.525411833892576,
+    "first_unequal_batch_extraction": 0.42774137505330145,
+    "first_head_forward": 0.006507124984636903,
+    "one_cached_feature_training_step": 0.033654000028036535
+  },
+  "limitations": [
+    "Two genuine English clips from one LibriSpeech speaker; no spoof examples",
+    "One update from a randomly initialized head; no accuracy, EER, or calibration claim",
+    "CPU float32 only; timings are single observations, not a latency benchmark",
+    "Features are extracted before head training; no production audio/data pipeline tested"
+  ]
+}

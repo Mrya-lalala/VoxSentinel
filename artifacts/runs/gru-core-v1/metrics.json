@@ -1,0 +1,19 @@
+{
+  "windows": 96,
+  "threshold": 0.5,
+  "score_direction": "higher score = more synthetic",
+  "accuracy": 0.5,
+  "balanced_accuracy": 0.5,
+  "precision": 0.5,
+  "recall": 1.0,
+  "f1": 0.6666666666666666,
+  "eer": 0.22916666666666666,
+  "eer_note": "ranking metric at its own operating point, not a deployed threshold",
+  "true_negative": 0,
+  "false_positive": 48,
+  "false_negative": 0,
+  "true_positive": 48,
+  "confusion_order": "rows = true label, columns = predicted; order [genuine, synthetic]",
+  "genuine_false_alarm_rate": 1.0,
+  "spoof_miss_rate": 0.0
+}

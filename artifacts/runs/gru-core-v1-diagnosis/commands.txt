@@ -1,0 +1,15 @@
+# Reproduction commands for the gru-core-v1 diagnosis (pinned encoder env .venv, Python 3.10, torch 2.2.2)
+# Working directory: repository root /Users/mouryabs/VoxSentinel
+./.venv/bin/python -m scripts.diagnose_gru scores
+./.venv/bin/python -m scripts.diagnose_gru reload
+./.venv/bin/python -m scripts.diagnose_gru features
+./.venv/bin/python -m scripts.diagnose_gru batches
+./.venv/bin/python -m scripts.diagnose_gru optimizer
+./.venv/bin/python -m scripts.diagnose_gru activations
+./.venv/bin/python -m scripts.diagnose_gru identity
+./.venv/bin/python artifacts/runs/gru-core-v1-diagnosis/stage3_fisher_probe.py
+./.venv/bin/python -m scripts.overfit_gru_subset
+./.venv/bin/python -m scripts.linear_baseline_gru_cache
+# Original run reproduction (do NOT overwrite gru-core-v1):
+./.venv/bin/python -m scripts.train_gru_from_cache --check-only
+# Fresh encoder extraction fidelity check: see transcript; bounded 4-window check, max abs diff 0.0
