@@ -42,6 +42,17 @@ class DetectResponse(BaseModel):
         description="Validation-selected decision threshold.",
     )
 
+    threshold_source: Optional[
+        Literal["configured", "checkpoint", "default"]
+    ] = Field(
+        default=None,
+        description=(
+            "Where the effective threshold came from: an operator override "
+            "(DETECTION_THRESHOLD), the detector checkpoint metadata, or the "
+            "service default."
+        ),
+    )
+
     chunks_total: int = Field(
         ge=0,
         description="Total chunks generated from the uploaded file."

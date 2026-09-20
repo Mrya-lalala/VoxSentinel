@@ -11,8 +11,10 @@ from .engine import (
     ServiceEngine,
     load_detector,
     load_encoder,
+    resolve_threshold,
 )
 from .schemas import DetectResponse
+from src.audio.errors import AudioLoadError
 
 
 ALLOWED_CONTENT_TYPES = {
@@ -40,12 +42,9 @@ TOP_K = int(
     )
 )
 
-THRESHOLD = float(
-    os.getenv(
-        "DETECTION_THRESHOLD",
-        "0.5",
-    )
-)
+THRESHOLD_ENV = "DETECTION_THRESHOLD"
+
+UPLOAD_CHUNK_BYTES = 1024 * 1024
 
 MODEL_ID = os.getenv(
     "MODEL_ID",
@@ -75,6 +74,64 @@ engine: ServiceEngine | None = None
 engine_error: str | None = None
 
 
+def configured_threshold() -> float | None:
+    """
+    Read the optional operator override for the decision threshold.
+
+    ``None`` means "no override", which lets the detector checkpoint decide.
+    """
+
+    raw = os.getenv(THRESHOLD_ENV)
+
+    if raw is None or not raw.strip():
+        return None
+
+    return float(raw)
+
+
+def _upload_too_large() -> HTTPException:
+    return HTTPException(
+        status_code=413,
+        detail=(
+            "Uploaded file exceeds the "
+            f"{MAX_UPLOAD_BYTES // (1024 * 1024)} MB limit."
+        ),
+    )
+
+
+async def read_upload(file: UploadFile) -> bytes:
+    """
+    Read an upload while enforcing ``MAX_UPLOAD_BYTES``.
+
+    The multipart parser may already know the part size, but it is not
+    trusted: content is read in bounded chunks and reading stops as soon as
+    the cap is exceeded, so an oversized body is never buffered in full.
+    """
+
+    declared_size = getattr(file, "size", None)
+
+    if declared_size is not None and declared_size > MAX_UPLOAD_BYTES:
+        raise _upload_too_large()
+
+    buffered: list[bytes] = []
+    total = 0
+
+    while True:
+        chunk = await file.read(UPLOAD_CHUNK_BYTES)
+
+        if not chunk:
+            break
+
+        total += len(chunk)
+
+        if total > MAX_UPLOAD_BYTES:
+            raise _upload_too_large()
+
+        buffered.append(chunk)
+
+    return b"".join(buffered)
+
+
 def create_engine() -> ServiceEngine:
     """
     Construct the C1 inference pipeline.
@@ -97,12 +154,21 @@ def create_engine() -> ServiceEngine:
     )
 
     detector = None
+    checkpoint_threshold = None
 
     if DETECTOR_CHECKPOINT:
-        detector = load_detector(
+        loaded = load_detector(
             DETECTOR_CHECKPOINT,
             device=DEVICE,
         )
+
+        detector = loaded.detector
+        checkpoint_threshold = loaded.threshold
+
+    threshold, threshold_source = resolve_threshold(
+        configured=configured_threshold(),
+        checkpoint=checkpoint_threshold,
+    )
 
     return ServiceEngine(
         encoder=encoder,
@@ -110,6 +176,8 @@ def create_engine() -> ServiceEngine:
         model_id=MODEL_ID,
         encoder_id=ENCODER_ID,
         device=DEVICE,
+        threshold=threshold,
+        threshold_source=threshold_source,
     )
 
 
@@ -213,21 +281,12 @@ async def detect(
             ),
         )
 
-    audio_bytes = await file.read()
+    audio_bytes = await read_upload(file)
 
     if not audio_bytes:
         raise HTTPException(
             status_code=400,
             detail="Uploaded file is empty.",
-        )
-
-    if len(audio_bytes) > MAX_UPLOAD_BYTES:
-        raise HTTPException(
-            status_code=413,
-            detail=(
-                "Uploaded file exceeds the "
-                f"{MAX_UPLOAD_BYTES // (1024 * 1024)} MB limit."
-            ),
         )
 
     source_id = uuid.uuid4().hex
@@ -237,6 +296,18 @@ async def detect(
             audio_bytes=audio_bytes,
             source_id=source_id,
         )
+
+    except AudioLoadError as exc:
+        # The upload could not be decoded: a client error, not a server bug.
+        # The exception message is not echoed because it contains the
+        # server-side temporary path.
+        raise HTTPException(
+            status_code=400,
+            detail=(
+                "Uploaded file could not be decoded "
+                "as a WAV audio file."
+            ),
+        ) from exc
 
     except ValueError as exc:
         raise HTTPException(
@@ -290,7 +361,8 @@ async def detect(
             model_id=engine.model_id,
             encoder_id=engine.encoder_id,
             aggregation=AGGREGATION_METHOD,
-            threshold=THRESHOLD,
+            threshold=engine.threshold,
+            threshold_source=engine.threshold_source,
             chunks_total=chunks_total,
             chunks_used=0,
             coverage_ratio=0.0,
@@ -335,7 +407,7 @@ async def detect(
 
     decision = (
         "spoof"
-        if file_score >= THRESHOLD
+        if file_score >= engine.threshold
         else "genuine"
     )
 
@@ -346,7 +418,8 @@ async def detect(
         model_id=engine.model_id,
         encoder_id=engine.encoder_id,
         aggregation=aggregation.method,
-        threshold=THRESHOLD,
+        threshold=engine.threshold,
+        threshold_source=engine.threshold_source,
         chunks_total=chunks_total,
         chunks_used=chunks_used,
         coverage_ratio=coverage_ratio,

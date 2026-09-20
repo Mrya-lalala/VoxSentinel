@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import math
 import os
 import tempfile
 import time
@@ -28,6 +29,40 @@ class ChunkInference:
     end_sample: int
 
 
+@dataclass(frozen=True)
+class LoadedDetector:
+    """A trained B2 detector together with its checkpoint metadata."""
+
+    detector: torch.nn.Module
+    threshold: float | None
+
+
+DEFAULT_THRESHOLD = 0.5
+"""Fallback decision threshold, matching EvaluationConfig.threshold."""
+
+
+def resolve_threshold(
+    *,
+    configured: float | None = None,
+    checkpoint: float | None = None,
+) -> tuple[float, str]:
+    """
+    Resolve the effective decision threshold and its provenance.
+
+    Precedence: an explicitly configured threshold (for example the
+    ``DETECTION_THRESHOLD`` environment variable) wins over the value recorded
+    in the detector checkpoint, which in turn wins over the default.
+    """
+
+    if configured is not None:
+        return float(configured), "configured"
+
+    if checkpoint is not None:
+        return float(checkpoint), "checkpoint"
+
+    return DEFAULT_THRESHOLD, "default"
+
+
 class ServiceEngine:
    
     def __init__(
@@ -38,6 +73,8 @@ class ServiceEngine:
         model_id: str,
         encoder_id: str,
         device: str | torch.device = "cpu",
+        threshold: float = DEFAULT_THRESHOLD,
+        threshold_source: str = "default",
     ) -> None:
 
         self.encoder = encoder
@@ -46,6 +83,9 @@ class ServiceEngine:
         self.model_id = model_id
         self.encoder_id = encoder_id
         self.device = torch.device(device)
+
+        self.threshold = float(threshold)
+        self.threshold_source = threshold_source
 
         if self.detector is not None:
             self.detector.to(self.device)
@@ -272,13 +312,35 @@ def load_encoder(
 # B2 checkpoint loader
 # ------------------------------------------------------------------
 
+def _checkpoint_threshold(checkpoint: dict[str, Any]) -> float | None:
+    """Read a usable operating threshold from the checkpoint, if recorded."""
+
+    metadata = checkpoint.get("metadata")
+
+    if isinstance(metadata, dict) and "threshold" in metadata:
+        value = metadata["threshold"]
+    else:
+        value = checkpoint.get("threshold")
+
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        return None
+
+    value = float(value)
+
+    return value if math.isfinite(value) and 0.0 <= value <= 1.0 else None
+
+
 def load_detector(
     checkpoint_path: str | os.PathLike[str],
     *,
     device: str | torch.device = "cpu",
-) -> torch.nn.Module:
+) -> LoadedDetector:
     """
-    Load the trained B2 GRU detector.
+    Load the trained B2 GRU detector and its checkpoint metadata.
+
+    The detector is returned together with the decision threshold recorded in
+    ``metadata["threshold"]`` (``None`` when the checkpoint stores none), so
+    the service can honour the operating point selected during training.
 
     IMPORTANT:
     B2 is still producing the final trained checkpoint. Therefore
@@ -305,6 +367,7 @@ def load_detector(
     checkpoint = torch.load(
         checkpoint_path,
         map_location=device,
+        weights_only=False,
     )
 
     if not isinstance(checkpoint, dict):
@@ -373,12 +436,18 @@ def load_detector(
     detector.to(device)
     detector.eval()
 
-    return detector
+    return LoadedDetector(
+        detector=detector,
+        threshold=_checkpoint_threshold(checkpoint),
+    )
 
 
 __all__ = [
     "ChunkInference",
+    "DEFAULT_THRESHOLD",
+    "LoadedDetector",
     "ServiceEngine",
     "load_encoder",
     "load_detector",
+    "resolve_threshold",
 ]
