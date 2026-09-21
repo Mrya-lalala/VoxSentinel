@@ -1,3 +1,33 @@
+# Embedding-adapted AASIST research head over frozen IndicWav2Vec features.
+# Gate 1 plan: docs/AASIST_IMPLEMENTATION_PLAN.md
+# Provenance: docs/third_party/AASIST_NOTICE.md (NAVER MIT, commit a04c9863).
 model:
   name: aasist
-  parameters: {}
+  parameters:
+    input_dim: 1024
+    pooled_bins: 32        # K temporal bins; also the minimum supported length
+    channels: 32           # C adapter channels
+    latent_nodes: 16       # F latent-feature nodes
+    gat_dims: [64, 32]
+    pool_ratios: [0.5, 0.7, 0.5]
+    temperatures: [2.0, 2.0, 100.0]
+    dropout_attention: 0.2
+    dropout_pool: 0.3
+    dropout_fusion: 0.2
+    dropout_readout: 0.5
+    feature_standardization: true
+    num_classes: 2
+optimizer:
+  name: adamw
+  learning_rate: 0.001
+  weight_decay: 0.0
+training:
+  batch_size: 8
+  epochs: 10
+  loss: cross_entropy
+evaluation:
+  threshold: 0.5
+checkpoint:
+  directory: artifacts/aasist
+  best_metric: eer
+  best_mode: min

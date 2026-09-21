@@ -1,5 +1,6 @@
 """B2 detector heads, adapters, checkpoints and training."""
 
+from .aasist import AasistDetector, AasistSpoofDetector
 from .base import Detector, DetectorOutput
 from .checkpoints import (
     CHECKPOINT_FORMAT_VERSION,
@@ -25,6 +26,8 @@ from .training import (
 )
 
 __all__ = [
+    "AasistDetector",
+    "AasistSpoofDetector",
     "BatchFactory",
     "BatchSource",
     "CHECKPOINT_FORMAT_VERSION",
