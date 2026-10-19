@@ -95,6 +95,7 @@ def main(argv: list[str] | None = None) -> int:
             repo_root=args.repo_root,
             tolerance=args.tolerance,
             device=args.device,
+            threads=args.threads,
         )
         print(json.dumps({
             "passed": report["passed"],

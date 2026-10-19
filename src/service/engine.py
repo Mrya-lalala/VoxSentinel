@@ -136,11 +136,12 @@ class ServiceEngine:
         # 1. A2 preprocessing
         # ---------------------------------------------------------
 
-        with tempfile.NamedTemporaryFile(suffix=".wav") as temporary_file:
-            temporary_file.write(audio_bytes)
-            temporary_file.flush()
+        # Close the upload before libsndfile reopens it (required on Windows).
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            upload_path = Path(temporary_directory) / "upload.wav"
+            upload_path.write_bytes(audio_bytes)
             try:
-                audio = decode_mono_16k(temporary_file.name)
+                audio = decode_mono_16k(upload_path)
             except AudioDecodeError as exc:
                 raise AudioLoadError("Uploaded audio could not be decoded") from exc
 

@@ -10,6 +10,8 @@ Data and caches live under `artifacts/datasets-v3-coverage/` and are not supplie
 
 The validated v3 feature bundles contain 458 train / 135 dev items. They reuse 480 verified historical embeddings and add 113 fresh embeddings from the frozen IndicWav2Vec final layer. Standardization must be fitted on training frames only.
 
+The local caches in this checkout were rebuilt by fresh extraction with the pinned frozen encoder because the canonical features bundle was not supplied; counts, labels, order and per-split frame totals are identical, but no historical embedding was reused. Verify with `scripts.prepare_dataset_v3_features check` / `parity --threads 12` and see [AASIST training results](AASIST_TRAINING_RESULTS.md) §1–2.
+
 From the repository root, with the required local artifacts present:
 
 ```sh
@@ -19,9 +21,14 @@ From the repository root, with the required local artifacts present:
 # Explicitly starts a NEW training run; preserves prior run directories
 .venv/bin/python -m scripts.train_gru_v3_from_cache \
   --run-dir artifacts/runs/gru-v3-expanded-standardized --threads 4
+
+# Embedding-adapted AASIST over the same caches, splits and protocol
+.venv/bin/python -m scripts.train_aasist_v3_from_cache --check-only
+.venv/bin/python -m scripts.train_aasist_v3_from_cache \
+  --run-dir artifacts/runs/aasist-v3-expanded-standardized --threads 4
 ```
 
-The fixed comparison uses ten epochs, seed zero, batch eight, unweighted cross-entropy, AdamW learning rate 0.001, and threshold 0.5. Epoch selection uses minimum development EER with the earliest tie. The completed run selected epoch three; see [results](V3_TRAINING_RESULTS.md). Do not treat development performance as independent-test evidence.
+The fixed comparison uses ten epochs, seed zero, batch eight, unweighted cross-entropy, AdamW learning rate 0.001, and threshold 0.5. Epoch selection uses minimum development EER with the earliest tie. The completed GRU run selected epoch three; see [results](V3_TRAINING_RESULTS.md). The AASIST sibling runner enforces the identical protocol for the embedding-adapted AASIST head; its completed run selected epoch ten and scored a development EER of 8.05% — higher (worse) than the GRU's 2.30% on the same split, with 91.85% vs 97.04% accuracy — see [AASIST training results](AASIST_TRAINING_RESULTS.md). Do not treat development performance as independent-test evidence.
 
 The previously scored 96-example benchmark is excluded from additions. Its results informed coverage acquisition, so any future repeat evaluation is on an already-seen benchmark. The adopted speaker/recording-disjoint protocol does not establish strict conversion-family isolation or cross-language person independence. Indian-English remains pending IndieFake access.
 

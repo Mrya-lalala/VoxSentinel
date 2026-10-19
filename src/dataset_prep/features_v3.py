@@ -818,6 +818,7 @@ def run_parity(
     backbone_config: str | Path = "configs/backbones.yaml",
     tolerance: float = 1e-5,
     device: str = "cpu",
+    threads: int | None = None,
 ) -> dict[str, Any]:
     """Encoder feature parity + autograd-compatibility check for cached tensors.
 
@@ -825,18 +826,31 @@ def run_parity(
     shortest/longest) is re-extracted directly from the prepared audio through
     the frozen encoder's exact-length contract and compared against the cache.
 
-    Tolerance policy: freshly extracted items must reproduce **bit-exactly**
-    (error == 0); items reused from the historical v1 cache may drift at unit
-    -in-the-last-place level because the CPU reduction order depends on the
-    thread count of the original extraction session (observed max 5.2e-06,
-    tolerance 1e-5).  This is encoder parity evidence, not classifier
-    evaluation.
+    Tolerance policy: fresh items must reproduce within an absolute-error
+    tolerance (1e-5, the same bound applied to reused v1 items).  Bit-exactness
+    between the grouped-batch extraction used to build the cache and the
+    single-item extraction used at inference is *not* achievable on every
+    platform because CPU kernel selection depends on the GEMM shape: measured
+    on x86 (Windows, 12 threads) the same window extracted alone and inside a
+    grouped batch differs by <= 1.9e-06, while repeated single-item extraction
+    is bit-exact (0.0).  The repeat check below therefore enforces bit-exactness
+    where it is well-defined, and the cache comparison enforces the 1e-5
+    absolute bound.  That bound is an empirical drift budget, not a
+    certificate: errors far beyond the observed drift indicate a genuine
+    mismatch (wrong layer, stale audio, wrong preprocessing), but the check
+    makes no claim about corruptions small enough to stay under 1e-5.  This is
+    encoder parity evidence, not classifier evaluation.
     """
     import numpy as np
     import torch
 
     from src.audio.prepare import read_prepared_wav
 
+    if threads is not None:
+        # CPU reduction order depends on the thread count; pass the build's
+        # --threads value so parity measures real drift, not a thread-count
+        # artifact.
+        torch.set_num_threads(int(threads))
     features_dir = Path(features_dir)
     audit = audit_v3_cache(version_path, features_dir, repo_root=repo_root, check_audio_hashes=True)
     if not audit["ready"]:
@@ -866,6 +880,11 @@ def run_parity(
         batch = encoder.extract_batch(tensor, torch.tensor([waveform.size]), sample_rate=ENCODER_PINS["sample_rate"])
         frames = int(batch.valid_lengths[0])
         direct = batch.features[0, :frames].detach().to("cpu", dtype=torch.float32)
+        repeat = encoder.extract_batch(tensor, torch.tensor([waveform.size]), sample_rate=ENCODER_PINS["sample_rate"])
+        repeat_frames = int(repeat.valid_lengths[0])
+        repeat_error = (
+            float(torch.abs(direct - repeat.features[0, :repeat_frames]).max()) if repeat_frames == frames else float("inf")
+        )
         cache_tensor = cached["features"]
         frames_match = int(cache_tensor.shape[0]) == frames
         error = float(torch.abs(cache_tensor - direct).max()) if frames_match else float("inf")
@@ -886,6 +905,7 @@ def run_parity(
             "direct_frames": frames,
             "frames_match": frames_match,
             "max_abs_error": error,
+            "repeat_error": repeat_error,
             "requires_grad_before": requires_before,
             "is_leaf_before": leaf_before,
             "autograd_ok": autograd_ok,
@@ -894,9 +914,9 @@ def run_parity(
             raise FeatureCacheError(f"{row['window_id']}: cached tensor is not autograd-compatible")
         if not frames_match:
             raise FeatureCacheError(f"{row['window_id']}: frame count mismatch {cache_tensor.shape[0]} != {frames}")
-        if cached.get("feature_source") == "extracted_v3" and error != 0.0:
+        if repeat_error != 0.0:
             raise FeatureCacheError(
-                f"{row['window_id']}: fresh extraction must be bit-exact, got {error}")
+                f"{row['window_id']}: repeated single-item extraction is not bit-exact ({repeat_error})")
         if error > tolerance:
             raise FeatureCacheError(f"{row['window_id']}: parity error {error} > tolerance {tolerance}")
 
@@ -911,6 +931,7 @@ def run_parity(
         "max_abs_error_reused_v1": max(reuse_errors) if reuse_errors else 0.0,
         "max_abs_error_extracted_v3": max(fresh_errors) if fresh_errors else 0.0,
         "fresh_extraction_bit_exact": all(error == 0.0 for error in fresh_errors),
+        "repeat_bit_exact": all(sample["repeat_error"] == 0.0 for sample in samples),
         "passed": overall_max <= tolerance and all(sample["frames_match"] for sample in samples),
         "samples": samples,
         "languages_covered": sorted({sample["language"] for sample in samples}),
@@ -922,8 +943,11 @@ def run_parity(
         "runtime": _runtime_identity(),
         "note": (
             "encoder feature parity for cached tensors; not classifier evaluation. "
-            "Fresh (same-session) extractions are bit-exact; reused v1 items may drift at "
-            "unit-in-the-last-place level from cross-session CPU reduction order."
+            "Cached items are compared against single-item extraction within a 1e-5 "
+            "absolute-error tolerance (not a ULP bound); repeated single-item extraction "
+            "is required to be bit-exact. Grouped-batch vs single-item kernel selection "
+            "explains sub-2e-06 drift on x86; the tolerance is an empirical drift budget, "
+            "not a guarantee that smaller corruptions would be detected."
         ),
     }
     _write_json_atomic(features_dir / "reports" / "parity.json", report)
