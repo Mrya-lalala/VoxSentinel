@@ -25,6 +25,7 @@ Pipeline (Gate 1 plan in ``docs/AASIST_IMPLEMENTATION_PLAN.md``):
 from __future__ import annotations
 
 from collections.abc import Sequence
+import math
 from typing import Mapping
 
 import torch
@@ -69,8 +70,10 @@ class AasistSpoofDetector(nn.Module):
             raise ValueError("gat_dims must contain two positive dimensions.")
         if len(pool_ratios) < 3 or any(not 0.0 < float(ratio) <= 1.0 for ratio in pool_ratios[:3]):
             raise ValueError("pool_ratios must provide three ratios in (0, 1].")
-        if len(temperatures) < 3 or any(float(temp) <= 0 for temp in temperatures[:3]):
-            raise ValueError("temperatures must provide three positive values.")
+        if len(temperatures) < 3 or any(
+            not math.isfinite(float(temp)) or float(temp) <= 0 for temp in temperatures[:3]
+        ):
+            raise ValueError("temperatures must provide three finite positive values.")
         if num_classes != 2:
             raise ValueError("The AASIST head uses exactly two classes (0=genuine, 1=spoof).")
 
@@ -130,9 +133,9 @@ class AasistSpoofDetector(nn.Module):
     ) -> Tensor:
         """Resolve a contiguous right-prefix valid mask or raise.
 
-        Same semantics as the GRU head: ``padding_mask`` is boolean with
-        True = padding, ``valid_lengths`` counts output frames, and the two are
-        intersected when both are supplied.
+        As in the GRU head, ``padding_mask`` is boolean with True = padding and
+        ``valid_lengths`` counts output frames. AASIST additionally requires
+        the two descriptions to agree when both are supplied.
         """
         batch, frames, _ = features.shape
         positions = torch.arange(frames, device=features.device).unsqueeze(0)
@@ -154,7 +157,16 @@ class AasistSpoofDetector(nn.Module):
                 raise ValueError(f"padding_mask must be boolean with True = padding; got dtype {padding_mask.dtype}.")
             if padding_mask.ndim != 2 or tuple(padding_mask.shape) != (batch, frames):
                 raise ValueError(f"padding_mask must have shape [batch, time] = [{batch}, {frames}].")
-            valid = valid & ~padding_mask.to(device=features.device)
+            mask_valid = ~padding_mask.to(device=features.device)
+            mask_expected = positions < mask_valid.sum(dim=1, keepdim=True)
+            if not torch.equal(mask_valid, mask_expected):
+                raise ValueError(
+                    "padding_mask must describe right padding only; "
+                    "left padding or masks with holes are not supported."
+                )
+            if valid_lengths is not None and not torch.equal(valid, mask_valid):
+                raise ValueError("valid_lengths and padding_mask must agree about every valid frame.")
+            valid = mask_valid
 
         expected = positions < valid.sum(dim=1, keepdim=True)
         if not torch.equal(valid, expected):
@@ -174,6 +186,8 @@ class AasistSpoofDetector(nn.Module):
     ) -> Tensor:
         if features.ndim != 3:
             raise ValueError(f"AASIST head expects features [batch, time, dim]; got {tuple(features.shape)}.")
+        if features.shape[0] == 0:
+            raise ValueError("AASIST head requires at least one sequence in the batch.")
         if features.shape[-1] != self.input_dim:
             raise ValueError(f"Expected embedding dim {self.input_dim}; got {features.shape[-1]}.")
         if features.dtype != torch.float32:

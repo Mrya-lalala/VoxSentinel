@@ -117,7 +117,10 @@ def _check_declared_file(entry: Mapping[str, Any] | None, *, label: str, root: P
     relative = Path(str(entry.get("path", "")))
     declared = str(entry.get("sha256", ""))
     _require(bool(relative.name), f"{label}: empty path")
-    _require(not relative.is_absolute() and ".." not in relative.parts,
+    # ``anchor`` is also checked: on Windows ``is_absolute()`` is False for
+    # root-relative ("\\x") and drive-relative ("C:x") paths, which must not
+    # be accepted as repo-relative.
+    _require(not relative.is_absolute() and not relative.anchor and ".." not in relative.parts,
              f"{label}: declared path must be repo-relative and safe: {relative}")
     _require(bool(declared) and len(declared) == 64, f"{label}: invalid declared sha256")
     path = root / relative
@@ -233,7 +236,9 @@ def _validate_row(version: DatasetVersion, name: str, row: Mapping[str, Any]) ->
     rel = audio.get("path")
     _require(isinstance(rel, str) and rel, f"{name}: row {window_id}: prepared_audio.path is required")
     rel_path = Path(rel)
-    _require(not rel_path.is_absolute(), f"{name}: row {window_id}: prepared path must be repo-relative")
+    # ``anchor`` also rejects Windows root-relative and drive-relative paths.
+    _require(not rel_path.is_absolute() and not rel_path.anchor,
+             f"{name}: row {window_id}: prepared path must be repo-relative")
     _require(".." not in rel_path.parts, f"{name}: row {window_id}: prepared path must not contain '..'")
     digest = audio.get("sha256")
     _require(isinstance(digest, str) and len(digest) == 64, f"{name}: row {window_id}: invalid prepared sha256")
@@ -300,7 +305,8 @@ def resolve_prepared_path(
     audio = row.get("prepared_audio") or {}
     rel = Path(str(audio.get("path", "")))
     _require(bool(rel.name), f"row {row.get('window_id')!r}: missing prepared path")
-    _require(not rel.is_absolute() and ".." not in rel.parts,
+    # ``anchor`` also rejects Windows root-relative and drive-relative paths.
+    _require(not rel.is_absolute() and not rel.anchor and ".." not in rel.parts,
              f"row {row.get('window_id')!r}: prepared path must be safe and relative")
     base = row.get("path_base")
     if base is None:

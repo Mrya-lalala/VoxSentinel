@@ -23,6 +23,8 @@ encoder, the adapter or the padding mask.
 
 from __future__ import annotations
 
+import math
+
 import torch
 from torch import Tensor, nn
 from torch.nn import functional as F
@@ -35,6 +37,8 @@ class GraphAttentionLayer(nn.Module):
         super().__init__()
         if not 0.0 <= dropout < 1.0:
             raise ValueError("dropout must be in [0, 1).")
+        if not math.isfinite(float(temperature)) or float(temperature) <= 0:
+            raise ValueError("temperature must be finite and positive.")
         self.att_proj = nn.Linear(in_dim, out_dim)
         self.att_weight = self._init_new_params(out_dim, 1)
         self.proj_with_att = nn.Linear(in_dim, out_dim)
@@ -89,6 +93,8 @@ class HtrgGraphAttentionLayer(nn.Module):
         super().__init__()
         if not 0.0 <= dropout < 1.0:
             raise ValueError("dropout must be in [0, 1).")
+        if not math.isfinite(float(temperature)) or float(temperature) <= 0:
+            raise ValueError("temperature must be finite and positive.")
         self.proj_type1 = nn.Linear(in_dim, in_dim)
         self.proj_type2 = nn.Linear(in_dim, in_dim)
 

@@ -103,3 +103,13 @@ v3 encoder/head, HTTP `/detect` matched `FilePredictor` exactly (score error
 0.0) on one known development clip and a derived long 44.1 kHz stereo clip
 with overflow. These are integration checks, not additional accuracy results.
 GitHub-hosted execution and branch-protection enforcement remain pending.
+
+## Embedding-adapted AASIST releases
+
+The existing release-mode service and FilePredictor also accept a separately trained
+AASIST release with `head.model_name: aasist`. The checkpoint model name must match,
+and fitted feature standardization is mandatory. Existing GRU manifests may omit
+this field. Select the release with `INFERENCE_RELEASE`; the encoder remains frozen
+and CPU-only. See [AASIST training results](AASIST_TRAINING_RESULTS.md) for training,
+packaging and launch commands. This is an embedding-adapted research head, not the
+published waveform AASIST. Weights and caches are supplied separately.

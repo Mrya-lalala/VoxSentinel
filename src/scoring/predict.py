@@ -32,10 +32,16 @@ class FilePredictor:
         if self.spec.get("schema") != "voxsentinel.inference_release.v1":
             raise ValueError("Unsupported prediction release schema")
         assert_trained_preprocessing(self.spec.get("preprocessing_version"))
+        # Existing v1 GRU releases predate the explicit head discriminator.
+        model_name = self.spec["head"].get("model_name", "gru")
+        if model_name not in ("gru", "aasist"):
+            raise ValueError(f"Unsupported release detector model_name: {model_name!r}")
         self.head_path = self.release_path.parent / self.spec["head"]["file"]
         if sha256_file(self.head_path) != self.spec["head"]["sha256"]:
             raise ValueError("Detector checkpoint hash mismatch")
-        payload = load_checkpoint(self.head_path, model_name="gru")
+        payload = load_checkpoint(self.head_path, model_name=model_name)
+        if model_name == "aasist" and payload["model_config"].get("feature_standardization") is not True:
+            raise ValueError("AASIST releases require fitted feature standardization")
         settings = dict(self.spec["encoder"])
         if encoder_path is not None:
             settings["checkpoint_path"] = str(encoder_path)
@@ -55,8 +61,8 @@ class FilePredictor:
         if not 0 <= threshold <= 1:
             raise ValueError("Threshold must be within [0,1]")
         self.policy = WindowPolicy(**self.spec["window"])
-        self.detector = create_detector(ModelConfig("gru", payload["model_config"])).eval()
-        restore_checkpoint(self.head_path, self.detector, model_name="gru")
+        self.detector = create_detector(ModelConfig(model_name, payload["model_config"])).eval()
+        restore_checkpoint(self.head_path, self.detector, model_name=model_name)
         self.detector.requires_grad_(False)
         self.encoder = IndicWav2VecExtractor(IndicWav2VecConfig(**settings))
         self.threshold = threshold

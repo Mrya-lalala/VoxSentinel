@@ -5,7 +5,7 @@ from torch.nn import functional as F
 from src.config import ModelConfig, load_config
 from src.data import EmbeddingExample, collate_examples
 from src.detectors import AasistDetector, AasistSpoofDetector, available_detectors, create_detector
-from src.detectors.aasist_blocks import GraphPool, HtrgGraphAttentionLayer
+from src.detectors.aasist_blocks import GraphAttentionLayer, GraphPool, HtrgGraphAttentionLayer
 from src.detectors.checkpoints import load_checkpoint, restore_checkpoint, save_checkpoint
 from src.detectors.standardization import fit_detector_standardizer
 
@@ -282,3 +282,50 @@ def test_aasist_detector_loss_scores_and_label_validation():
     assert torch.isfinite(detector.loss(output, batch)).all()
     with pytest.raises(ValueError, match="binary"):
         detector.loss(output, {**batch, "labels": torch.tensor([0.5, 1.0])})
+
+
+@pytest.mark.parametrize("masked_length", [32, 48])
+def test_aasist_rejects_disagreeing_lengths_and_padding(masked_length):
+    detector = _fitted_detector().eval()
+    batch = _batch([40], frames=64)
+    batch["padding_mask"] = torch.arange(64).unsqueeze(0) >= masked_length
+    with pytest.raises(ValueError, match="agree"):
+        detector(batch)
+
+
+def test_aasist_rejects_mask_holes_beyond_declared_length():
+    detector = _fitted_detector().eval()
+    batch = _batch([40], frames=64)
+    batch["padding_mask"][0, 60] = False
+    with pytest.raises(ValueError, match="right padding"):
+        detector(batch)
+
+
+def test_aasist_accepts_equivalent_length_or_mask_metadata():
+    detector = _fitted_detector().eval()
+    batch = _batch([40, 64])
+    with torch.no_grad():
+        both = detector(batch).logits
+        lengths_only = detector({k: v for k, v in batch.items() if k != "padding_mask"}).logits
+        mask_only = detector({k: v for k, v in batch.items() if k != "valid_lengths"}).logits
+    torch.testing.assert_close(both, lengths_only)
+    torch.testing.assert_close(both, mask_only)
+
+
+def test_aasist_rejects_empty_batch_clearly():
+    detector = _fitted_detector()
+    with pytest.raises(ValueError, match="at least one sequence"):
+        detector({"features": torch.empty(0, 64, INPUT_DIM)})
+
+
+@pytest.mark.parametrize("temperature", [0.0, -1.0, float("nan"), float("inf")])
+@pytest.mark.parametrize("layer_type", [GraphAttentionLayer, HtrgGraphAttentionLayer])
+def test_aasist_graph_blocks_reject_invalid_temperature(layer_type, temperature):
+    with pytest.raises(ValueError, match="temperature"):
+        layer_type(8, 4, temperature=temperature)
+
+
+@pytest.mark.parametrize("temperature", [float("nan"), float("inf")])
+def test_aasist_rejects_nonfinite_config_temperature(temperature):
+    with pytest.raises(ValueError, match="temperatures"):
+        AasistSpoofDetector(**_params(temperatures=(2.0, 2.0, temperature)))

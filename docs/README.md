@@ -9,6 +9,7 @@ The current deliverable is the **v3 Indic research baseline**. It is not product
 | Install the encoder runtime and obtain its weights | [Encoder setup](b1-setup.md) |
 | Understand the current data, caches and training commands | [Data and training guide](DATA_AND_TRAINING.md) |
 | Review the trained model and development results | [V3 training results](V3_TRAINING_RESULTS.md) |
+| Review the embedding-adapted AASIST training results | [AASIST training results](AASIST_TRAINING_RESULTS.md) |
 | Review the branch handoff checks | [Release checks](RESEARCH_BASELINE_RELEASE_CHECKS.md) |
 
 Superseded reports, reviews and agent instructions are kept in the [archive](archive/README.md). They document how the project reached its current state; they are not the current setup instructions.
