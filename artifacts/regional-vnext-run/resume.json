@@ -1,0 +1,5 @@
+{
+  "script_sha256": "cd05b9ed92819f2e0c7e6de46cc0fc6813f51bce4af7a37cf91b6f7f7d8d4f65",
+  "reason": "Bound mmap residency per batch",
+  "original_script_sha256": "38023f7f084129e8225d947cbecfe2b264317a91847025ace36262b79736c05d"
+}

@@ -8,8 +8,9 @@ import torch
 
 @dataclass(frozen=True)
 class EncoderBatch:
-    """Detached float32 features [B,T,D]; padded frames are zero.
+    """Float32 features [B,T,D]; padded frames are zero.
 
+    Frozen extractors detach features. Trainable encoders may retain a graph.
     valid_lengths: int64 [B], measured in output frames.
     padding_mask: bool [B,T], True means padding (ignore), False means valid.
     D is encoder-specific; shared shapes do not make head weights transferable.

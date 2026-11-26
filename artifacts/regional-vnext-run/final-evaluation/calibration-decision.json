@@ -1,0 +1,6 @@
+{
+  "threshold": 0.4190840721130371,
+  "objective": "minimum balanced error; tie closest to 0.5",
+  "checkpoint_sha256": "851990bb3b9c825bb2f02fa509b15168176157725dad810e6883f4a849147c3d",
+  "calibration_manifest_sha256": "ccb5f88dac609a9b30a8ae6140adf49c2ec0f62fc02ef0f9fa966c5b084cfbd8"
+}
