@@ -1,0 +1,22 @@
+{
+  "checkpoint_sha256": "851990bb3b9c825bb2f02fa509b15168176157725dad810e6883f4a849147c3d",
+  "dataset_version_sha256": "b465e0d70607b1f8536d0f2e78c94c30f47f2c5112abe9fa0ee8cf7a94cb17d0",
+  "script_sha256": "ccea2b8f3f2f9b0442518e94ffc3761e70afae745a88790256fc2d49025c9c2e",
+  "manifests": {
+    "calibration": {
+      "additions": 8,
+      "original_rows": 2728,
+      "path": "manifests/calibration.jsonl",
+      "rows": 2736,
+      "sha256": "ccb5f88dac609a9b30a8ae6140adf49c2ec0f62fc02ef0f9fa966c5b084cfbd8"
+    },
+    "test": {
+      "additions": 4,
+      "original_rows": 5666,
+      "path": "manifests/test.jsonl",
+      "rows": 5670,
+      "sha256": "926be32f8e804e09ef369a53192f2a12f46ff19c0f86227506765f3e210580c8"
+    }
+  },
+  "encoder_sha256": "26bb5ada18952fd7355f691d25927b34a0e46d6afda7658bf5c254621831ab59"
+}

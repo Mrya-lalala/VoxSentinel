@@ -1,0 +1,41 @@
+{
+  "identity": {
+    "dataset_version_sha256": "0f3baad9687201f52041921a9720c76847c4bffff06f0489fa3d2e32315884a1",
+    "encoder_sha256": "26bb5ada18952fd7355f691d25927b34a0e46d6afda7658bf5c254621831ab59",
+    "selected_layer": null,
+    "dtype": "float32",
+    "preprocessing": "voxsentinel-prep-2"
+  },
+  "model": {
+    "input_dim": 1024,
+    "hidden_size": 256,
+    "num_layers": 1,
+    "dropout": 0.0,
+    "num_classes": 2,
+    "feature_standardization": true
+  },
+  "epochs": 10,
+  "batch_size": 32,
+  "seed": 0,
+  "optimizer": {
+    "name": "AdamW",
+    "lr": 0.001,
+    "weight_decay": 0
+  },
+  "threshold": 0.5,
+  "selection": "earliest minimum dev EER",
+  "manifests": {
+    "train": {
+      "path": "manifests/train.jsonl",
+      "rows": 37834,
+      "sha256": "8c2b2095f30d4e4afaa0632283f74f74800f8d2bc3044b220388b8f1045ac92f"
+    },
+    "dev": {
+      "path": "manifests/dev.jsonl",
+      "rows": 4144,
+      "sha256": "a20cfc77a05635bddd5704c84a95716663b05032dedeeb42851d90f7cc99c4fa"
+    }
+  },
+  "script_sha256": "38023f7f084129e8225d947cbecfe2b264317a91847025ace36262b79736c05d",
+  "heldout_policy": "Calibration and test excluded from feature extraction and training"
+}

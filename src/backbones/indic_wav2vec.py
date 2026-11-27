@@ -1,4 +1,5 @@
 """Frozen, local-checkpoint IndicWav2Vec acoustic encoder (no ASR decoding)."""
+from contextlib import nullcontext
 from dataclasses import dataclass
 import hashlib
 import math
@@ -130,6 +131,13 @@ class IndicWav2VecExtractor(BackboneExtractor):
         Right-padding after each valid length is ignored, but all values must be
         finite. Outputs are ordinary detached tensors, allowing head backward.
         """
+        return self._extract_batch(samples, valid_lengths, sample_rate=sample_rate, frozen=True)
+
+    def _extract_batch(
+        self, samples: "torch.Tensor", valid_lengths: "torch.Tensor", *,
+        sample_rate: int, frozen: bool,
+    ) -> "EncoderBatch":
+        """Shared tensor path. The trainable wrapper manages its own module modes."""
         import torch
         from .tensor_interface import EncoderBatch
         if sample_rate != 16_000:
@@ -139,8 +147,9 @@ class IndicWav2VecExtractor(BackboneExtractor):
             raise BackboneInputError("samples must have non-empty shape [B,S]")
         if not samples.is_floating_point() or not torch.isfinite(samples).all():
             raise BackboneInputError("samples must be finite floating PCM")
-        if not isinstance(valid_lengths, torch.Tensor) or valid_lengths.shape != (samples.shape[0],):
-            raise BackboneInputError("valid_lengths must have shape [B]")
+        if (not isinstance(valid_lengths, torch.Tensor) or valid_lengths.shape != (samples.shape[0],)
+                or valid_lengths.layout != torch.strided):
+            raise BackboneInputError("valid_lengths must be a dense tensor with shape [B]")
         if valid_lengths.dtype not in (torch.int32, torch.int64):
             raise BackboneInputError("valid_lengths must be integer sample counts")
         lengths = valid_lengths.detach().cpu().tolist()
@@ -152,12 +161,15 @@ class IndicWav2VecExtractor(BackboneExtractor):
         model = self._load_model()
         if min(lengths) < self.min_samples:
             raise BackboneInputError(f"audio needs at least {self.min_samples} samples for one encoder frame")
-        model.eval()
-        model.requires_grad_(False)
+        if frozen:
+            model.eval()
+            model.requires_grad_(False)
         device = next(model.parameters()).device
         rows = [None] * len(lengths)
         # no_grad rather than inference_mode permits downstream backward.
-        with torch.inference_mode(False), torch.no_grad(), torch.autocast(device_type=device.type, enabled=False):
+        inference = torch.inference_mode(False) if frozen else nullcontext()
+        gradients = torch.no_grad() if frozen else nullcontext()
+        with inference, gradients, torch.autocast(device_type=device.type, enabled=False):
             for n in sorted(set(lengths)):
                 indices = [i for i, length in enumerate(lengths) if length == n]
                 source = samples[indices, :n].detach().to(device=device, dtype=torch.float32).contiguous()
